@@ -10,7 +10,7 @@ namespace ClrTest.Reflection
 
     public class MethodBaseILProvider : IILProvider
     {
-        private MethodBase m_method;
+        private readonly MethodBase m_method;
         private byte[] m_byteArray;
 
         public MethodBaseILProvider(MethodBase method)

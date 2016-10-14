@@ -9,17 +9,20 @@ namespace ClrTest.Reflection
     {
         #region Static stuffs
 
-        private static PropertyInfo s_indexer;
-        private static FieldInfo s_scopeFi;
+        private static readonly PropertyInfo s_indexer;
+        private static readonly FieldInfo s_scopeFi;
 
-        private static Type s_genMethodInfoType;
-        private static FieldInfo s_genmethFi1, s_genmethFi2;
+        private static readonly Type s_genMethodInfoType;
+        private static readonly FieldInfo s_genmethFi1;
+        private static readonly FieldInfo s_genmethFi2;
 
-        private static Type s_varArgMethodType;
-        private static FieldInfo s_varargFi1, s_varargFi2;
+        private static readonly Type s_varArgMethodType;
+        private static readonly FieldInfo s_varargFi1;
+        private static FieldInfo s_varargFi2;
 
-        private static Type s_genFieldInfoType;
-        private static FieldInfo s_genfieldFi1, s_genfieldFi2;
+        private static readonly Type s_genFieldInfoType;
+        private static readonly FieldInfo s_genfieldFi1;
+        private static readonly FieldInfo s_genfieldFi2;
 
         static DynamicScopeTokenResolver()
         {
@@ -49,7 +52,7 @@ namespace ClrTest.Reflection
 
         #endregion
 
-        private object m_scope = null;
+        private readonly object m_scope = null;
 
         internal object this[int token]
         {

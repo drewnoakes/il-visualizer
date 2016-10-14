@@ -10,11 +10,11 @@ namespace ClrTest.Reflection
     {
         #region Static members
 
-        private static Type s_runtimeMethodInfoType = Type.GetType("System.Reflection.RuntimeMethodInfo");
-        private static Type s_runtimeConstructorInfoType = Type.GetType("System.Reflection.RuntimeConstructorInfo");
+        private static readonly Type s_runtimeMethodInfoType = Type.GetType("System.Reflection.RuntimeMethodInfo");
+        private static readonly Type s_runtimeConstructorInfoType = Type.GetType("System.Reflection.RuntimeConstructorInfo");
 
-        private static OpCode[] s_OneByteOpCodes;
-        private static OpCode[] s_TwoByteOpCodes;
+        private static readonly OpCode[] s_OneByteOpCodes;
+        private static readonly OpCode[] s_TwoByteOpCodes;
 
         static ILReader()
         {
@@ -39,9 +39,9 @@ namespace ClrTest.Reflection
         #endregion
 
         private Int32 m_position;
-        private ITokenResolver m_resolver;
-        private IILProvider m_ilProvider;
-        private byte[] m_byteArray;
+        private readonly ITokenResolver m_resolver;
+        private readonly IILProvider m_ilProvider;
+        private readonly byte[] m_byteArray;
 
         public ILReader(MethodBase method)
         {

@@ -24,7 +24,7 @@ namespace ClrTest.Reflection
 
     internal class TcpClientDataProvider : IXmlDataProvider<MethodBodyInfo>
     {
-        private int m_portNumber;
+        private readonly int m_portNumber;
 
         public TcpClientDataProvider(int port)
         {

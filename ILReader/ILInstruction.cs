@@ -43,7 +43,7 @@ namespace ClrTest.Reflection
 
     public class InlineBrTargetInstruction : ILInstruction
     {
-        private Int32 m_delta;
+        private readonly Int32 m_delta;
 
         internal InlineBrTargetInstruction(Int32 offset, OpCode opCode, Int32 delta)
             : base(offset, opCode)
@@ -69,7 +69,7 @@ namespace ClrTest.Reflection
 
     public class ShortInlineBrTargetInstruction : ILInstruction
     {
-        private SByte m_delta;
+        private readonly SByte m_delta;
 
         internal ShortInlineBrTargetInstruction(Int32 offset, OpCode opCode, SByte delta)
             : base(offset, opCode)
@@ -95,7 +95,7 @@ namespace ClrTest.Reflection
 
     public class InlineSwitchInstruction : ILInstruction
     {
-        private Int32[] m_deltas;
+        private readonly Int32[] m_deltas;
         private Int32[] m_targetOffsets;
 
         internal InlineSwitchInstruction(Int32 offset, OpCode opCode, Int32[] deltas)
@@ -133,7 +133,7 @@ namespace ClrTest.Reflection
 
     public class InlineIInstruction : ILInstruction
     {
-        private Int32 m_int32;
+        private readonly Int32 m_int32;
 
         internal InlineIInstruction(Int32 offset, OpCode opCode, Int32 value)
             : base(offset, opCode)
@@ -154,7 +154,7 @@ namespace ClrTest.Reflection
 
     public class InlineI8Instruction : ILInstruction
     {
-        private Int64 m_int64;
+        private readonly Int64 m_int64;
 
         internal InlineI8Instruction(Int32 offset, OpCode opCode, Int64 value)
             : base(offset, opCode)
@@ -175,7 +175,7 @@ namespace ClrTest.Reflection
 
     public class ShortInlineIInstruction : ILInstruction
     {
-        private Byte m_int8;
+        private readonly Byte m_int8;
 
         internal ShortInlineIInstruction(Int32 offset, OpCode opCode, Byte value)
             : base(offset, opCode)
@@ -196,7 +196,7 @@ namespace ClrTest.Reflection
 
     public class InlineRInstruction : ILInstruction
     {
-        private Double m_value;
+        private readonly Double m_value;
 
         internal InlineRInstruction(Int32 offset, OpCode opCode, Double value)
             : base(offset, opCode)
@@ -217,7 +217,7 @@ namespace ClrTest.Reflection
 
     public class ShortInlineRInstruction : ILInstruction
     {
-        private Single m_value;
+        private readonly Single m_value;
 
         internal ShortInlineRInstruction(Int32 offset, OpCode opCode, Single value)
             : base(offset, opCode)
@@ -238,8 +238,8 @@ namespace ClrTest.Reflection
 
     public class InlineFieldInstruction : ILInstruction
     {
-        private ITokenResolver m_resolver;
-        private Int32 m_token;
+        private readonly ITokenResolver m_resolver;
+        private readonly Int32 m_token;
         private FieldInfo m_field;
 
         internal InlineFieldInstruction(ITokenResolver resolver, Int32 offset, OpCode opCode, Int32 token)
@@ -274,8 +274,8 @@ namespace ClrTest.Reflection
 
     public class InlineMethodInstruction : ILInstruction
     {
-        private ITokenResolver m_resolver;
-        private Int32 m_token;
+        private readonly ITokenResolver m_resolver;
+        private readonly Int32 m_token;
         private MethodBase m_method;
 
         internal InlineMethodInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
@@ -310,8 +310,8 @@ namespace ClrTest.Reflection
 
     public class InlineTypeInstruction : ILInstruction
     {
-        private ITokenResolver m_resolver;
-        private Int32 m_token;
+        private readonly ITokenResolver m_resolver;
+        private readonly Int32 m_token;
         private Type m_type;
 
         internal InlineTypeInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
@@ -346,8 +346,8 @@ namespace ClrTest.Reflection
 
     public class InlineSigInstruction : ILInstruction
     {
-        private ITokenResolver m_resolver;
-        private Int32 m_token;
+        private readonly ITokenResolver m_resolver;
+        private readonly Int32 m_token;
         private byte[] m_signature;
 
         internal InlineSigInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
@@ -382,8 +382,8 @@ namespace ClrTest.Reflection
 
     public class InlineTokInstruction : ILInstruction
     {
-        private ITokenResolver m_resolver;
-        private Int32 m_token;
+        private readonly ITokenResolver m_resolver;
+        private readonly Int32 m_token;
         private MemberInfo m_member;
 
         internal InlineTokInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
@@ -418,8 +418,8 @@ namespace ClrTest.Reflection
 
     public class InlineStringInstruction : ILInstruction
     {
-        private ITokenResolver m_resolver;
-        private Int32 m_token;
+        private readonly ITokenResolver m_resolver;
+        private readonly Int32 m_token;
         private String m_string;
 
         internal InlineStringInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
@@ -452,7 +452,7 @@ namespace ClrTest.Reflection
 
     public class InlineVarInstruction : ILInstruction
     {
-        private UInt16 m_ordinal;
+        private readonly UInt16 m_ordinal;
 
         internal InlineVarInstruction(Int32 offset, OpCode opCode, UInt16 ordinal)
             : base(offset, opCode)
@@ -473,7 +473,7 @@ namespace ClrTest.Reflection
 
     public class ShortInlineVarInstruction : ILInstruction
     {
-        private Byte m_ordinal;
+        private readonly Byte m_ordinal;
 
         internal ShortInlineVarInstruction(Int32 offset, OpCode opCode, Byte ordinal)
             : base(offset, opCode)

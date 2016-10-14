@@ -12,7 +12,7 @@ namespace ClrTest.Reflection
         private string m_typeName;
         private string m_methodToString;
 
-        private List<string> m_instructions = new List<string>();
+        private readonly List<string> m_instructions = new List<string>();
 
         public int Identity
         {
@@ -62,7 +62,7 @@ namespace ClrTest.Reflection
 
         private class MethodBodyInfoBuilder : IILStringCollector
         {
-            private MethodBodyInfo m_mbi;
+            private readonly MethodBodyInfo m_mbi;
 
             public MethodBodyInfoBuilder(MethodBodyInfo mbi)
             {

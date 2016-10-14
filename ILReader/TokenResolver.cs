@@ -15,10 +15,10 @@ namespace ClrTest.Reflection
 
     public class ModuleScopeTokenResolver : ITokenResolver
     {
-        private Module m_module;
-        private MethodBase m_enclosingMethod;
-        private Type[] m_methodContext;
-        private Type[] m_typeContext;
+        private readonly Module m_module;
+        private readonly MethodBase m_enclosingMethod;
+        private readonly Type[] m_methodContext;
+        private readonly Type[] m_typeContext;
 
         public ModuleScopeTokenResolver(MethodBase method)
         {
