@@ -35,27 +35,17 @@ namespace ClrTest.Reflection
 
         public void Dump(MethodBodyInfo mbi)
         {
-            var tcpClient = new TcpClient();
-            var memoryStream = new MemoryStream();
-            try
+            using (var tcpClient = new TcpClient())
             {
                 tcpClient.Connect(IPAddress.Parse("127.0.0.1"), m_portNumber);
 
-                var s = new XmlSerializer(typeof(MethodBodyInfo));
-                s.Serialize(memoryStream, mbi);
+                var memoryStream = new MemoryStream();
+                new XmlSerializer(typeof(MethodBodyInfo)).Serialize(memoryStream, mbi);
 
-                var buffer = memoryStream.ToArray();
+                memoryStream.Position = 0;
+
                 using (var networkStream = tcpClient.GetStream())
-                {
-                    networkStream.Write(buffer, 0, buffer.Length);
-                }
-            }
-            finally
-            {
-                if (memoryStream != null)
-                    memoryStream.Dispose();
-                if (tcpClient != null)
-                    tcpClient.Close();
+                    memoryStream.CopyTo(networkStream);
             }
         }
     }
