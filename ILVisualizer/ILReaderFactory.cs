@@ -35,7 +35,7 @@ namespace ClrTest.Reflection
                 return new ILReader(method);
             }
 
-            throw new NotSupportedException(string.Format("Reading IL from type {0} is currently not supported", type));
+            throw new NotSupportedException($"Reading IL from type {type} is currently not supported");
         }
 
         private static readonly Type s_dynamicMethodType = Type.GetType("System.Reflection.Emit.DynamicMethod");

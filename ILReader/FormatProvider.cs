@@ -39,12 +39,12 @@ namespace ClrTest.Reflection
 
         public virtual string Argument(int ordinal)
         {
-            return string.Format("V_{0}", ordinal);
+            return $"V_{ordinal}";
         }
 
         public virtual string Label(int offset)
         {
-            return string.Format("IL_{0:x4}", offset);
+            return $"IL_{offset:x4}";
         }
 
         public virtual string MultipleLabels(int[] offsets)

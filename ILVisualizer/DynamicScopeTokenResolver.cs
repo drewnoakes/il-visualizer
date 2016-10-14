@@ -79,7 +79,7 @@ namespace ClrTest.Reflection
                     (RuntimeTypeHandle)s_genfieldFi2.GetValue(this[token]));
             }
 
-            Debug.Assert(false, string.Format("unexpected type: {0}", this[token].GetType()));
+            Debug.Assert(false, $"unexpected type: {this[token].GetType()}");
             return null;
         }
 
@@ -104,7 +104,7 @@ namespace ClrTest.Reflection
             if (this[token].GetType() == s_varArgMethodType)
                 return (MethodInfo)s_varargFi1.GetValue(this[token]);
 
-            Debug.Assert(false, string.Format("unexpected type: {0}", this[token].GetType()));
+            Debug.Assert(false, $"unexpected type: {this[token].GetType()}");
             return null;
         }
 
@@ -117,7 +117,7 @@ namespace ClrTest.Reflection
             if ((token & 0x04000000) == 0x04000000)
                 return this.AsField(token);
 
-            Debug.Assert(false, string.Format("unexpected token type: {0:x8}", token));
+            Debug.Assert(false, $"unexpected token type: {token:x8}");
             return null;
         }
 

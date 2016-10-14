@@ -71,10 +71,7 @@ namespace ClrTest.Reflection
 
             public void Process(ILInstruction instruction, string operandString)
             {
-                m_mbi.AddInstruction(string.Format("IL_{0:x4}: {1,-10} {2}",
-                    instruction.Offset,
-                    instruction.OpCode.Name,
-                    operandString));
+                m_mbi.AddInstruction($"IL_{instruction.Offset:x4}: {instruction.OpCode.Name,-10} {operandString}");
             }
         }
     }
