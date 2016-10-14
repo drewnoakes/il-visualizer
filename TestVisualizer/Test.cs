@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 class Foo
 {
 
-    [MethodImplAttribute(MethodImplOptions.NoInlining)]
+    [MethodImpl(MethodImplOptions.NoInlining)]
     public string MyMethod(string x)
     {
         Console.WriteLine(x);
