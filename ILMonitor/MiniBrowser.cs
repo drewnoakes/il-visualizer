@@ -21,20 +21,20 @@ namespace ClrTest.Reflection {
         public void UpdateWith(IncrementalMethodBodyInfo imbi) {
             m_imbi = imbi;
 
-            XslCompiledTransform xslt = new XslCompiledTransform();
-            using (StringReader sr = new StringReader(Properties.Resources.XSLT)) {
-                using (XmlTextReader xtr = new XmlTextReader(sr)) {
+            var xslt = new XslCompiledTransform();
+            using (var sr = new StringReader(Properties.Resources.XSLT)) {
+                using (var xtr = new XmlTextReader(sr)) {
                     xslt.Load(xtr);
                 }
             }
 
-            XmlSerializer serializer = new XmlSerializer(typeof(IncrementalMethodBodyInfo));
-            using (MemoryStream beforeTransform = new MemoryStream()) {
-                MemoryStream afterTransform = new MemoryStream();
+            var serializer = new XmlSerializer(typeof(IncrementalMethodBodyInfo));
+            using (var beforeTransform = new MemoryStream()) {
+                var afterTransform = new MemoryStream();
                 serializer.Serialize(beforeTransform, m_imbi);
 
                 beforeTransform.Position = 0;
-                using (XmlTextReader reader = new XmlTextReader(beforeTransform)) {
+                using (var reader = new XmlTextReader(beforeTransform)) {
                     xslt.Transform(reader, null, afterTransform);
                 }
 

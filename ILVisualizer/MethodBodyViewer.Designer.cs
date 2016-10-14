@@ -24,7 +24,7 @@ namespace ClrTest.Reflection {
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MethodBodyViewer));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MethodBodyViewer));
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtMethodToString = new System.Windows.Forms.TextBox();
             this.lblMethodGetType = new System.Windows.Forms.Label();

@@ -19,7 +19,7 @@ namespace ClrTest.Reflection {
         private static FieldInfo s_genfieldFi1, s_genfieldFi2;
 
         static DynamicScopeTokenResolver() {
-            BindingFlags s_bfInternal = BindingFlags.NonPublic | BindingFlags.Instance;
+            var s_bfInternal = BindingFlags.NonPublic | BindingFlags.Instance;
             s_indexer = Type.GetType("System.Reflection.Emit.DynamicScope").GetProperty("Item", s_bfInternal);
             s_scopeFi = Type.GetType("System.Reflection.Emit.DynamicILGenerator").GetField("m_scope", s_bfInternal);
 

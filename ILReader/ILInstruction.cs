@@ -66,10 +66,10 @@ namespace ClrTest.Reflection {
         public Int32[] TargetOffsets {
             get {
                 if (m_targetOffsets == null) {
-                    int cases = m_deltas.Length;
-                    int itself = 1 + 4 + 4 * cases;
+                    var cases = m_deltas.Length;
+                    var itself = 1 + 4 + 4 * cases;
                     m_targetOffsets = new Int32[cases];
-                    for (Int32 i = 0; i < cases; i++)
+                    for (var i = 0; i < cases; i++)
                         m_targetOffsets[i] = m_offset + m_deltas[i] + itself;
                 }
                 return m_targetOffsets;

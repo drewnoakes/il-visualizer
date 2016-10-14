@@ -23,16 +23,16 @@ namespace ClrTest.Reflection {
         }
 
         public static IncrementalMethodBodyInfo Create(MethodBodyInfo mbi, List<int> history) {
-            IncrementalMethodBodyInfo imbi = new IncrementalMethodBodyInfo();
+            var imbi = new IncrementalMethodBodyInfo();
 
             imbi.Identity = mbi.Identity;
             imbi.TypeName = mbi.TypeName;
             imbi.MethodToString = mbi.MethodToString;
 
-            int count = mbi.Instructions.Count;
+            var count = mbi.Instructions.Count;
             imbi.Instructions = new AgingInstruction[count];
 
-            for (int i = 0; i < count; i++) {
+            for (var i = 0; i < count; i++) {
                 imbi.Instructions[i] = new AgingInstruction();
                 imbi.Instructions[i].ILString = mbi.Instructions[i];
             }
@@ -43,8 +43,8 @@ namespace ClrTest.Reflection {
             }
             imbi.LengthHistory.Add(count);
 
-            for (int i = 0; i < imbi.LengthHistory.Count - 1; i++) {
-                for (int a = imbi.LengthHistory[i]; a < imbi.LengthHistory[i + 1]; a++) {
+            for (var i = 0; i < imbi.LengthHistory.Count - 1; i++) {
+                for (var a = imbi.LengthHistory[i]; a < imbi.LengthHistory[i + 1]; a++) {
                     imbi.Instructions[a].Age = i + 1;
                 }
             }

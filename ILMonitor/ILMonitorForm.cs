@@ -29,7 +29,7 @@ namespace ClrTest.Reflection {
         }
 
         private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e) {
-            foreach (Form childForm in MdiChildren) {
+            foreach (var childForm in MdiChildren) {
                 childForm.Close();
             }
         }
@@ -64,8 +64,8 @@ namespace ClrTest.Reflection {
         }
 
         private void OnVisualizerDataReady(object sender, VisualizerDataEventArgs<MethodBodyInfo> e) {
-            MethodBodyInfo mbi = e.VisualizerData;
-            MiniBrowser childForm = FindOrCreateChildForm(mbi);
+            var mbi = e.VisualizerData;
+            var childForm = FindOrCreateChildForm(mbi);
 
             IncrementalMethodBodyInfo imbi;
             if (childForm.CurrentData != null)
@@ -77,8 +77,8 @@ namespace ClrTest.Reflection {
         }
 
         private MiniBrowser FindOrCreateChildForm(MethodBodyInfo mbi) {
-            foreach (Form form in MdiChildren) {
-                MiniBrowser miniBrowser = form as MiniBrowser;
+            foreach (var form in MdiChildren) {
+                var miniBrowser = form as MiniBrowser;
                 if (miniBrowser == null) continue;
                 if (miniBrowser.CurrentData == null) continue;
 
@@ -88,7 +88,7 @@ namespace ClrTest.Reflection {
                 }
             }
 
-            MiniBrowser newChild = new MiniBrowser();
+            var newChild = new MiniBrowser();
             newChild.Text = mbi.MethodToString;
             newChild.MdiParent = this;
             newChild.Show();
@@ -104,7 +104,7 @@ namespace ClrTest.Reflection {
         }
 
         private void ILMonitorForm_FormClosing(object sender, FormClosingEventArgs e) {
-            Properties.Settings s = Properties.Settings.Default;
+            var s = Properties.Settings.Default;
             s.AutomaticallyStart = autoStartToolStripMenuItem.Checked;
             s.Save();
 

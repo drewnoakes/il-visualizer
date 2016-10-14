@@ -5,7 +5,7 @@ using System.Reflection;
 namespace ClrTest.Reflection {
     public class ILReaderFactory {
         public static ILReader Create(object obj) {
-            Type type = obj.GetType();
+            var type = obj.GetType();
 
             if (type == s_dynamicMethodType || type == s_rtDynamicMethodType) {
                 DynamicMethod dm;
@@ -23,7 +23,7 @@ namespace ClrTest.Reflection {
             }
 
             if (type == s_runtimeMethodInfoType || type == s_runtimeConstructorInfoType) {
-                MethodBase method = obj as MethodBase;
+                var method = obj as MethodBase;
                 return new ILReader(method);
             }
 

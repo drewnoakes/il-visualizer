@@ -17,12 +17,12 @@ namespace ClrTest.Reflection {
 
         public byte[] GetByteArray() {
             if (m_byteArray == null) {
-                ILGenerator ilgen = m_method.GetILGenerator();
+                var ilgen = m_method.GetILGenerator();
                 try {
                     m_byteArray = (byte[])s_miBakeByteArray.Invoke(ilgen, null);
                     if (m_byteArray == null) m_byteArray = new byte[0];
                 } catch (TargetInvocationException) {
-                    int length = (int)s_fiLen.GetValue(ilgen);
+                    var length = (int)s_fiLen.GetValue(ilgen);
                     m_byteArray = new byte[length];
                     Array.Copy((byte[])s_fiStream.GetValue(ilgen), m_byteArray, length);
                 }

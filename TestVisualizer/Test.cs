@@ -25,9 +25,9 @@ internal class Program
 
     private static void M1()
     {
-        DynamicMethod dm = new DynamicMethod("HelloWorld", typeof(void), new Type[] { }, typeof(Program), false);
+        var dm = new DynamicMethod("HelloWorld", typeof(void), new Type[] { }, typeof(Program), false);
 
-        ILGenerator il = dm.GetILGenerator();
+        var il = dm.GetILGenerator();
 
         TestShowVisualizer(dm);
         il.Emit(OpCodes.Ldstr, "hello, world");
@@ -43,16 +43,16 @@ internal class Program
     {
         // DynamicMethod wrapper method
 
-        DynamicMethod dm = new DynamicMethod("MyMethodWrapper", typeof(object), new Type[] { typeof(object[]) }, typeof(Program), true);
-        ILGenerator il = dm.GetILGenerator();
-        Label l1 = il.DefineLabel();
-        LocalBuilder returnLocal = il.DeclareLocal(typeof(object));
+        var dm = new DynamicMethod("MyMethodWrapper", typeof(object), new Type[] { typeof(object[]) }, typeof(Program), true);
+        var il = dm.GetILGenerator();
+        var l1 = il.DefineLabel();
+        var returnLocal = il.DeclareLocal(typeof(object));
 
 
         // grab the method parameters of the method we wish to wrap
-        ParameterInfo[] methodParameters = typeof(Foo).GetMethod("MyMethod").GetParameters();
-        int parameterLength = methodParameters.Length;
-        MethodInfo method = typeof(Foo).GetMethod("MyMethod");
+        var methodParameters = typeof(Foo).GetMethod("MyMethod").GetParameters();
+        var parameterLength = methodParameters.Length;
+        var method = typeof(Foo).GetMethod("MyMethod");
 
         // check to see if the call to MyMethodWrapper has the required amount of arguments in the object[] array.
         il.Emit(OpCodes.Ldarg_0);
@@ -73,7 +73,7 @@ internal class Program
         il.Emit(OpCodes.Castclass, typeof(Foo));
 
         // pull out the parameters to the instance method call and push them on to the IL stack
-        for (int i = 0; i < parameterLength; i++)
+        for (var i = 0; i < parameterLength; i++)
         {
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Ldc_I4, i + 1);
@@ -100,7 +100,7 @@ internal class Program
 
     public static void TestShowVisualizer(object objectToVisualize)
     {
-        VisualizerDevelopmentHost visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(ClrTest.Reflection.MethodBodyVisualizer), typeof(ClrTest.Reflection.MethodBodyObjectSource));
+        var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(ClrTest.Reflection.MethodBodyVisualizer), typeof(ClrTest.Reflection.MethodBodyObjectSource));
         visualizerHost.ShowVisualizer();
     }
 }

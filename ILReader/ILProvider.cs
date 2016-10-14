@@ -16,7 +16,7 @@ namespace ClrTest.Reflection {
 
         public byte[] GetByteArray() {
             if (m_byteArray == null) {
-                MethodBody methodBody = m_method.GetMethodBody();
+                var methodBody = m_method.GetMethodBody();
                 m_byteArray = (methodBody == null) ? new Byte[0] : methodBody.GetILAsByteArray();
             }
             return m_byteArray;

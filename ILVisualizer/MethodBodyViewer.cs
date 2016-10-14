@@ -22,8 +22,8 @@ namespace ClrTest.Reflection {
         }
 
         private void GetObjectData() {
-            using (Stream output = m_objectProvider.GetData()) {
-                BinaryFormatter formatter = new BinaryFormatter();
+            using (var output = m_objectProvider.GetData()) {
+                var formatter = new BinaryFormatter();
                 m_mbi = (MethodBodyInfo)formatter.Deserialize(output, null);
             }
         }
@@ -32,9 +32,9 @@ namespace ClrTest.Reflection {
             lblMethodGetType.Text = m_mbi.TypeName;
             txtMethodToString.Text = m_mbi.MethodToString;
 
-            int cnt = m_mbi.Instructions.Count;
-            string[] lines = new string[cnt];
-            for (int i = 0; i < cnt; i++)
+            var cnt = m_mbi.Instructions.Count;
+            var lines = new string[cnt];
+            for (var i = 0; i < cnt; i++)
                 lines[i] = m_mbi.Instructions[i];
             richTextBox.Lines = lines;
 
@@ -62,21 +62,21 @@ namespace ClrTest.Reflection {
         private ToolStripMenuItem selectedFontSizeMenuItem;
 
         private void BuildContextMenu() {
-            string[] fontCandidates = new string[] { "Arial", "Consolas", "Courier New", "Lucida Console", "Tahoma", };
+            var fontCandidates = new string[] { "Arial", "Consolas", "Courier New", "Lucida Console", "Tahoma", };
 
-            List<string> fontChoices = new List<string>();
+            var fontChoices = new List<string>();
             if (Array.IndexOf(fontCandidates, selectedFontName) == -1)
                 fontChoices.Add(selectedFontName);
 
             // only choose those available in current machine
-            foreach (FontFamily ff in FontFamily.Families) {
+            foreach (var ff in FontFamily.Families) {
                 if (Array.IndexOf(fontCandidates, ff.Name) != -1)
                     fontChoices.Add(ff.Name);
             }
 
-            int nameCount = fontChoices.Count;
-            ToolStripMenuItem[] nameItems = new ToolStripMenuItem[nameCount];
-            for (int i = 0; i < nameCount; i++) {
+            var nameCount = fontChoices.Count;
+            var nameItems = new ToolStripMenuItem[nameCount];
+            for (var i = 0; i < nameCount; i++) {
                 nameItems[i] = new ToolStripMenuItem(fontChoices[i], null, fontNameToolStripMenuItem_Click);
                 if (fontChoices[i] == selectedFontName) {
                     nameItems[i].Checked = true;
@@ -85,11 +85,11 @@ namespace ClrTest.Reflection {
             }
             this.fontNameToolStripMenuItem.DropDownItems.AddRange(nameItems);
 
-            int[] sizeChoices = new int[] { 9, 10, 11, 12, 14, 20 };
-            int sizeCount = sizeChoices.Length;
+            var sizeChoices = new int[] { 9, 10, 11, 12, 14, 20 };
+            var sizeCount = sizeChoices.Length;
 
-            ToolStripMenuItem[] sizeItems = new ToolStripMenuItem[sizeCount];
-            for (int i = 0; i < sizeCount; i++) {
+            var sizeItems = new ToolStripMenuItem[sizeCount];
+            for (var i = 0; i < sizeCount; i++) {
                 sizeItems[i] = new ToolStripMenuItem(sizeChoices[i].ToString(), null, fontSizeToolStripMenuItem_Click);
                 if (sizeChoices[i] == selectedFontSize) {
                     sizeItems[i].Checked = true;
@@ -102,7 +102,7 @@ namespace ClrTest.Reflection {
         }
 
         private void LoadSettings() {
-            Properties.Settings s = Properties.Settings.Default;
+            var s = Properties.Settings.Default;
 
             this.Width = s.WindowWidth;
             this.Height = s.WindowHeight;
@@ -114,7 +114,7 @@ namespace ClrTest.Reflection {
         }
 
         private void SaveSettings() {
-            Properties.Settings s = Properties.Settings.Default;
+            var s = Properties.Settings.Default;
 
             s.WindowWidth = this.Width;
             s.WindowHeight = this.Height;

@@ -41,8 +41,8 @@ namespace ClrTest.Reflection {
 
         protected void FireStatusChangeEvent(MonitorStatus status) {
             if (MonitorStatusChange != null) {
-                MonitorStatusChangeEventArgs args = new MonitorStatusChangeEventArgs(status);
-                Control targetCtrl = MonitorStatusChange.Target as Control;
+                var args = new MonitorStatusChangeEventArgs(status);
+                var targetCtrl = MonitorStatusChange.Target as Control;
 
                 if (targetCtrl != null) {
                     targetCtrl.Invoke(MonitorStatusChange, new object[] { this, args });
@@ -53,8 +53,8 @@ namespace ClrTest.Reflection {
         }
         protected void FireDataReadyEvent(T data) {
             if (VisualizerDataReady != null) {
-                VisualizerDataEventArgs<T> args = new VisualizerDataEventArgs<T>(data);
-                Control targetCtrl = VisualizerDataReady.Target as Control;
+                var args = new VisualizerDataEventArgs<T>(data);
+                var targetCtrl = VisualizerDataReady.Target as Control;
 
                 if (targetCtrl != null) {
                     targetCtrl.Invoke(VisualizerDataReady, new object[] { this, args });
@@ -83,7 +83,7 @@ namespace ClrTest.Reflection {
                     while (!m_listener.Pending()) {
                         Thread.Sleep(1000);
                     }
-                    TcpClient client = m_listener.AcceptTcpClient();
+                    var client = m_listener.AcceptTcpClient();
                     ThreadPool.QueueUserWorkItem(delegate { HandleConnection(client); });
                 }
             } catch (Exception ex) {
@@ -94,12 +94,12 @@ namespace ClrTest.Reflection {
         }
 
         private void HandleConnection(TcpClient client) {
-            NetworkStream network = client.GetStream();
-            MemoryStream memory = new MemoryStream();
+            var network = client.GetStream();
+            var memory = new MemoryStream();
 
             try {
-                byte[] buffer = new byte[1024];
-                int received = 0;
+                var buffer = new byte[1024];
+                var received = 0;
                 while (true) {
                     received = network.Read(buffer, 0, 1024);
                     if (received == 0) {
@@ -108,9 +108,9 @@ namespace ClrTest.Reflection {
                         memory.Write(buffer, 0, received);
                     }
                 }
-                XmlSerializer s = new XmlSerializer(typeof(T));
+                var s = new XmlSerializer(typeof(T));
                 memory.Position = 0;
-                T ret = (T)s.Deserialize(memory);
+                var ret = (T)s.Deserialize(memory);
 
                 FireDataReadyEvent(ret);
             } finally {

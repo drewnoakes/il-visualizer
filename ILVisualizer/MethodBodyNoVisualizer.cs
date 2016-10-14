@@ -28,16 +28,16 @@ namespace ClrTest.Reflection {
         }
 
         public void Dump(MethodBodyInfo mbi) {
-            TcpClient tcpClient = new TcpClient();
-            MemoryStream memoryStream = new MemoryStream();
+            var tcpClient = new TcpClient();
+            var memoryStream = new MemoryStream();
             try {
                 tcpClient.Connect(IPAddress.Parse("127.0.0.1"), this.m_portNumber);
 
-                XmlSerializer s = new XmlSerializer(typeof(MethodBodyInfo));
+                var s = new XmlSerializer(typeof(MethodBodyInfo));
                 s.Serialize(memoryStream, mbi);
 
-                byte[] buffer = memoryStream.ToArray();
-                using (NetworkStream networkStream = tcpClient.GetStream()) {
+                var buffer = memoryStream.ToArray();
+                using (var networkStream = tcpClient.GetStream()) {
                     networkStream.Write(buffer, 0, buffer.Length);
                 }
             } finally {
@@ -53,8 +53,8 @@ namespace ClrTest.Reflection {
         protected override void Show(IDialogVisualizerService windowService, IVisualizerObjectProvider objectProvider) {
             try {
                 MethodBodyInfo mbi;
-                using (Stream output = objectProvider.GetData()) {
-                    BinaryFormatter formatter = new BinaryFormatter();
+                using (var output = objectProvider.GetData()) {
+                    var formatter = new BinaryFormatter();
                     mbi = (MethodBodyInfo)formatter.Deserialize(output, null);
                 }
 

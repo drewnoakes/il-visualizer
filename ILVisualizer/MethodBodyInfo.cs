@@ -36,17 +36,17 @@ namespace ClrTest.Reflection {
         }
 
         public static MethodBodyInfo Create(MethodBase method) {
-            MethodBodyInfo mbi = new MethodBodyInfo();
+            var mbi = new MethodBodyInfo();
 
             mbi.Identity = method.GetHashCode();
             mbi.TypeName = method.GetType().Name;
             mbi.MethodToString = method.ToString();
 
-            ReadableILStringVisitor visitor = new ReadableILStringVisitor(
+            var visitor = new ReadableILStringVisitor(
                 new MethodBodyInfoBuilder(mbi),
                 DefaultFormatProvider.Instance);
 
-            ILReader reader = ILReaderFactory.Create(method);
+            var reader = ILReaderFactory.Create(method);
             reader.Accept(visitor);
 
             return mbi;

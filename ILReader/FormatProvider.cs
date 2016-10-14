@@ -38,9 +38,9 @@ namespace ClrTest.Reflection {
         }
 
         public virtual string MultipleLabels(int[] offsets) {
-            StringBuilder sb = new StringBuilder();
-            int length = offsets.Length;
-            for (int i = 0; i < length; i++) {
+            var sb = new StringBuilder();
+            var length = offsets.Length;
+            for (var i = 0; i < length; i++) {
                 if (i == 0) sb.AppendFormat("(");
                 else sb.AppendFormat(", ");
                 sb.Append(Label(offsets[i]));
@@ -50,10 +50,10 @@ namespace ClrTest.Reflection {
         }
 
         public virtual string EscapedString(string str) {
-            int length = str.Length;
-            StringBuilder sb = new StringBuilder(length * 2);
-            for (int i = 0; i < length; i++) {
-                char ch = str[i];
+            var length = str.Length;
+            var sb = new StringBuilder(length * 2);
+            for (var i = 0; i < length; i++) {
+                var ch = str[i];
                 if (ch == '\t') sb.Append("\\t");
                 else if (ch == '\n') sb.Append("\\n");
                 else if (ch == '\r') sb.Append("\\r");
@@ -66,9 +66,9 @@ namespace ClrTest.Reflection {
         }
 
         public virtual string SigByteArrayToString(byte[] sig) {
-            StringBuilder sb = new StringBuilder();
-            int length = sig.Length;
-            for (int i = 0; i < length; i++) {
+            var sb = new StringBuilder();
+            var length = sig.Length;
+            for (var i = 0; i < length; i++) {
                 if (i == 0) sb.AppendFormat("SIG [");
                 else sb.AppendFormat(" ");
                 sb.Append(Int8ToHex(sig[i]));
