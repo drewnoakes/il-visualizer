@@ -18,7 +18,6 @@ namespace ClrTest.Reflection
 
         private static readonly Type s_varArgMethodType;
         private static readonly FieldInfo s_varargFi1;
-        private static FieldInfo s_varargFi2;
 
         private static readonly Type s_genFieldInfoType;
         private static readonly FieldInfo s_genfieldFi1;
@@ -32,7 +31,6 @@ namespace ClrTest.Reflection
 
             s_varArgMethodType = Type.GetType("System.Reflection.Emit.VarArgMethod");
             s_varargFi1 = s_varArgMethodType.GetField("m_method", s_bfInternal);
-            s_varargFi2 = s_varArgMethodType.GetField("m_signature", s_bfInternal);
 
             s_genMethodInfoType = Type.GetType("System.Reflection.Emit.GenericMethodInfo");
             s_genmethFi1 = s_genMethodInfoType.GetField("m_methodHandle", s_bfInternal);

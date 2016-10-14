@@ -16,13 +16,11 @@ namespace ClrTest.Reflection
     public class ModuleScopeTokenResolver : ITokenResolver
     {
         private readonly Module m_module;
-        private readonly MethodBase m_enclosingMethod;
         private readonly Type[] m_methodContext;
         private readonly Type[] m_typeContext;
 
         public ModuleScopeTokenResolver(MethodBase method)
         {
-            m_enclosingMethod = method;
             m_module = method.Module;
             m_methodContext = (method is ConstructorInfo) ? null : method.GetGenericArguments();
             m_typeContext = (method.DeclaringType == null) ? null : method.DeclaringType.GetGenericArguments();
