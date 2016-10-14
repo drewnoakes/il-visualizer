@@ -22,7 +22,7 @@ namespace ClrTest.Reflection
             if (m_byteArray == null)
             {
                 var methodBody = m_method.GetMethodBody();
-                m_byteArray = (methodBody == null) ? new byte[0] : methodBody.GetILAsByteArray();
+                m_byteArray = methodBody == null ? new byte[0] : methodBody.GetILAsByteArray();
             }
             return m_byteArray;
         }

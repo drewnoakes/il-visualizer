@@ -22,8 +22,8 @@ namespace ClrTest.Reflection
         public ModuleScopeTokenResolver(MethodBase method)
         {
             m_module = method.Module;
-            m_methodContext = (method is ConstructorInfo) ? null : method.GetGenericArguments();
-            m_typeContext = (method.DeclaringType == null) ? null : method.DeclaringType.GetGenericArguments();
+            m_methodContext = method is ConstructorInfo ? null : method.GetGenericArguments();
+            m_typeContext = method.DeclaringType == null ? null : method.DeclaringType.GetGenericArguments();
         }
 
         public MethodBase AsMethod(int token)
