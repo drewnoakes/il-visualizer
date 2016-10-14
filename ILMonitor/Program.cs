@@ -1,13 +1,16 @@
 using System;
 using System.Windows.Forms;
 
-namespace ClrTest.Reflection {
-    internal static class Program {
+namespace ClrTest.Reflection
+{
+    internal static class Program
+    {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        private static void Main() {
+        private static void Main()
+        {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new ILMonitorForm());

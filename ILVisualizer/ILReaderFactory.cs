@@ -2,27 +2,35 @@ using System;
 using System.Reflection.Emit;
 using System.Reflection;
 
-namespace ClrTest.Reflection {
-    public class ILReaderFactory {
-        public static ILReader Create(object obj) {
+namespace ClrTest.Reflection
+{
+    public class ILReaderFactory
+    {
+        public static ILReader Create(object obj)
+        {
             var type = obj.GetType();
 
-            if (type == s_dynamicMethodType || type == s_rtDynamicMethodType) {
+            if (type == s_dynamicMethodType || type == s_rtDynamicMethodType)
+            {
                 DynamicMethod dm;
-                if (type == s_rtDynamicMethodType) {
+                if (type == s_rtDynamicMethodType)
+                {
                     //
                     // if the target is RTDynamicMethod, get the value of 
                     // RTDynamicMethod.m_owner instead
                     //
                     dm = (DynamicMethod)s_fiOwner.GetValue(obj);
-                } else {
+                }
+                else
+                {
                     dm = obj as DynamicMethod;
                 }
 
                 return new ILReader(new DynamicMethodILProvider(dm), new DynamicScopeTokenResolver(dm));
             }
 
-            if (type == s_runtimeMethodInfoType || type == s_runtimeConstructorInfoType) {
+            if (type == s_runtimeMethodInfoType || type == s_runtimeConstructorInfoType)
+            {
                 var method = obj as MethodBase;
                 return new ILReader(method);
             }

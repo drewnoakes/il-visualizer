@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace ClrTest.Reflection {
-    public sealed class ILReader : IEnumerable<ILInstruction>, IEnumerable {
+namespace ClrTest.Reflection
+{
+    public sealed class ILReader : IEnumerable<ILInstruction>, IEnumerable
+    {
         #region Static members
 
         private static Type s_runtimeMethodInfoType = Type.GetType("System.Reflection.RuntimeMethodInfo");
@@ -14,20 +16,26 @@ namespace ClrTest.Reflection {
         private static OpCode[] s_OneByteOpCodes;
         private static OpCode[] s_TwoByteOpCodes;
 
-        static ILReader() {
+        static ILReader()
+        {
             s_OneByteOpCodes = new OpCode[0x100];
             s_TwoByteOpCodes = new OpCode[0x100];
 
-            foreach (var fi in typeof(OpCodes).GetFields(BindingFlags.Public | BindingFlags.Static)) {
+            foreach (var fi in typeof(OpCodes).GetFields(BindingFlags.Public | BindingFlags.Static))
+            {
                 var opCode = (OpCode)fi.GetValue(null);
                 var value = (UInt16)opCode.Value;
-                if (value < 0x100) {
+                if (value < 0x100)
+                {
                     s_OneByteOpCodes[value] = opCode;
-                } else if ((value & 0xff00) == 0xfe00) {
+                }
+                else if ((value & 0xff00) == 0xfe00)
+                {
                     s_TwoByteOpCodes[value & 0xff] = opCode;
                 }
             }
         }
+
         #endregion
 
         private Int32 m_position;
@@ -35,13 +43,16 @@ namespace ClrTest.Reflection {
         private IILProvider m_ilProvider;
         private byte[] m_byteArray;
 
-        public ILReader(MethodBase method) {
-            if (method == null) {
+        public ILReader(MethodBase method)
+        {
+            if (method == null)
+            {
                 throw new ArgumentNullException("method");
             }
 
             var rtType = method.GetType();
-            if (rtType != s_runtimeMethodInfoType && rtType != s_runtimeConstructorInfoType) {
+            if (rtType != s_runtimeMethodInfoType && rtType != s_runtimeConstructorInfoType)
+            {
                 throw new ArgumentException("method must be RuntimeMethodInfo or RuntimeConstructorInfo for this constructor.");
             }
 
@@ -51,8 +62,10 @@ namespace ClrTest.Reflection {
             m_position = 0;
         }
 
-        public ILReader(IILProvider ilProvider, ITokenResolver tokenResolver) {
-            if (ilProvider == null) {
+        public ILReader(IILProvider ilProvider, ITokenResolver tokenResolver)
+        {
+            if (ilProvider == null)
+            {
                 throw new ArgumentNullException("ilProvider");
             }
 
@@ -62,7 +75,8 @@ namespace ClrTest.Reflection {
             m_position = 0;
         }
 
-        public IEnumerator<ILInstruction> GetEnumerator() {
+        public IEnumerator<ILInstruction> GetEnumerator()
+        {
             while (m_position < m_byteArray.Length)
                 yield return Next();
 
@@ -70,25 +84,31 @@ namespace ClrTest.Reflection {
             yield break;
         }
 
-        IEnumerator IEnumerable.GetEnumerator() {
+        IEnumerator IEnumerable.GetEnumerator()
+        {
             return this.GetEnumerator();
         }
 
-        private ILInstruction Next() {
+        private ILInstruction Next()
+        {
             var offset = m_position;
             var opCode = OpCodes.Nop;
             var token = 0;
 
             // read first 1 or 2 bytes as opCode
             var code = ReadByte();
-            if (code != 0xFE) {
+            if (code != 0xFE)
+            {
                 opCode = s_OneByteOpCodes[code];
-            } else {
+            }
+            else
+            {
                 code = ReadByte();
                 opCode = s_TwoByteOpCodes[code];
             }
 
-            switch (opCode.OperandType) {
+            switch (opCode.OperandType)
+            {
                 case OperandType.InlineNone:
                     return new InlineNoneInstruction(offset, opCode);
 
@@ -180,66 +200,78 @@ namespace ClrTest.Reflection {
             }
         }
 
-        public void Accept(ILInstructionVisitor visitor) {
+        public void Accept(ILInstructionVisitor visitor)
+        {
             if (visitor == null)
                 throw new ArgumentNullException("argument 'visitor' can not be null");
 
-            foreach (var instruction in this) {
+            foreach (var instruction in this)
+            {
                 instruction.Accept(visitor);
             }
         }
 
         #region read in operands
 
-        private Byte ReadByte() {
+        private Byte ReadByte()
+        {
             return (Byte)m_byteArray[m_position++];
         }
 
-        private SByte ReadSByte() {
+        private SByte ReadSByte()
+        {
             return (SByte)ReadByte();
         }
 
-        private UInt16 ReadUInt16() {
+        private UInt16 ReadUInt16()
+        {
             var pos = m_position;
             m_position += 2;
             return BitConverter.ToUInt16(m_byteArray, pos);
         }
 
-        private UInt32 ReadUInt32() {
+        private UInt32 ReadUInt32()
+        {
             var pos = m_position;
             m_position += 4;
             return BitConverter.ToUInt32(m_byteArray, pos);
         }
 
-        private UInt64 ReadUInt64() {
+        private UInt64 ReadUInt64()
+        {
             var pos = m_position;
             m_position += 8;
             return BitConverter.ToUInt64(m_byteArray, pos);
         }
 
-        private Int32 ReadInt32() {
+        private Int32 ReadInt32()
+        {
             var pos = m_position;
             m_position += 4;
             return BitConverter.ToInt32(m_byteArray, pos);
         }
 
-        private Int64 ReadInt64() {
+        private Int64 ReadInt64()
+        {
             var pos = m_position;
             m_position += 8;
             return BitConverter.ToInt64(m_byteArray, pos);
         }
 
-        private Single ReadSingle() {
+        private Single ReadSingle()
+        {
             var pos = m_position;
             m_position += 4;
             return BitConverter.ToSingle(m_byteArray, pos);
         }
 
-        private Double ReadDouble() {
+        private Double ReadDouble()
+        {
             var pos = m_position;
             m_position += 8;
             return BitConverter.ToDouble(m_byteArray, pos);
         }
+
         #endregion
     }
 }

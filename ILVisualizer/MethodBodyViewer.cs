@@ -6,29 +6,36 @@ using Microsoft.VisualStudio.DebuggerVisualizers;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-namespace ClrTest.Reflection {
-    public partial class MethodBodyViewer : Form {
+namespace ClrTest.Reflection
+{
+    public partial class MethodBodyViewer : Form
+    {
         private IVisualizerObjectProvider m_objectProvider;
         private MethodBodyInfo m_mbi = null;
 
-        public MethodBodyViewer() {
+        public MethodBodyViewer()
+        {
             InitializeComponent();
         }
 
-        public void SetObjectProvider(IVisualizerObjectProvider objectProvider) {
+        public void SetObjectProvider(IVisualizerObjectProvider objectProvider)
+        {
             m_objectProvider = objectProvider;
             this.GetObjectData();
             this.UpdateForm();
         }
 
-        private void GetObjectData() {
-            using (var output = m_objectProvider.GetData()) {
+        private void GetObjectData()
+        {
+            using (var output = m_objectProvider.GetData())
+            {
                 var formatter = new BinaryFormatter();
                 m_mbi = (MethodBodyInfo)formatter.Deserialize(output, null);
             }
         }
 
-        private void UpdateForm() {
+        private void UpdateForm()
+        {
             lblMethodGetType.Text = m_mbi.TypeName;
             txtMethodToString.Text = m_mbi.MethodToString;
 
@@ -42,17 +49,20 @@ namespace ClrTest.Reflection {
         }
 
         // allow ESC to close
-        private void MethodForm_KeyUp(object sender, KeyEventArgs e) {
+        private void MethodForm_KeyUp(object sender, KeyEventArgs e)
+        {
             if (e.KeyCode == Keys.Escape)
                 this.Close();
         }
 
-        private void MethodBodyViewer_Load(object sender, EventArgs e) {
+        private void MethodBodyViewer_Load(object sender, EventArgs e)
+        {
             LoadSettings();
             BuildContextMenu();
         }
 
-        private void MethodBodyViewer_FormClosing(object sender, FormClosingEventArgs e) {
+        private void MethodBodyViewer_FormClosing(object sender, FormClosingEventArgs e)
+        {
             SaveSettings();
         }
 
@@ -61,37 +71,43 @@ namespace ClrTest.Reflection {
         private int selectedFontSize;
         private ToolStripMenuItem selectedFontSizeMenuItem;
 
-        private void BuildContextMenu() {
-            var fontCandidates = new string[] { "Arial", "Consolas", "Courier New", "Lucida Console", "Tahoma", };
+        private void BuildContextMenu()
+        {
+            var fontCandidates = new string[] {"Arial", "Consolas", "Courier New", "Lucida Console", "Tahoma",};
 
             var fontChoices = new List<string>();
             if (Array.IndexOf(fontCandidates, selectedFontName) == -1)
                 fontChoices.Add(selectedFontName);
 
             // only choose those available in current machine
-            foreach (var ff in FontFamily.Families) {
+            foreach (var ff in FontFamily.Families)
+            {
                 if (Array.IndexOf(fontCandidates, ff.Name) != -1)
                     fontChoices.Add(ff.Name);
             }
 
             var nameCount = fontChoices.Count;
             var nameItems = new ToolStripMenuItem[nameCount];
-            for (var i = 0; i < nameCount; i++) {
+            for (var i = 0; i < nameCount; i++)
+            {
                 nameItems[i] = new ToolStripMenuItem(fontChoices[i], null, fontNameToolStripMenuItem_Click);
-                if (fontChoices[i] == selectedFontName) {
+                if (fontChoices[i] == selectedFontName)
+                {
                     nameItems[i].Checked = true;
                     selectedFontNameMenuItem = nameItems[i];
                 }
             }
             this.fontNameToolStripMenuItem.DropDownItems.AddRange(nameItems);
 
-            var sizeChoices = new int[] { 9, 10, 11, 12, 14, 20 };
+            var sizeChoices = new int[] {9, 10, 11, 12, 14, 20};
             var sizeCount = sizeChoices.Length;
 
             var sizeItems = new ToolStripMenuItem[sizeCount];
-            for (var i = 0; i < sizeCount; i++) {
+            for (var i = 0; i < sizeCount; i++)
+            {
                 sizeItems[i] = new ToolStripMenuItem(sizeChoices[i].ToString(), null, fontSizeToolStripMenuItem_Click);
-                if (sizeChoices[i] == selectedFontSize) {
+                if (sizeChoices[i] == selectedFontSize)
+                {
                     sizeItems[i].Checked = true;
                     selectedFontSizeMenuItem = sizeItems[i];
                 }
@@ -101,7 +117,8 @@ namespace ClrTest.Reflection {
             this.richTextBox.Font = new Font(selectedFontName, selectedFontSize);
         }
 
-        private void LoadSettings() {
+        private void LoadSettings()
+        {
             var s = Properties.Settings.Default;
 
             this.Width = s.WindowWidth;
@@ -113,7 +130,8 @@ namespace ClrTest.Reflection {
             selectedFontSize = s.FontSize;
         }
 
-        private void SaveSettings() {
+        private void SaveSettings()
+        {
             var s = Properties.Settings.Default;
 
             s.WindowWidth = this.Width;
@@ -127,7 +145,8 @@ namespace ClrTest.Reflection {
             s.Save();
         }
 
-        private void fontNameToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void fontNameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             selectedFontNameMenuItem.Checked = false;
             selectedFontNameMenuItem = sender as ToolStripMenuItem;
             selectedFontNameMenuItem.Checked = true;
@@ -137,7 +156,8 @@ namespace ClrTest.Reflection {
             Update();
         }
 
-        private void fontSizeToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void fontSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             selectedFontSizeMenuItem.Checked = false;
             selectedFontSizeMenuItem = sender as ToolStripMenuItem;
             selectedFontSizeMenuItem.Checked = true;

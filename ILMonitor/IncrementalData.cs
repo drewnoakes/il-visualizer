@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 
-namespace ClrTest.Reflection {
+namespace ClrTest.Reflection
+{
     [Serializable]
-    public class IncrementalMethodBodyInfo {
+    public class IncrementalMethodBodyInfo
+    {
         [Serializable]
-        public class AgingInstruction {
+        public class AgingInstruction
+        {
             public int Age;
             public string ILString;
         }
@@ -18,11 +21,13 @@ namespace ClrTest.Reflection {
         // hidden field
         public List<int> LengthHistory;
 
-        public static IncrementalMethodBodyInfo Create(MethodBodyInfo mbi) {
+        public static IncrementalMethodBodyInfo Create(MethodBodyInfo mbi)
+        {
             return Create(mbi, null);
         }
 
-        public static IncrementalMethodBodyInfo Create(MethodBodyInfo mbi, List<int> history) {
+        public static IncrementalMethodBodyInfo Create(MethodBodyInfo mbi, List<int> history)
+        {
             var imbi = new IncrementalMethodBodyInfo();
 
             imbi.Identity = mbi.Identity;
@@ -32,19 +37,23 @@ namespace ClrTest.Reflection {
             var count = mbi.Instructions.Count;
             imbi.Instructions = new AgingInstruction[count];
 
-            for (var i = 0; i < count; i++) {
+            for (var i = 0; i < count; i++)
+            {
                 imbi.Instructions[i] = new AgingInstruction();
                 imbi.Instructions[i].ILString = mbi.Instructions[i];
             }
 
             imbi.LengthHistory = new List<int>();
-            if (history != null) {
+            if (history != null)
+            {
                 imbi.LengthHistory.AddRange(history);
             }
             imbi.LengthHistory.Add(count);
 
-            for (var i = 0; i < imbi.LengthHistory.Count - 1; i++) {
-                for (var a = imbi.LengthHistory[i]; a < imbi.LengthHistory[i + 1]; a++) {
+            for (var i = 0; i < imbi.LengthHistory.Count - 1; i++)
+            {
+                for (var a = imbi.LengthHistory[i]; a < imbi.LengthHistory[i + 1]; a++)
+                {
                     imbi.Instructions[a].Age = i + 1;
                 }
             }

@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace ClrTest.Reflection {
+namespace ClrTest.Reflection
+{
     [Serializable]
-    public class MethodBodyInfo {
+    public class MethodBodyInfo
+    {
         private int m_methodId;
 
         private string m_typeName;
@@ -12,30 +14,36 @@ namespace ClrTest.Reflection {
 
         private List<string> m_instructions = new List<string>();
 
-        public int Identity {
+        public int Identity
+        {
             get { return m_methodId; }
             set { m_methodId = value; }
         }
 
-        public string TypeName {
+        public string TypeName
+        {
             get { return m_typeName; }
             set { m_typeName = value; }
         }
 
-        public string MethodToString {
+        public string MethodToString
+        {
             get { return m_methodToString; }
             set { m_methodToString = value; }
         }
 
-        public List<string> Instructions {
+        public List<string> Instructions
+        {
             get { return m_instructions; }
         }
 
-        private void AddInstruction(string inst) {
+        private void AddInstruction(string inst)
+        {
             m_instructions.Add(inst);
         }
 
-        public static MethodBodyInfo Create(MethodBase method) {
+        public static MethodBodyInfo Create(MethodBase method)
+        {
             var mbi = new MethodBodyInfo();
 
             mbi.Identity = method.GetHashCode();
@@ -52,14 +60,17 @@ namespace ClrTest.Reflection {
             return mbi;
         }
 
-        private class MethodBodyInfoBuilder : IILStringCollector {
+        private class MethodBodyInfoBuilder : IILStringCollector
+        {
             private MethodBodyInfo m_mbi;
 
-            public MethodBodyInfoBuilder(MethodBodyInfo mbi) {
+            public MethodBodyInfoBuilder(MethodBodyInfo mbi)
+            {
                 m_mbi = mbi;
             }
 
-            public void Process(ILInstruction instruction, string operandString) {
+            public void Process(ILInstruction instruction, string operandString)
+            {
                 m_mbi.AddInstruction(string.Format("IL_{0:x4}: {1,-10} {2}",
                     instruction.Offset,
                     instruction.OpCode.Name,
@@ -67,5 +78,4 @@ namespace ClrTest.Reflection {
             }
         }
     }
-
 }

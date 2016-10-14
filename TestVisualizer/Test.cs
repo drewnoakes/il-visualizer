@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 
 internal class Foo
 {
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public string MyMethod(string x)
     {
@@ -25,14 +24,14 @@ internal class Program
 
     private static void M1()
     {
-        var dm = new DynamicMethod("HelloWorld", typeof(void), new Type[] { }, typeof(Program), false);
+        var dm = new DynamicMethod("HelloWorld", typeof(void), new Type[] {}, typeof(Program), false);
 
         var il = dm.GetILGenerator();
 
         TestShowVisualizer(dm);
         il.Emit(OpCodes.Ldstr, "hello, world");
         TestShowVisualizer(dm);
-        il.Emit(OpCodes.Call, typeof(Console).GetMethod("WriteLine", new Type[] { typeof(string) }));
+        il.Emit(OpCodes.Call, typeof(Console).GetMethod("WriteLine", new Type[] {typeof(string)}));
         TestShowVisualizer(dm);
         il.Emit(OpCodes.Ret);
         TestShowVisualizer(dm);
@@ -43,7 +42,7 @@ internal class Program
     {
         // DynamicMethod wrapper method
 
-        var dm = new DynamicMethod("MyMethodWrapper", typeof(object), new Type[] { typeof(object[]) }, typeof(Program), true);
+        var dm = new DynamicMethod("MyMethodWrapper", typeof(object), new Type[] {typeof(object[])}, typeof(Program), true);
         var il = dm.GetILGenerator();
         var l1 = il.DefineLabel();
         var returnLocal = il.DeclareLocal(typeof(object));
@@ -61,7 +60,7 @@ internal class Program
         il.Emit(OpCodes.Ldc_I4, parameterLength + 1);
         il.Emit(OpCodes.Beq_S, l1);
         il.Emit(OpCodes.Ldstr, "insufficient arguments");
-        il.Emit(OpCodes.Newobj, typeof(System.ArgumentException).GetConstructor(new Type[] { typeof(string) }));
+        il.Emit(OpCodes.Newobj, typeof(System.ArgumentException).GetConstructor(new Type[] {typeof(string)}));
         il.Emit(OpCodes.Throw);
         il.MarkLabel(l1);
 

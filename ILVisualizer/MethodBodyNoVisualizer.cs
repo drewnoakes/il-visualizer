@@ -9,38 +9,47 @@ using System.Xml.Serialization;
 using System.Net;
 
 [assembly: DebuggerVisualizer(
-    typeof(ClrTest.Reflection.MethodBodyNoVisualizer),
-    typeof(ClrTest.Reflection.MethodBodyObjectSource),
-    Target = typeof(System.Reflection.MethodBase),
-    Description = "Send to IL Monitor")
+               typeof(ClrTest.Reflection.MethodBodyNoVisualizer),
+               typeof(ClrTest.Reflection.MethodBodyObjectSource),
+               Target = typeof(System.Reflection.MethodBase),
+               Description = "Send to IL Monitor")
 ]
 
-namespace ClrTest.Reflection {
-    internal interface IXmlDataProvider<T> {
+namespace ClrTest.Reflection
+{
+    internal interface IXmlDataProvider<T>
+    {
         void Dump(T obj);
     }
 
-    internal class TcpClientDataProvider : IXmlDataProvider<MethodBodyInfo> {
+    internal class TcpClientDataProvider : IXmlDataProvider<MethodBodyInfo>
+    {
         private int m_portNumber;
 
-        public TcpClientDataProvider(int port) {
+        public TcpClientDataProvider(int port)
+        {
             this.m_portNumber = port;
         }
 
-        public void Dump(MethodBodyInfo mbi) {
+        public void Dump(MethodBodyInfo mbi)
+        {
             var tcpClient = new TcpClient();
             var memoryStream = new MemoryStream();
-            try {
+            try
+            {
                 tcpClient.Connect(IPAddress.Parse("127.0.0.1"), this.m_portNumber);
 
                 var s = new XmlSerializer(typeof(MethodBodyInfo));
                 s.Serialize(memoryStream, mbi);
 
                 var buffer = memoryStream.ToArray();
-                using (var networkStream = tcpClient.GetStream()) {
+                using (var networkStream = tcpClient.GetStream())
+                {
                     networkStream.Write(buffer, 0, buffer.Length);
                 }
-            } finally {
+            }
+            finally
+            {
                 if (memoryStream != null)
                     memoryStream.Dispose();
                 if (tcpClient != null)
@@ -49,18 +58,24 @@ namespace ClrTest.Reflection {
         }
     }
 
-    public class MethodBodyNoVisualizer : DialogDebuggerVisualizer {
-        protected override void Show(IDialogVisualizerService windowService, IVisualizerObjectProvider objectProvider) {
-            try {
+    public class MethodBodyNoVisualizer : DialogDebuggerVisualizer
+    {
+        protected override void Show(IDialogVisualizerService windowService, IVisualizerObjectProvider objectProvider)
+        {
+            try
+            {
                 MethodBodyInfo mbi;
-                using (var output = objectProvider.GetData()) {
+                using (var output = objectProvider.GetData())
+                {
                     var formatter = new BinaryFormatter();
                     mbi = (MethodBodyInfo)formatter.Deserialize(output, null);
                 }
 
                 IXmlDataProvider<MethodBodyInfo> provider = new TcpClientDataProvider(22017);
                 provider.Dump(mbi);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message,
                     "Send to IL Monitor",
                     MessageBoxButtons.OK,

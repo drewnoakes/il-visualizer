@@ -1,7 +1,9 @@
 using System.Text;
 
-namespace ClrTest.Reflection {
-    public interface IFormatProvider {
+namespace ClrTest.Reflection
+{
+    public interface IFormatProvider
+    {
         string Int32ToHex(int int32);
         string Int16ToHex(int int16);
         string Int8ToHex(int int8);
@@ -12,65 +14,90 @@ namespace ClrTest.Reflection {
         string SigByteArrayToString(byte[] sig);
     }
 
-    public class DefaultFormatProvider : IFormatProvider {
-        private DefaultFormatProvider() { }
+    public class DefaultFormatProvider : IFormatProvider
+    {
+        private DefaultFormatProvider()
+        {
+        }
 
         public static DefaultFormatProvider Instance = new DefaultFormatProvider();
 
-        public virtual string Int32ToHex(int int32) {
+        public virtual string Int32ToHex(int int32)
+        {
             return int32.ToString("X8");
         }
 
-        public virtual string Int16ToHex(int int16) {
+        public virtual string Int16ToHex(int int16)
+        {
             return int16.ToString("X4");
         }
 
-        public virtual string Int8ToHex(int int8) {
+        public virtual string Int8ToHex(int int8)
+        {
             return int8.ToString("X2");
         }
 
-        public virtual string Argument(int ordinal) {
+        public virtual string Argument(int ordinal)
+        {
             return string.Format("V_{0}", ordinal);
         }
 
-        public virtual string Label(int offset) {
+        public virtual string Label(int offset)
+        {
             return string.Format("IL_{0:x4}", offset);
         }
 
-        public virtual string MultipleLabels(int[] offsets) {
+        public virtual string MultipleLabels(int[] offsets)
+        {
             var sb = new StringBuilder();
             var length = offsets.Length;
-            for (var i = 0; i < length; i++) {
-                if (i == 0) sb.AppendFormat("(");
-                else sb.AppendFormat(", ");
+            for (var i = 0; i < length; i++)
+            {
+                if (i == 0)
+                    sb.AppendFormat("(");
+                else
+                    sb.AppendFormat(", ");
                 sb.Append(Label(offsets[i]));
             }
             sb.AppendFormat(")");
             return sb.ToString();
         }
 
-        public virtual string EscapedString(string str) {
+        public virtual string EscapedString(string str)
+        {
             var length = str.Length;
-            var sb = new StringBuilder(length * 2);
-            for (var i = 0; i < length; i++) {
+            var sb = new StringBuilder(length*2);
+            for (var i = 0; i < length; i++)
+            {
                 var ch = str[i];
-                if (ch == '\t') sb.Append("\\t");
-                else if (ch == '\n') sb.Append("\\n");
-                else if (ch == '\r') sb.Append("\\r");
-                else if (ch == '\"') sb.Append("\\\"");
-                else if (ch == '\\') sb.Append("\\");
-                else if (ch < 0x20 || ch >= 0x7f) sb.AppendFormat("\\u{0:x4}", (int)ch);
-                else sb.Append(ch);
+                if (ch == '\t')
+                    sb.Append("\\t");
+                else if (ch == '\n')
+                    sb.Append("\\n");
+                else if (ch == '\r')
+                    sb.Append("\\r");
+                else if (ch == '\"')
+                    sb.Append("\\\"");
+                else if (ch == '\\')
+                    sb.Append("\\");
+                else if (ch < 0x20 || ch >= 0x7f)
+                    sb.AppendFormat("\\u{0:x4}", (int)ch);
+                else
+                    sb.Append(ch);
             }
             return "\"" + sb.ToString() + "\"";
         }
 
-        public virtual string SigByteArrayToString(byte[] sig) {
+        public virtual string SigByteArrayToString(byte[] sig)
+        {
             var sb = new StringBuilder();
             var length = sig.Length;
-            for (var i = 0; i < length; i++) {
-                if (i == 0) sb.AppendFormat("SIG [");
-                else sb.AppendFormat(" ");
+            for (var i = 0; i < length; i++)
+            {
+                if (i == 0)
+                    sb.AppendFormat("SIG [");
+                else
+                    sb.AppendFormat(" ");
                 sb.Append(Int8ToHex(sig[i]));
             }
             sb.AppendFormat("]");
