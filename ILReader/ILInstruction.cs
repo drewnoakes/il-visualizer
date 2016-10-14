@@ -11,8 +11,8 @@ namespace ClrTest.Reflection
 
         internal ILInstruction(int offset, OpCode opCode)
         {
-            this.m_offset = offset;
-            this.m_opCode = opCode;
+            m_offset = offset;
+            m_opCode = opCode;
         }
 
         public int Offset
@@ -48,7 +48,7 @@ namespace ClrTest.Reflection
         internal InlineBrTargetInstruction(int offset, OpCode opCode, int delta)
             : base(offset, opCode)
         {
-            this.m_delta = delta;
+            m_delta = delta;
         }
 
         public int Delta
@@ -74,7 +74,7 @@ namespace ClrTest.Reflection
         internal ShortInlineBrTargetInstruction(int offset, OpCode opCode, sbyte delta)
             : base(offset, opCode)
         {
-            this.m_delta = delta;
+            m_delta = delta;
         }
 
         public sbyte Delta
@@ -101,7 +101,7 @@ namespace ClrTest.Reflection
         internal InlineSwitchInstruction(int offset, OpCode opCode, int[] deltas)
             : base(offset, opCode)
         {
-            this.m_deltas = deltas;
+            m_deltas = deltas;
         }
 
         public int[] Deltas
@@ -138,7 +138,7 @@ namespace ClrTest.Reflection
         internal InlineIInstruction(int offset, OpCode opCode, int value)
             : base(offset, opCode)
         {
-            this.m_int32 = value;
+            m_int32 = value;
         }
 
         public int Int32
@@ -159,7 +159,7 @@ namespace ClrTest.Reflection
         internal InlineI8Instruction(int offset, OpCode opCode, long value)
             : base(offset, opCode)
         {
-            this.m_int64 = value;
+            m_int64 = value;
         }
 
         public long Int64
@@ -180,7 +180,7 @@ namespace ClrTest.Reflection
         internal ShortInlineIInstruction(int offset, OpCode opCode, byte value)
             : base(offset, opCode)
         {
-            this.m_int8 = value;
+            m_int8 = value;
         }
 
         public byte Byte
@@ -201,7 +201,7 @@ namespace ClrTest.Reflection
         internal InlineRInstruction(int offset, OpCode opCode, double value)
             : base(offset, opCode)
         {
-            this.m_value = value;
+            m_value = value;
         }
 
         public double Double
@@ -222,7 +222,7 @@ namespace ClrTest.Reflection
         internal ShortInlineRInstruction(int offset, OpCode opCode, float value)
             : base(offset, opCode)
         {
-            this.m_value = value;
+            m_value = value;
         }
 
         public float Single
@@ -245,8 +245,8 @@ namespace ClrTest.Reflection
         internal InlineFieldInstruction(ITokenResolver resolver, int offset, OpCode opCode, int token)
             : base(offset, opCode)
         {
-            this.m_resolver = resolver;
-            this.m_token = token;
+            m_resolver = resolver;
+            m_token = token;
         }
 
         public FieldInfo Field
@@ -281,8 +281,8 @@ namespace ClrTest.Reflection
         internal InlineMethodInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
-            this.m_resolver = resolver;
-            this.m_token = token;
+            m_resolver = resolver;
+            m_token = token;
         }
 
         public MethodBase Method
@@ -317,8 +317,8 @@ namespace ClrTest.Reflection
         internal InlineTypeInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
-            this.m_resolver = resolver;
-            this.m_token = token;
+            m_resolver = resolver;
+            m_token = token;
         }
 
         public Type Type
@@ -353,8 +353,8 @@ namespace ClrTest.Reflection
         internal InlineSigInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
-            this.m_resolver = resolver;
-            this.m_token = token;
+            m_resolver = resolver;
+            m_token = token;
         }
 
         public byte[] Signature
@@ -389,8 +389,8 @@ namespace ClrTest.Reflection
         internal InlineTokInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
-            this.m_resolver = resolver;
-            this.m_token = token;
+            m_resolver = resolver;
+            m_token = token;
         }
 
         public MemberInfo Member
@@ -425,8 +425,8 @@ namespace ClrTest.Reflection
         internal InlineStringInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
-            this.m_resolver = resolver;
-            this.m_token = token;
+            m_resolver = resolver;
+            m_token = token;
         }
 
         public string String
@@ -457,7 +457,7 @@ namespace ClrTest.Reflection
         internal InlineVarInstruction(int offset, OpCode opCode, ushort ordinal)
             : base(offset, opCode)
         {
-            this.m_ordinal = ordinal;
+            m_ordinal = ordinal;
         }
 
         public ushort Ordinal
@@ -478,7 +478,7 @@ namespace ClrTest.Reflection
         internal ShortInlineVarInstruction(int offset, OpCode opCode, byte ordinal)
             : base(offset, opCode)
         {
-            this.m_ordinal = ordinal;
+            m_ordinal = ordinal;
         }
 
         public byte Ordinal

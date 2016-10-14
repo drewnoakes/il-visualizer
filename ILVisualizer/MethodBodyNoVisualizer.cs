@@ -28,7 +28,7 @@ namespace ClrTest.Reflection
 
         public TcpClientDataProvider(int port)
         {
-            this.m_portNumber = port;
+            m_portNumber = port;
         }
 
         public void Dump(MethodBodyInfo mbi)
@@ -37,7 +37,7 @@ namespace ClrTest.Reflection
             var memoryStream = new MemoryStream();
             try
             {
-                tcpClient.Connect(IPAddress.Parse("127.0.0.1"), this.m_portNumber);
+                tcpClient.Connect(IPAddress.Parse("127.0.0.1"), m_portNumber);
 
                 var s = new XmlSerializer(typeof(MethodBodyInfo));
                 s.Serialize(memoryStream, mbi);

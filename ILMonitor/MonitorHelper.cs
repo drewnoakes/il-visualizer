@@ -15,7 +15,7 @@ namespace ClrTest.Reflection
 
         public VisualizerDataEventArgs(T data)
         {
-            this.VisualizerData = data;
+            VisualizerData = data;
         }
     }
 
@@ -25,7 +25,7 @@ namespace ClrTest.Reflection
 
         public MonitorStatusChangeEventArgs(MonitorStatus status)
         {
-            this.Status = status;
+            Status = status;
         }
     }
 
@@ -159,7 +159,7 @@ namespace ClrTest.Reflection
 
         public override void Start()
         {
-            m_listenerThread = new Thread(new ThreadStart(this.ListenerThread));
+            m_listenerThread = new Thread(new ThreadStart(ListenerThread));
             m_listenerThread.Start();
             FireStatusChangeEvent(MonitorStatus.Monitoring);
         }

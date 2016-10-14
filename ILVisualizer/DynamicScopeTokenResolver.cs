@@ -112,11 +112,11 @@ namespace ClrTest.Reflection
         public MemberInfo AsMember(int token)
         {
             if ((token & 0x02000000) == 0x02000000)
-                return this.AsType(token);
+                return AsType(token);
             if ((token & 0x06000000) == 0x06000000)
-                return this.AsMethod(token);
+                return AsMethod(token);
             if ((token & 0x04000000) == 0x04000000)
-                return this.AsField(token);
+                return AsField(token);
 
             Debug.Assert(false, $"unexpected token type: {token:x8}");
             return null;

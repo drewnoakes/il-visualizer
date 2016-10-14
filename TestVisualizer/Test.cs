@@ -60,7 +60,7 @@ internal class Program
         il.Emit(OpCodes.Ldc_I4, parameterLength + 1);
         il.Emit(OpCodes.Beq_S, l1);
         il.Emit(OpCodes.Ldstr, "insufficient arguments");
-        il.Emit(OpCodes.Newobj, typeof(System.ArgumentException).GetConstructor(new Type[] {typeof(string)}));
+        il.Emit(OpCodes.Newobj, typeof(ArgumentException).GetConstructor(new Type[] {typeof(string)}));
         il.Emit(OpCodes.Throw);
         il.MarkLabel(l1);
 

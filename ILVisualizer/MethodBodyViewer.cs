@@ -21,8 +21,8 @@ namespace ClrTest.Reflection
         public void SetObjectProvider(IVisualizerObjectProvider objectProvider)
         {
             m_objectProvider = objectProvider;
-            this.GetObjectData();
-            this.UpdateForm();
+            GetObjectData();
+            UpdateForm();
         }
 
         private void GetObjectData()
@@ -45,14 +45,14 @@ namespace ClrTest.Reflection
                 lines[i] = m_mbi.Instructions[i];
             richTextBox.Lines = lines;
 
-            this.ActiveControl = richTextBox;
+            ActiveControl = richTextBox;
         }
 
         // allow ESC to close
         private void MethodForm_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
-                this.Close();
+                Close();
         }
 
         private void MethodBodyViewer_Load(object sender, EventArgs e)
@@ -97,7 +97,7 @@ namespace ClrTest.Reflection
                     selectedFontNameMenuItem = nameItems[i];
                 }
             }
-            this.fontNameToolStripMenuItem.DropDownItems.AddRange(nameItems);
+            fontNameToolStripMenuItem.DropDownItems.AddRange(nameItems);
 
             var sizeChoices = new int[] {9, 10, 11, 12, 14, 20};
             var sizeCount = sizeChoices.Length;
@@ -112,19 +112,19 @@ namespace ClrTest.Reflection
                     selectedFontSizeMenuItem = sizeItems[i];
                 }
             }
-            this.fontSizeToolStripMenuItem.DropDownItems.AddRange(sizeItems);
+            fontSizeToolStripMenuItem.DropDownItems.AddRange(sizeItems);
 
-            this.richTextBox.Font = new Font(selectedFontName, selectedFontSize);
+            richTextBox.Font = new Font(selectedFontName, selectedFontSize);
         }
 
         private void LoadSettings()
         {
             var s = Properties.Settings.Default;
 
-            this.Width = s.WindowWidth;
-            this.Height = s.WindowHeight;
-            this.Left = s.WindowLeft;
-            this.Top = s.WindowTop;
+            Width = s.WindowWidth;
+            Height = s.WindowHeight;
+            Left = s.WindowLeft;
+            Top = s.WindowTop;
 
             selectedFontName = s.FontName;
             selectedFontSize = s.FontSize;
@@ -134,10 +134,10 @@ namespace ClrTest.Reflection
         {
             var s = Properties.Settings.Default;
 
-            s.WindowWidth = this.Width;
-            s.WindowHeight = this.Height;
-            s.WindowLeft = this.Left;
-            s.WindowTop = this.Top;
+            s.WindowWidth = Width;
+            s.WindowHeight = Height;
+            s.WindowLeft = Left;
+            s.WindowTop = Top;
 
             s.FontName = selectedFontName;
             s.FontSize = selectedFontSize;
