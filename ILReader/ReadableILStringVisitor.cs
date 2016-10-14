@@ -35,9 +35,9 @@ namespace ClrTest.Reflection
 
         public override void Process(ILInstruction ilInstruction, string operandString)
         {
-            writer.WriteLine("IL_{0:x4}: {1,-4}| {2, -8}",
+            writer.WriteLine("IL_{0:x4}: {1,-4:x2}| {2, -8}",
                 ilInstruction.Offset,
-                ilInstruction.OpCode.Value.ToString("x2"),
+                ilInstruction.OpCode.Value,
                 operandString);
         }
     }
