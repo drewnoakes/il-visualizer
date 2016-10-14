@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DynamicMethodVisualizer.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ClrTest.Reflection.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="WindowWidth" Type="System.Int32" Scope="User">
@@ -14,11 +14,11 @@
     <Setting Name="WindowTop" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">100</Value>
     </Setting>
-    <Setting Name="Font" Type="System.String" Scope="User">
+    <Setting Name="FontName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Courier New</Value>
     </Setting>
-    <Setting Name="ShowBytes" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="FontSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
     </Setting>
   </Settings>
 </SettingsFile>

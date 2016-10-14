@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MethodVisualizer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ILMonitor")]
+[assembly: AssemblyDescription("To Track Code-gen of Dynamic Method")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("MethodVisualizer")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2005")]
+[assembly: AssemblyProduct("ILMonitor")]
+[assembly: AssemblyCopyright("Copyright ©  2006")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("632585a0-d9e5-4ba1-8b1e-b847b5834a77")]
+[assembly: Guid("b617795a-39df-4022-a9eb-c0caa098bdaf")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -29,7 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

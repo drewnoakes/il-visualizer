@@ -102,7 +102,7 @@ class Program
 
     public static void TestShowVisualizer(object objectToVisualize)
     {
-        VisualizerDevelopmentHost visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(DynamicMethodVisualizer.MethodBodyVisualizer), typeof(DynamicMethodVisualizer.MethodBodyObjectSource));
+        VisualizerDevelopmentHost visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(ClrTest.Reflection.MethodBodyVisualizer), typeof(ClrTest.Reflection.MethodBodyObjectSource));
         visualizerHost.ShowVisualizer();
     }
 }

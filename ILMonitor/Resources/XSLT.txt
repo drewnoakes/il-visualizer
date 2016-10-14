@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="html"/>
+
+  <xsl:attribute-set name="alternate">
+    <xsl:attribute name="class">
+      <xsl:apply-templates select="." mode="alternate"/>
+    </xsl:attribute>
+  </xsl:attribute-set>
+
+  <xsl:template match="AgingInstruction" mode="alternate">
+    <xsl:choose>
+      <xsl:when test="Age mod 3 = 0">first</xsl:when>
+      <xsl:when test="Age mod 3 = 1">second</xsl:when>
+      <xsl:otherwise>third</xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="IncrementalMethodBodyInfo">
+    <html>
+      <head>
+        <style type="text/css">
+          body
+          {
+          margin: 2px;
+          font-family: Tahoma;
+          }
+          .tostring
+          {
+          font-size: 90%;
+          color: Navy;
+          font-weight: bold;
+          }
+          .type
+          {
+          font-size: 70%;
+          }
+          table
+          {
+          padding: 0px;
+          border: 0px;
+          width: 100%;
+          text-align:left;
+          font-size: 80%;
+          }
+          tr.first
+          {
+          background-color: #fffacd;
+          }
+
+          tr.second
+          {
+          background-color: #ccffcc;
+          }
+
+          tr.third
+          {
+          background-color: #e0ffff;
+          }
+        </style>
+        <title></title>
+      </head>
+      <body>
+        <span class="type">
+          <xsl:apply-templates select="TypeName"/>
+        </span>
+        <br />
+        <span class="tostring">
+          <xsl:apply-templates select="MethodToString"/>
+        </span>
+        <hr />
+        <table>
+          <xsl:apply-templates select="Instructions"/>
+        </table>
+      </body>
+    </html>
+  </xsl:template>
+  <xsl:template match="AgingInstruction">
+    <tr xsl:use-attribute-sets="alternate">
+      <td width="30px">
+        <xsl:value-of select="substring-before(ILString, ':')"/>
+      </td>
+      <td>
+        <xsl:value-of select="substring-after(ILString, ':')"/>
+      </td>
+    </tr>
+  </xsl:template>
+</xsl:stylesheet>
