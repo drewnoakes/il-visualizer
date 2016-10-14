@@ -7,11 +7,12 @@ using System.Reflection.Emit;
 namespace ClrTest.Reflection {
     public sealed class ILReader : IEnumerable<ILInstruction>, IEnumerable {
         #region Static members
-        static Type s_runtimeMethodInfoType = Type.GetType("System.Reflection.RuntimeMethodInfo");
-        static Type s_runtimeConstructorInfoType = Type.GetType("System.Reflection.RuntimeConstructorInfo");
-        
-        static OpCode[] s_OneByteOpCodes;
-        static OpCode[] s_TwoByteOpCodes;
+
+        private static Type s_runtimeMethodInfoType = Type.GetType("System.Reflection.RuntimeMethodInfo");
+        private static Type s_runtimeConstructorInfoType = Type.GetType("System.Reflection.RuntimeConstructorInfo");
+
+        private static OpCode[] s_OneByteOpCodes;
+        private static OpCode[] s_TwoByteOpCodes;
 
         static ILReader() {
             s_OneByteOpCodes = new OpCode[0x100];
@@ -29,10 +30,10 @@ namespace ClrTest.Reflection {
         }
         #endregion
 
-        Int32 m_position;
-        ITokenResolver m_resolver;
-        IILProvider m_ilProvider;
-        byte[] m_byteArray;
+        private Int32 m_position;
+        private ITokenResolver m_resolver;
+        private IILProvider m_ilProvider;
+        private byte[] m_byteArray;
 
         public ILReader(MethodBase method) {
             if (method == null) {
@@ -73,7 +74,7 @@ namespace ClrTest.Reflection {
             return this.GetEnumerator();
         }
 
-        ILInstruction Next() {
+        private ILInstruction Next() {
             Int32 offset = m_position;
             OpCode opCode = OpCodes.Nop;
             Int32 token = 0;
@@ -189,48 +190,52 @@ namespace ClrTest.Reflection {
         }
 
         #region read in operands
-        Byte ReadByte() {
+
+        private Byte ReadByte() {
             return (Byte)m_byteArray[m_position++];
         }
 
-        SByte ReadSByte() {
+        private SByte ReadSByte() {
             return (SByte)ReadByte();
         }
 
-        UInt16 ReadUInt16() {
+        private UInt16 ReadUInt16() {
             int pos = m_position;
             m_position += 2;
             return BitConverter.ToUInt16(m_byteArray, pos);
         }
 
-        UInt32 ReadUInt32() {
+        private UInt32 ReadUInt32() {
             int pos = m_position;
             m_position += 4;
             return BitConverter.ToUInt32(m_byteArray, pos);
         }
-        UInt64 ReadUInt64() {
+
+        private UInt64 ReadUInt64() {
             int pos = m_position;
             m_position += 8;
             return BitConverter.ToUInt64(m_byteArray, pos);
         }
 
-        Int32 ReadInt32() {
+        private Int32 ReadInt32() {
             int pos = m_position;
             m_position += 4;
             return BitConverter.ToInt32(m_byteArray, pos);
         }
-        Int64 ReadInt64() {
+
+        private Int64 ReadInt64() {
             int pos = m_position;
             m_position += 8;
             return BitConverter.ToInt64(m_byteArray, pos);
         }
 
-        Single ReadSingle() {
+        private Single ReadSingle() {
             int pos = m_position;
             m_position += 4;
             return BitConverter.ToSingle(m_byteArray, pos);
         }
-        Double ReadDouble() {
+
+        private Double ReadDouble() {
             int pos = m_position;
             m_position += 8;
             return BitConverter.ToDouble(m_byteArray, pos);

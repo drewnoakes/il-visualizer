@@ -31,7 +31,7 @@ namespace ClrTest.Reflection {
             get { return m_instructions; }
         }
 
-        void AddInstruction(string inst) {
+        private void AddInstruction(string inst) {
             m_instructions.Add(inst);
         }
 
@@ -52,8 +52,8 @@ namespace ClrTest.Reflection {
             return mbi;
         }
 
-        class MethodBodyInfoBuilder : IILStringCollector {
-            MethodBodyInfo m_mbi;
+        private class MethodBodyInfoBuilder : IILStringCollector {
+            private MethodBodyInfo m_mbi;
 
             public MethodBodyInfoBuilder(MethodBodyInfo mbi) {
                 m_mbi = mbi;

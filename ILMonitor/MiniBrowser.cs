@@ -10,7 +10,7 @@ namespace ClrTest.Reflection {
             InitializeComponent();
         }
 
-        IncrementalMethodBodyInfo m_imbi;
+        private IncrementalMethodBodyInfo m_imbi;
 
         public IncrementalMethodBodyInfo CurrentData {
             get {

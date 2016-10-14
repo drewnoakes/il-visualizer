@@ -4,12 +4,12 @@ using System.Reflection.Emit;
 
 namespace ClrTest.Reflection {
     public class DynamicMethodILProvider : IILProvider {
-        static FieldInfo s_fiLen = typeof(ILGenerator).GetField("m_length", BindingFlags.NonPublic | BindingFlags.Instance);
-        static FieldInfo s_fiStream = typeof(ILGenerator).GetField("m_ILStream", BindingFlags.NonPublic | BindingFlags.Instance);
-        static MethodInfo s_miBakeByteArray = typeof(ILGenerator).GetMethod("BakeByteArray", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static FieldInfo s_fiLen = typeof(ILGenerator).GetField("m_length", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static FieldInfo s_fiStream = typeof(ILGenerator).GetField("m_ILStream", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static MethodInfo s_miBakeByteArray = typeof(ILGenerator).GetMethod("BakeByteArray", BindingFlags.NonPublic | BindingFlags.Instance);
 
-        DynamicMethod m_method;
-        byte[] m_byteArray;
+        private DynamicMethod m_method;
+        private byte[] m_byteArray;
 
         public DynamicMethodILProvider(DynamicMethod method) {
             m_method = method;

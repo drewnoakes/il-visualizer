@@ -4,7 +4,7 @@ using System.Reflection;
 using Microsoft.VisualStudio.DebuggerVisualizers;
 using System.Runtime.CompilerServices;
 
-class Foo
+internal class Foo
 {
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -15,15 +15,15 @@ class Foo
     }
 }
 
-class Program
+internal class Program
 {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
         M1();
         M2();
     }
 
-    static void M1()
+    private static void M1()
     {
         DynamicMethod dm = new DynamicMethod("HelloWorld", typeof(void), new Type[] { }, typeof(Program), false);
 
@@ -39,7 +39,7 @@ class Program
         dm.Invoke(null, null);
     }
 
-    static void M2()
+    private static void M2()
     {
         // DynamicMethod wrapper method
 

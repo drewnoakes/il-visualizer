@@ -16,12 +16,12 @@ using System.Net;
 ]
 
 namespace ClrTest.Reflection {
-    interface IXmlDataProvider<T> {
+    internal interface IXmlDataProvider<T> {
         void Dump(T obj);
     }
 
-    class TcpClientDataProvider : IXmlDataProvider<MethodBodyInfo> {
-        int m_portNumber;
+    internal class TcpClientDataProvider : IXmlDataProvider<MethodBodyInfo> {
+        private int m_portNumber;
 
         public TcpClientDataProvider(int port) {
             this.m_portNumber = port;

@@ -34,7 +34,7 @@ namespace ClrTest.Reflection {
             }
         }
 
-        AbstractXmlDataMonitor<MethodBodyInfo> m_monitor;
+        private AbstractXmlDataMonitor<MethodBodyInfo> m_monitor;
 
         private void ILMonitorForm_Load(object sender, EventArgs e) {
             m_monitor = new TcpDataMonitor<MethodBodyInfo>(22017);
@@ -48,7 +48,7 @@ namespace ClrTest.Reflection {
             }
         }
 
-        void OnMonitorStatusChange(object sender, MonitorStatusChangeEventArgs e) {
+        private void OnMonitorStatusChange(object sender, MonitorStatusChangeEventArgs e) {
             if (e.Status == MonitorStatus.Monitoring) {
                 toolStripStatusLabel.Text = "Monitoring";
                 toolStripStatusLabel.ForeColor = Color.Blue;
@@ -63,7 +63,7 @@ namespace ClrTest.Reflection {
             }
         }
 
-        void OnVisualizerDataReady(object sender, VisualizerDataEventArgs<MethodBodyInfo> e) {
+        private void OnVisualizerDataReady(object sender, VisualizerDataEventArgs<MethodBodyInfo> e) {
             MethodBodyInfo mbi = e.VisualizerData;
             MiniBrowser childForm = FindOrCreateChildForm(mbi);
 
@@ -76,7 +76,7 @@ namespace ClrTest.Reflection {
             childForm.UpdateWith(imbi);
         }
 
-        MiniBrowser FindOrCreateChildForm(MethodBodyInfo mbi) {
+        private MiniBrowser FindOrCreateChildForm(MethodBodyInfo mbi) {
             foreach (Form form in MdiChildren) {
                 MiniBrowser miniBrowser = form as MiniBrowser;
                 if (miniBrowser == null) continue;

@@ -56,12 +56,12 @@ namespace ClrTest.Reflection {
             SaveSettings();
         }
 
-        string selectedFontName;
-        ToolStripMenuItem selectedFontNameMenuItem;
-        int selectedFontSize;
-        ToolStripMenuItem selectedFontSizeMenuItem;
+        private string selectedFontName;
+        private ToolStripMenuItem selectedFontNameMenuItem;
+        private int selectedFontSize;
+        private ToolStripMenuItem selectedFontSizeMenuItem;
 
-        void BuildContextMenu() {
+        private void BuildContextMenu() {
             string[] fontCandidates = new string[] { "Arial", "Consolas", "Courier New", "Lucida Console", "Tahoma", };
 
             List<string> fontChoices = new List<string>();

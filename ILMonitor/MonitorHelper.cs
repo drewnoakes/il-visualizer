@@ -66,15 +66,15 @@ namespace ClrTest.Reflection {
     }
 
     public class TcpDataMonitor<T> : AbstractXmlDataMonitor<T> {
-        TcpListener m_listener;
-        Thread m_listenerThread;
-        readonly int m_port;
+        private TcpListener m_listener;
+        private Thread m_listenerThread;
+        private readonly int m_port;
 
         public TcpDataMonitor(int port) {
             m_port = port;
         }
 
-        void ListenerThread() {
+        private void ListenerThread() {
             m_listener = new TcpListener(IPAddress.Parse("127.0.0.1"), m_port);
             m_listener.Start();
 
@@ -93,7 +93,7 @@ namespace ClrTest.Reflection {
             }
         }
 
-        void HandleConnection(TcpClient client) {
+        private void HandleConnection(TcpClient client) {
             NetworkStream network = client.GetStream();
             MemoryStream memory = new MemoryStream();
 

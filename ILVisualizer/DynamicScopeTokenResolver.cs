@@ -41,7 +41,7 @@ namespace ClrTest.Reflection {
         }
         #endregion
 
-        object m_scope = null;
+        private object m_scope = null;
         internal object this[int token] {
             get {
                 return s_indexer.GetValue(m_scope, new object[] { token });

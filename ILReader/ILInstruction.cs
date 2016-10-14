@@ -144,9 +144,9 @@ namespace ClrTest.Reflection {
     }
 
     public class InlineFieldInstruction : ILInstruction {
-        ITokenResolver m_resolver;
-        Int32 m_token;
-        FieldInfo m_field;
+        private ITokenResolver m_resolver;
+        private Int32 m_token;
+        private FieldInfo m_field;
 
         internal InlineFieldInstruction(ITokenResolver resolver, Int32 offset, OpCode opCode, Int32 token)
             : base(offset, opCode) {
