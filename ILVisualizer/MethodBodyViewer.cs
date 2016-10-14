@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.VisualStudio.DebuggerVisualizers;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
 
 namespace ClrTest.Reflection
 {
