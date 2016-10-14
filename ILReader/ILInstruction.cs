@@ -15,15 +15,9 @@ namespace ClrTest.Reflection
             m_opCode = opCode;
         }
 
-        public int Offset
-        {
-            get { return m_offset; }
-        }
+        public int Offset => m_offset;
 
-        public OpCode OpCode
-        {
-            get { return m_opCode; }
-        }
+        public OpCode OpCode => m_opCode;
 
         public abstract void Accept(ILInstructionVisitor vistor);
     }
@@ -51,15 +45,9 @@ namespace ClrTest.Reflection
             m_delta = delta;
         }
 
-        public int Delta
-        {
-            get { return m_delta; }
-        }
+        public int Delta => m_delta;
 
-        public int TargetOffset
-        {
-            get { return m_offset + m_delta + 1 + 4; }
-        }
+        public int TargetOffset => m_offset + m_delta + 1 + 4;
 
         public override void Accept(ILInstructionVisitor vistor)
         {
@@ -77,15 +65,9 @@ namespace ClrTest.Reflection
             m_delta = delta;
         }
 
-        public sbyte Delta
-        {
-            get { return m_delta; }
-        }
+        public sbyte Delta => m_delta;
 
-        public int TargetOffset
-        {
-            get { return m_offset + m_delta + 1 + 1; }
-        }
+        public int TargetOffset => m_offset + m_delta + 1 + 1;
 
         public override void Accept(ILInstructionVisitor vistor)
         {
@@ -104,10 +86,7 @@ namespace ClrTest.Reflection
             m_deltas = deltas;
         }
 
-        public int[] Deltas
-        {
-            get { return (int[])m_deltas.Clone(); }
-        }
+        public int[] Deltas => (int[])m_deltas.Clone();
 
         public int[] TargetOffsets
         {
@@ -141,10 +120,7 @@ namespace ClrTest.Reflection
             m_int32 = value;
         }
 
-        public int Int32
-        {
-            get { return m_int32; }
-        }
+        public int Int32 => m_int32;
 
         public override void Accept(ILInstructionVisitor vistor)
         {
@@ -162,10 +138,7 @@ namespace ClrTest.Reflection
             m_int64 = value;
         }
 
-        public long Int64
-        {
-            get { return m_int64; }
-        }
+        public long Int64 => m_int64;
 
         public override void Accept(ILInstructionVisitor vistor)
         {
@@ -183,10 +156,7 @@ namespace ClrTest.Reflection
             m_int8 = value;
         }
 
-        public byte Byte
-        {
-            get { return m_int8; }
-        }
+        public byte Byte => m_int8;
 
         public override void Accept(ILInstructionVisitor vistor)
         {
@@ -204,10 +174,7 @@ namespace ClrTest.Reflection
             m_value = value;
         }
 
-        public double Double
-        {
-            get { return m_value; }
-        }
+        public double Double => m_value;
 
         public override void Accept(ILInstructionVisitor vistor)
         {
@@ -225,10 +192,7 @@ namespace ClrTest.Reflection
             m_value = value;
         }
 
-        public float Single
-        {
-            get { return m_value; }
-        }
+        public float Single => m_value;
 
         public override void Accept(ILInstructionVisitor vistor)
         {
@@ -261,10 +225,7 @@ namespace ClrTest.Reflection
             }
         }
 
-        public int Token
-        {
-            get { return m_token; }
-        }
+        public int Token => m_token;
 
         public override void Accept(ILInstructionVisitor vistor)
         {
@@ -297,10 +258,7 @@ namespace ClrTest.Reflection
             }
         }
 
-        public int Token
-        {
-            get { return m_token; }
-        }
+        public int Token => m_token;
 
         public override void Accept(ILInstructionVisitor vistor)
         {
@@ -333,10 +291,7 @@ namespace ClrTest.Reflection
             }
         }
 
-        public int Token
-        {
-            get { return m_token; }
-        }
+        public int Token => m_token;
 
         public override void Accept(ILInstructionVisitor vistor)
         {
@@ -369,10 +324,7 @@ namespace ClrTest.Reflection
             }
         }
 
-        public int Token
-        {
-            get { return m_token; }
-        }
+        public int Token => m_token;
 
         public override void Accept(ILInstructionVisitor vistor)
         {
@@ -405,10 +357,7 @@ namespace ClrTest.Reflection
             }
         }
 
-        public int Token
-        {
-            get { return m_token; }
-        }
+        public int Token => m_token;
 
         public override void Accept(ILInstructionVisitor vistor)
         {
@@ -439,10 +388,7 @@ namespace ClrTest.Reflection
             }
         }
 
-        public int Token
-        {
-            get { return m_token; }
-        }
+        public int Token => m_token;
 
         public override void Accept(ILInstructionVisitor vistor)
         {
@@ -460,10 +406,7 @@ namespace ClrTest.Reflection
             m_ordinal = ordinal;
         }
 
-        public ushort Ordinal
-        {
-            get { return m_ordinal; }
-        }
+        public ushort Ordinal => m_ordinal;
 
         public override void Accept(ILInstructionVisitor vistor)
         {
@@ -481,10 +424,7 @@ namespace ClrTest.Reflection
             m_ordinal = ordinal;
         }
 
-        public byte Ordinal
-        {
-            get { return m_ordinal; }
-        }
+        public byte Ordinal => m_ordinal;
 
         public override void Accept(ILInstructionVisitor vistor)
         {

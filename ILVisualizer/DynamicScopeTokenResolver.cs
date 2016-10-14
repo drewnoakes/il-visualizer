@@ -52,10 +52,7 @@ namespace ClrTest.Reflection
 
         private readonly object m_scope;
 
-        internal object this[int token]
-        {
-            get { return s_indexer.GetValue(m_scope, new object[] {token}); }
-        }
+        internal object this[int token] => s_indexer.GetValue(m_scope, new object[] {token});
 
         public DynamicScopeTokenResolver(DynamicMethod dm)
         {

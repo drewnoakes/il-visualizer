@@ -15,10 +15,7 @@ namespace ClrTest.Reflection
 
         private IncrementalMethodBodyInfo m_imbi;
 
-        public IncrementalMethodBodyInfo CurrentData
-        {
-            get { return m_imbi; }
-        }
+        public IncrementalMethodBodyInfo CurrentData => m_imbi;
 
         public void UpdateWith(IncrementalMethodBodyInfo imbi)
         {

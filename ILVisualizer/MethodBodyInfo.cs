@@ -32,10 +32,7 @@ namespace ClrTest.Reflection
             set { m_methodToString = value; }
         }
 
-        public List<string> Instructions
-        {
-            get { return m_instructions; }
-        }
+        public List<string> Instructions => m_instructions;
 
         private void AddInstruction(string inst)
         {
