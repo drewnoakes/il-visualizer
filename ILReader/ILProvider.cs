@@ -5,7 +5,7 @@ namespace ClrTest.Reflection
 {
     public interface IILProvider
     {
-        Byte[] GetByteArray();
+        byte[] GetByteArray();
     }
 
     public class MethodBaseILProvider : IILProvider
@@ -23,7 +23,7 @@ namespace ClrTest.Reflection
             if (m_byteArray == null)
             {
                 var methodBody = m_method.GetMethodBody();
-                m_byteArray = (methodBody == null) ? new Byte[0] : methodBody.GetILAsByteArray();
+                m_byteArray = (methodBody == null) ? new byte[0] : methodBody.GetILAsByteArray();
             }
             return m_byteArray;
         }

@@ -6,16 +6,16 @@ namespace ClrTest.Reflection
 {
     public abstract class ILInstruction
     {
-        protected Int32 m_offset;
+        protected int m_offset;
         protected OpCode m_opCode;
 
-        internal ILInstruction(Int32 offset, OpCode opCode)
+        internal ILInstruction(int offset, OpCode opCode)
         {
             this.m_offset = offset;
             this.m_opCode = opCode;
         }
 
-        public Int32 Offset
+        public int Offset
         {
             get { return m_offset; }
         }
@@ -30,7 +30,7 @@ namespace ClrTest.Reflection
 
     public class InlineNoneInstruction : ILInstruction
     {
-        internal InlineNoneInstruction(Int32 offset, OpCode opCode)
+        internal InlineNoneInstruction(int offset, OpCode opCode)
             : base(offset, opCode)
         {
         }
@@ -43,20 +43,20 @@ namespace ClrTest.Reflection
 
     public class InlineBrTargetInstruction : ILInstruction
     {
-        private readonly Int32 m_delta;
+        private readonly int m_delta;
 
-        internal InlineBrTargetInstruction(Int32 offset, OpCode opCode, Int32 delta)
+        internal InlineBrTargetInstruction(int offset, OpCode opCode, int delta)
             : base(offset, opCode)
         {
             this.m_delta = delta;
         }
 
-        public Int32 Delta
+        public int Delta
         {
             get { return m_delta; }
         }
 
-        public Int32 TargetOffset
+        public int TargetOffset
         {
             get { return m_offset + m_delta + 1 + 4; }
         }
@@ -69,20 +69,20 @@ namespace ClrTest.Reflection
 
     public class ShortInlineBrTargetInstruction : ILInstruction
     {
-        private readonly SByte m_delta;
+        private readonly sbyte m_delta;
 
-        internal ShortInlineBrTargetInstruction(Int32 offset, OpCode opCode, SByte delta)
+        internal ShortInlineBrTargetInstruction(int offset, OpCode opCode, sbyte delta)
             : base(offset, opCode)
         {
             this.m_delta = delta;
         }
 
-        public SByte Delta
+        public sbyte Delta
         {
             get { return m_delta; }
         }
 
-        public Int32 TargetOffset
+        public int TargetOffset
         {
             get { return m_offset + m_delta + 1 + 1; }
         }
@@ -95,21 +95,21 @@ namespace ClrTest.Reflection
 
     public class InlineSwitchInstruction : ILInstruction
     {
-        private readonly Int32[] m_deltas;
-        private Int32[] m_targetOffsets;
+        private readonly int[] m_deltas;
+        private int[] m_targetOffsets;
 
-        internal InlineSwitchInstruction(Int32 offset, OpCode opCode, Int32[] deltas)
+        internal InlineSwitchInstruction(int offset, OpCode opCode, int[] deltas)
             : base(offset, opCode)
         {
             this.m_deltas = deltas;
         }
 
-        public Int32[] Deltas
+        public int[] Deltas
         {
-            get { return (Int32[])m_deltas.Clone(); }
+            get { return (int[])m_deltas.Clone(); }
         }
 
-        public Int32[] TargetOffsets
+        public int[] TargetOffsets
         {
             get
             {
@@ -117,7 +117,7 @@ namespace ClrTest.Reflection
                 {
                     var cases = m_deltas.Length;
                     var itself = 1 + 4 + 4*cases;
-                    m_targetOffsets = new Int32[cases];
+                    m_targetOffsets = new int[cases];
                     for (var i = 0; i < cases; i++)
                         m_targetOffsets[i] = m_offset + m_deltas[i] + itself;
                 }
@@ -133,15 +133,15 @@ namespace ClrTest.Reflection
 
     public class InlineIInstruction : ILInstruction
     {
-        private readonly Int32 m_int32;
+        private readonly int m_int32;
 
-        internal InlineIInstruction(Int32 offset, OpCode opCode, Int32 value)
+        internal InlineIInstruction(int offset, OpCode opCode, int value)
             : base(offset, opCode)
         {
             this.m_int32 = value;
         }
 
-        public Int32 Int32
+        public int Int32
         {
             get { return m_int32; }
         }
@@ -154,15 +154,15 @@ namespace ClrTest.Reflection
 
     public class InlineI8Instruction : ILInstruction
     {
-        private readonly Int64 m_int64;
+        private readonly long m_int64;
 
-        internal InlineI8Instruction(Int32 offset, OpCode opCode, Int64 value)
+        internal InlineI8Instruction(int offset, OpCode opCode, long value)
             : base(offset, opCode)
         {
             this.m_int64 = value;
         }
 
-        public Int64 Int64
+        public long Int64
         {
             get { return m_int64; }
         }
@@ -175,15 +175,15 @@ namespace ClrTest.Reflection
 
     public class ShortInlineIInstruction : ILInstruction
     {
-        private readonly Byte m_int8;
+        private readonly byte m_int8;
 
-        internal ShortInlineIInstruction(Int32 offset, OpCode opCode, Byte value)
+        internal ShortInlineIInstruction(int offset, OpCode opCode, byte value)
             : base(offset, opCode)
         {
             this.m_int8 = value;
         }
 
-        public Byte Byte
+        public byte Byte
         {
             get { return m_int8; }
         }
@@ -196,15 +196,15 @@ namespace ClrTest.Reflection
 
     public class InlineRInstruction : ILInstruction
     {
-        private readonly Double m_value;
+        private readonly double m_value;
 
-        internal InlineRInstruction(Int32 offset, OpCode opCode, Double value)
+        internal InlineRInstruction(int offset, OpCode opCode, double value)
             : base(offset, opCode)
         {
             this.m_value = value;
         }
 
-        public Double Double
+        public double Double
         {
             get { return m_value; }
         }
@@ -217,15 +217,15 @@ namespace ClrTest.Reflection
 
     public class ShortInlineRInstruction : ILInstruction
     {
-        private readonly Single m_value;
+        private readonly float m_value;
 
-        internal ShortInlineRInstruction(Int32 offset, OpCode opCode, Single value)
+        internal ShortInlineRInstruction(int offset, OpCode opCode, float value)
             : base(offset, opCode)
         {
             this.m_value = value;
         }
 
-        public Single Single
+        public float Single
         {
             get { return m_value; }
         }
@@ -239,10 +239,10 @@ namespace ClrTest.Reflection
     public class InlineFieldInstruction : ILInstruction
     {
         private readonly ITokenResolver m_resolver;
-        private readonly Int32 m_token;
+        private readonly int m_token;
         private FieldInfo m_field;
 
-        internal InlineFieldInstruction(ITokenResolver resolver, Int32 offset, OpCode opCode, Int32 token)
+        internal InlineFieldInstruction(ITokenResolver resolver, int offset, OpCode opCode, int token)
             : base(offset, opCode)
         {
             this.m_resolver = resolver;
@@ -261,7 +261,7 @@ namespace ClrTest.Reflection
             }
         }
 
-        public Int32 Token
+        public int Token
         {
             get { return m_token; }
         }
@@ -275,10 +275,10 @@ namespace ClrTest.Reflection
     public class InlineMethodInstruction : ILInstruction
     {
         private readonly ITokenResolver m_resolver;
-        private readonly Int32 m_token;
+        private readonly int m_token;
         private MethodBase m_method;
 
-        internal InlineMethodInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
+        internal InlineMethodInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
             this.m_resolver = resolver;
@@ -297,7 +297,7 @@ namespace ClrTest.Reflection
             }
         }
 
-        public Int32 Token
+        public int Token
         {
             get { return m_token; }
         }
@@ -311,10 +311,10 @@ namespace ClrTest.Reflection
     public class InlineTypeInstruction : ILInstruction
     {
         private readonly ITokenResolver m_resolver;
-        private readonly Int32 m_token;
+        private readonly int m_token;
         private Type m_type;
 
-        internal InlineTypeInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
+        internal InlineTypeInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
             this.m_resolver = resolver;
@@ -333,7 +333,7 @@ namespace ClrTest.Reflection
             }
         }
 
-        public Int32 Token
+        public int Token
         {
             get { return m_token; }
         }
@@ -347,10 +347,10 @@ namespace ClrTest.Reflection
     public class InlineSigInstruction : ILInstruction
     {
         private readonly ITokenResolver m_resolver;
-        private readonly Int32 m_token;
+        private readonly int m_token;
         private byte[] m_signature;
 
-        internal InlineSigInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
+        internal InlineSigInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
             this.m_resolver = resolver;
@@ -369,7 +369,7 @@ namespace ClrTest.Reflection
             }
         }
 
-        public Int32 Token
+        public int Token
         {
             get { return m_token; }
         }
@@ -383,10 +383,10 @@ namespace ClrTest.Reflection
     public class InlineTokInstruction : ILInstruction
     {
         private readonly ITokenResolver m_resolver;
-        private readonly Int32 m_token;
+        private readonly int m_token;
         private MemberInfo m_member;
 
-        internal InlineTokInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
+        internal InlineTokInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
             this.m_resolver = resolver;
@@ -405,7 +405,7 @@ namespace ClrTest.Reflection
             }
         }
 
-        public Int32 Token
+        public int Token
         {
             get { return m_token; }
         }
@@ -419,17 +419,17 @@ namespace ClrTest.Reflection
     public class InlineStringInstruction : ILInstruction
     {
         private readonly ITokenResolver m_resolver;
-        private readonly Int32 m_token;
-        private String m_string;
+        private readonly int m_token;
+        private string m_string;
 
-        internal InlineStringInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
+        internal InlineStringInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
             this.m_resolver = resolver;
             this.m_token = token;
         }
 
-        public String String
+        public string String
         {
             get
             {
@@ -439,7 +439,7 @@ namespace ClrTest.Reflection
             }
         }
 
-        public Int32 Token
+        public int Token
         {
             get { return m_token; }
         }
@@ -452,15 +452,15 @@ namespace ClrTest.Reflection
 
     public class InlineVarInstruction : ILInstruction
     {
-        private readonly UInt16 m_ordinal;
+        private readonly ushort m_ordinal;
 
-        internal InlineVarInstruction(Int32 offset, OpCode opCode, UInt16 ordinal)
+        internal InlineVarInstruction(int offset, OpCode opCode, ushort ordinal)
             : base(offset, opCode)
         {
             this.m_ordinal = ordinal;
         }
 
-        public UInt16 Ordinal
+        public ushort Ordinal
         {
             get { return m_ordinal; }
         }
@@ -473,15 +473,15 @@ namespace ClrTest.Reflection
 
     public class ShortInlineVarInstruction : ILInstruction
     {
-        private readonly Byte m_ordinal;
+        private readonly byte m_ordinal;
 
-        internal ShortInlineVarInstruction(Int32 offset, OpCode opCode, Byte ordinal)
+        internal ShortInlineVarInstruction(int offset, OpCode opCode, byte ordinal)
             : base(offset, opCode)
         {
             this.m_ordinal = ordinal;
         }
 
-        public Byte Ordinal
+        public byte Ordinal
         {
             get { return m_ordinal; }
         }

@@ -8,7 +8,7 @@ namespace ClrTest.Reflection
         MethodBase AsMethod(int token);
         FieldInfo AsField(int token);
         Type AsType(int token);
-        String AsString(int token);
+        string AsString(int token);
         MemberInfo AsMember(int token);
         byte[] AsSignature(int token);
     }

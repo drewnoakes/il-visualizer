@@ -64,7 +64,7 @@ namespace ClrTest.Reflection
             m_scope = s_scopeFi.GetValue(dm.GetILGenerator());
         }
 
-        public String AsString(int token)
+        public string AsString(int token)
         {
             return this[token] as string;
         }

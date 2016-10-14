@@ -162,7 +162,7 @@ namespace ClrTest.Reflection
             selectedFontSizeMenuItem = sender as ToolStripMenuItem;
             selectedFontSizeMenuItem.Checked = true;
 
-            selectedFontSize = Int32.Parse(selectedFontSizeMenuItem.Text);
+            selectedFontSize = int.Parse(selectedFontSizeMenuItem.Text);
             richTextBox.Font = new Font(richTextBox.Font.Name, selectedFontSize);
             Update();
         }

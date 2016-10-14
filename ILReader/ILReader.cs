@@ -24,7 +24,7 @@ namespace ClrTest.Reflection
             foreach (var fi in typeof(OpCodes).GetFields(BindingFlags.Public | BindingFlags.Static))
             {
                 var opCode = (OpCode)fi.GetValue(null);
-                var value = (UInt16)opCode.Value;
+                var value = (ushort)opCode.Value;
                 if (value < 0x100)
                 {
                     s_OneByteOpCodes[value] = opCode;
@@ -38,7 +38,7 @@ namespace ClrTest.Reflection
 
         #endregion
 
-        private Int32 m_position;
+        private int m_position;
         private readonly ITokenResolver m_resolver;
         private readonly IILProvider m_ilProvider;
         private readonly byte[] m_byteArray;
@@ -190,7 +190,7 @@ namespace ClrTest.Reflection
                 //The operand is the 32-bit integer argument to a switch instruction.
                 case OperandType.InlineSwitch:
                     var cases = ReadInt32();
-                    var deltas = new Int32[cases];
+                    var deltas = new int[cases];
                     for (var i = 0; i < cases; i++)
                         deltas[i] = ReadInt32();
                     return new InlineSwitchInstruction(offset, opCode, deltas);
@@ -213,59 +213,59 @@ namespace ClrTest.Reflection
 
         #region read in operands
 
-        private Byte ReadByte()
+        private byte ReadByte()
         {
-            return (Byte)m_byteArray[m_position++];
+            return (byte)m_byteArray[m_position++];
         }
 
-        private SByte ReadSByte()
+        private sbyte ReadSByte()
         {
-            return (SByte)ReadByte();
+            return (sbyte)ReadByte();
         }
 
-        private UInt16 ReadUInt16()
+        private ushort ReadUInt16()
         {
             var pos = m_position;
             m_position += 2;
             return BitConverter.ToUInt16(m_byteArray, pos);
         }
 
-        private UInt32 ReadUInt32()
+        private uint ReadUInt32()
         {
             var pos = m_position;
             m_position += 4;
             return BitConverter.ToUInt32(m_byteArray, pos);
         }
 
-        private UInt64 ReadUInt64()
+        private ulong ReadUInt64()
         {
             var pos = m_position;
             m_position += 8;
             return BitConverter.ToUInt64(m_byteArray, pos);
         }
 
-        private Int32 ReadInt32()
+        private int ReadInt32()
         {
             var pos = m_position;
             m_position += 4;
             return BitConverter.ToInt32(m_byteArray, pos);
         }
 
-        private Int64 ReadInt64()
+        private long ReadInt64()
         {
             var pos = m_position;
             m_position += 8;
             return BitConverter.ToInt64(m_byteArray, pos);
         }
 
-        private Single ReadSingle()
+        private float ReadSingle()
         {
             var pos = m_position;
             m_position += 4;
             return BitConverter.ToSingle(m_byteArray, pos);
         }
 
-        private Double ReadDouble()
+        private double ReadDouble()
         {
             var pos = m_position;
             m_position += 8;
