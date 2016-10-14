@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
-using Microsoft.VisualStudio.DebuggerVisualizers;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
+using ClrTest.Reflection.Properties;
+using Microsoft.VisualStudio.DebuggerVisualizers;
 
 namespace ClrTest.Reflection
 {
@@ -72,7 +73,7 @@ namespace ClrTest.Reflection
 
         private void BuildContextMenu()
         {
-            var fontCandidates = new string[] {"Arial", "Consolas", "Courier New", "Lucida Console", "Tahoma",};
+            var fontCandidates = new[] {"Arial", "Consolas", "Courier New", "Lucida Console", "Tahoma"};
 
             var fontChoices = new List<string>();
             if (Array.IndexOf(fontCandidates, selectedFontName) == -1)
@@ -98,7 +99,7 @@ namespace ClrTest.Reflection
             }
             fontNameToolStripMenuItem.DropDownItems.AddRange(nameItems);
 
-            var sizeChoices = new int[] {9, 10, 11, 12, 14, 20};
+            var sizeChoices = new[] {9, 10, 11, 12, 14, 20};
             var sizeCount = sizeChoices.Length;
 
             var sizeItems = new ToolStripMenuItem[sizeCount];
@@ -118,7 +119,7 @@ namespace ClrTest.Reflection
 
         private void LoadSettings()
         {
-            var s = Properties.Settings.Default;
+            var s = Settings.Default;
 
             Width = s.WindowWidth;
             Height = s.WindowHeight;
@@ -131,7 +132,7 @@ namespace ClrTest.Reflection
 
         private void SaveSettings()
         {
-            var s = Properties.Settings.Default;
+            var s = Settings.Default;
 
             s.WindowWidth = Width;
             s.WindowHeight = Height;

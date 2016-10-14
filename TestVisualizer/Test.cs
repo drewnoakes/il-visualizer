@@ -1,7 +1,8 @@
 using System;
 using System.Reflection.Emit;
-using Microsoft.VisualStudio.DebuggerVisualizers;
 using System.Runtime.CompilerServices;
+using ClrTest.Reflection;
+using Microsoft.VisualStudio.DebuggerVisualizers;
 
 internal class Foo
 {
@@ -30,7 +31,7 @@ internal class Program
         TestShowVisualizer(dm);
         il.Emit(OpCodes.Ldstr, "hello, world");
         TestShowVisualizer(dm);
-        il.Emit(OpCodes.Call, typeof(Console).GetMethod("WriteLine", new Type[] {typeof(string)}));
+        il.Emit(OpCodes.Call, typeof(Console).GetMethod("WriteLine", new[] {typeof(string)}));
         TestShowVisualizer(dm);
         il.Emit(OpCodes.Ret);
         TestShowVisualizer(dm);
@@ -41,7 +42,7 @@ internal class Program
     {
         // DynamicMethod wrapper method
 
-        var dm = new DynamicMethod("MyMethodWrapper", typeof(object), new Type[] {typeof(object[])}, typeof(Program), true);
+        var dm = new DynamicMethod("MyMethodWrapper", typeof(object), new[] {typeof(object[])}, typeof(Program), true);
         var il = dm.GetILGenerator();
         var l1 = il.DefineLabel();
         var returnLocal = il.DeclareLocal(typeof(object));
@@ -59,7 +60,7 @@ internal class Program
         il.Emit(OpCodes.Ldc_I4, parameterLength + 1);
         il.Emit(OpCodes.Beq_S, l1);
         il.Emit(OpCodes.Ldstr, "insufficient arguments");
-        il.Emit(OpCodes.Newobj, typeof(ArgumentException).GetConstructor(new Type[] {typeof(string)}));
+        il.Emit(OpCodes.Newobj, typeof(ArgumentException).GetConstructor(new[] {typeof(string)}));
         il.Emit(OpCodes.Throw);
         il.MarkLabel(l1);
 
@@ -98,7 +99,7 @@ internal class Program
 
     public static void TestShowVisualizer(object objectToVisualize)
     {
-        var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(ClrTest.Reflection.MethodBodyVisualizer), typeof(ClrTest.Reflection.MethodBodyObjectSource));
+        var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(MethodBodyVisualizer), typeof(MethodBodyObjectSource));
         visualizerHost.ShowVisualizer();
     }
 }

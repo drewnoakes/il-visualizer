@@ -85,7 +85,7 @@ namespace ClrTest.Reflection
                 else
                     sb.Append(ch);
             }
-            return "\"" + sb.ToString() + "\"";
+            return "\"" + sb + "\"";
         }
 
         public virtual string SigByteArrayToString(byte[] sig)

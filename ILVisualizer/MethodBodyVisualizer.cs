@@ -1,10 +1,12 @@
-using Microsoft.VisualStudio.DebuggerVisualizers;
 using System.Diagnostics;
+using System.Reflection;
+using ClrTest.Reflection;
+using Microsoft.VisualStudio.DebuggerVisualizers;
 
 [assembly: DebuggerVisualizer(
-               typeof(ClrTest.Reflection.MethodBodyVisualizer),
-               typeof(ClrTest.Reflection.MethodBodyObjectSource),
-               Target = typeof(System.Reflection.MethodBase),
+               typeof(MethodBodyVisualizer),
+               typeof(MethodBodyObjectSource),
+               Target = typeof(MethodBase),
                Description = "IL Visualizer")
 ]
 

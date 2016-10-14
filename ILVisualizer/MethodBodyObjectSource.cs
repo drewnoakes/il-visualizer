@@ -1,8 +1,8 @@
 using System;
-using System.Reflection;
 using System.IO;
-using Microsoft.VisualStudio.DebuggerVisualizers;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
+using Microsoft.VisualStudio.DebuggerVisualizers;
 
 namespace ClrTest.Reflection
 {

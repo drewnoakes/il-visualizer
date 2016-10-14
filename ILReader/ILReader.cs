@@ -81,7 +81,6 @@ namespace ClrTest.Reflection
                 yield return Next();
 
             m_position = 0;
-            yield break;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -215,7 +214,7 @@ namespace ClrTest.Reflection
 
         private byte ReadByte()
         {
-            return (byte)m_byteArray[m_position++];
+            return m_byteArray[m_position++];
         }
 
         private sbyte ReadSByte()

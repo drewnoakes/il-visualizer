@@ -1,11 +1,11 @@
 using System;
-using System.Net.Sockets;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.Sockets;
 using System.Threading;
-using System.Xml.Serialization;
 using System.Windows.Forms;
-using System.Diagnostics;
+using System.Xml.Serialization;
 
 namespace ClrTest.Reflection
 {
@@ -32,7 +32,7 @@ namespace ClrTest.Reflection
     public enum MonitorStatus
     {
         NotMonitoring,
-        Monitoring,
+        Monitoring
     }
 
     public abstract class AbstractXmlDataMonitor<T>
@@ -56,7 +56,7 @@ namespace ClrTest.Reflection
 
                 if (targetCtrl != null)
                 {
-                    targetCtrl.Invoke(MonitorStatusChange, new object[] {this, args});
+                    targetCtrl.Invoke(MonitorStatusChange, this, args);
                 }
                 else
                 {
@@ -74,7 +74,7 @@ namespace ClrTest.Reflection
 
                 if (targetCtrl != null)
                 {
-                    targetCtrl.Invoke(VisualizerDataReady, new object[] {this, args});
+                    targetCtrl.Invoke(VisualizerDataReady, this, args);
                 }
                 else
                 {
@@ -138,10 +138,7 @@ namespace ClrTest.Reflection
                     {
                         break;
                     }
-                    else
-                    {
-                        memory.Write(buffer, 0, received);
-                    }
+                    memory.Write(buffer, 0, received);
                 }
                 var s = new XmlSerializer(typeof(T));
                 memory.Position = 0;
@@ -159,7 +156,7 @@ namespace ClrTest.Reflection
 
         public override void Start()
         {
-            m_listenerThread = new Thread(new ThreadStart(ListenerThread));
+            m_listenerThread = new Thread(ListenerThread);
             m_listenerThread.Start();
             FireStatusChangeEvent(MonitorStatus.Monitoring);
         }

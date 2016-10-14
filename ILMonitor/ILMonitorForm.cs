@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ClrTest.Reflection.Properties;
 
 namespace ClrTest.Reflection
 {
@@ -50,10 +51,10 @@ namespace ClrTest.Reflection
         {
             m_monitor = new TcpDataMonitor<MethodBodyInfo>(22017);
 
-            m_monitor.MonitorStatusChange += new AbstractXmlDataMonitor<MethodBodyInfo>.MonitorStatusChangeEventHandler(OnMonitorStatusChange);
-            m_monitor.VisualizerDataReady += new AbstractXmlDataMonitor<MethodBodyInfo>.VisualizerDataReadyEventHandler(OnVisualizerDataReady);
+            m_monitor.MonitorStatusChange += OnMonitorStatusChange;
+            m_monitor.VisualizerDataReady += OnVisualizerDataReady;
 
-            if (Properties.Settings.Default.AutomaticallyStart)
+            if (Settings.Default.AutomaticallyStart)
             {
                 autoStartToolStripMenuItem.Checked = true;
                 m_monitor.Start();
@@ -128,7 +129,7 @@ namespace ClrTest.Reflection
 
         private void ILMonitorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var s = Properties.Settings.Default;
+            var s = Settings.Default;
             s.AutomaticallyStart = autoStartToolStripMenuItem.Checked;
             s.Save();
 

@@ -1,8 +1,9 @@
-using System.Windows.Forms;
 using System.IO;
-using System.Xml.Xsl;
-using System.Xml.Serialization;
+using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Serialization;
+using System.Xml.Xsl;
+using ClrTest.Reflection.Properties;
 
 namespace ClrTest.Reflection
 {
@@ -22,7 +23,7 @@ namespace ClrTest.Reflection
             m_imbi = imbi;
 
             var xslt = new XslCompiledTransform();
-            using (var sr = new StringReader(Properties.Resources.XSLT))
+            using (var sr = new StringReader(Resources.XSLT))
             {
                 using (var xtr = new XmlTextReader(sr))
                 {

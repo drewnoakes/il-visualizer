@@ -1,17 +1,19 @@
 using System;
 using System.Diagnostics;
-using System.Windows.Forms;
-using Microsoft.VisualStudio.DebuggerVisualizers;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using System.Net.Sockets;
-using System.Xml.Serialization;
 using System.Net;
+using System.Net.Sockets;
+using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
+using System.Xml.Serialization;
+using ClrTest.Reflection;
+using Microsoft.VisualStudio.DebuggerVisualizers;
 
 [assembly: DebuggerVisualizer(
-               typeof(ClrTest.Reflection.MethodBodyNoVisualizer),
-               typeof(ClrTest.Reflection.MethodBodyObjectSource),
-               Target = typeof(System.Reflection.MethodBase),
+               typeof(MethodBodyNoVisualizer),
+               typeof(MethodBodyObjectSource),
+               Target = typeof(MethodBase),
                Description = "Send to IL Monitor")
 ]
 
