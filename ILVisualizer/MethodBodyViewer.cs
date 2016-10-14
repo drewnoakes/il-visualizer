@@ -11,7 +11,7 @@ namespace ClrTest.Reflection
     public partial class MethodBodyViewer : Form
     {
         private IVisualizerObjectProvider m_objectProvider;
-        private MethodBodyInfo m_mbi = null;
+        private MethodBodyInfo m_mbi;
 
         public MethodBodyViewer()
         {

@@ -50,7 +50,7 @@ namespace ClrTest.Reflection
 
         #endregion
 
-        private readonly object m_scope = null;
+        private readonly object m_scope;
 
         internal object this[int token]
         {
