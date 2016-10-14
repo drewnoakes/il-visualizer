@@ -19,7 +19,7 @@ using Microsoft.VisualStudio.DebuggerVisualizers;
 
 namespace ClrTest.Reflection
 {
-    internal interface IXmlDataProvider<T>
+    internal interface IXmlDataProvider<in T>
     {
         void Dump(T obj);
     }
