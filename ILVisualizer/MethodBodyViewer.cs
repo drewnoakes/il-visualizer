@@ -148,7 +148,7 @@ namespace ClrTest.Reflection
         private void fontNameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             selectedFontNameMenuItem.Checked = false;
-            selectedFontNameMenuItem = sender as ToolStripMenuItem;
+            selectedFontNameMenuItem = (ToolStripMenuItem)sender;
             selectedFontNameMenuItem.Checked = true;
 
             selectedFontName = selectedFontNameMenuItem.Text;
@@ -159,7 +159,7 @@ namespace ClrTest.Reflection
         private void fontSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             selectedFontSizeMenuItem.Checked = false;
-            selectedFontSizeMenuItem = sender as ToolStripMenuItem;
+            selectedFontSizeMenuItem = (ToolStripMenuItem)sender;
             selectedFontSizeMenuItem.Checked = true;
 
             selectedFontSize = int.Parse(selectedFontSizeMenuItem.Text);
