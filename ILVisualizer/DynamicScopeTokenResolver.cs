@@ -90,8 +90,9 @@ namespace ClrTest.Reflection
 
         public MethodBase AsMethod(int token)
         {
-            if (this[token] is DynamicMethod)
-                return this[token] as DynamicMethod;
+            var dynamicMethod = this[token] as DynamicMethod;
+            if (dynamicMethod != null)
+                return dynamicMethod;
 
             if (this[token] is RuntimeMethodHandle)
                 return MethodBase.GetMethodFromHandle((RuntimeMethodHandle)this[token]);
