@@ -84,11 +84,9 @@ namespace ClrTest.Reflection
             var mbi = e.VisualizerData;
             var childForm = FindOrCreateChildForm(mbi);
 
-            IncrementalMethodBodyInfo imbi;
-            if (childForm.CurrentData != null)
-                imbi = IncrementalMethodBodyInfo.Create(mbi, childForm.CurrentData.LengthHistory);
-            else
-                imbi = IncrementalMethodBodyInfo.Create(mbi);
+            var imbi = childForm.CurrentData != null
+                ? IncrementalMethodBodyInfo.Create(mbi, childForm.CurrentData.LengthHistory)
+                : IncrementalMethodBodyInfo.Create(mbi);
 
             childForm.UpdateWith(imbi);
         }

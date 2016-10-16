@@ -53,10 +53,7 @@ namespace ClrTest.Reflection
             var length = offsets.Length;
             for (var i = 0; i < length; i++)
             {
-                if (i == 0)
-                    sb.AppendFormat("(");
-                else
-                    sb.AppendFormat(", ");
+                sb.AppendFormat(i == 0 ? "(" : ", ");
                 sb.Append(Label(offsets[i]));
             }
             sb.AppendFormat(")");
@@ -94,10 +91,7 @@ namespace ClrTest.Reflection
             var length = sig.Length;
             for (var i = 0; i < length; i++)
             {
-                if (i == 0)
-                    sb.AppendFormat("SIG [");
-                else
-                    sb.AppendFormat(" ");
+                sb.AppendFormat(i == 0 ? "SIG [" : " ");
                 sb.Append(Int8ToHex(sig[i]));
             }
             sb.AppendFormat("]");
