@@ -25,9 +25,7 @@ namespace ClrTest.Reflection
                 var ilgen = m_method.GetILGenerator();
                 try
                 {
-                    m_byteArray = (byte[])s_miBakeByteArray.Invoke(ilgen, null);
-                    if (m_byteArray == null)
-                        m_byteArray = new byte[0];
+                    m_byteArray = (byte[])s_miBakeByteArray.Invoke(ilgen, null) ?? new byte[0];
                 }
                 catch (TargetInvocationException)
                 {

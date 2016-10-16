@@ -200,14 +200,7 @@ namespace ClrTest.Reflection
 
         public FieldInfo Field
         {
-            get
-            {
-                if (m_field == null)
-                {
-                    m_field = m_resolver.AsField(Token);
-                }
-                return m_field;
-            }
+            get { return m_field ?? (m_field = m_resolver.AsField(Token)); }
         }
 
         public int Token { get; }
@@ -232,14 +225,7 @@ namespace ClrTest.Reflection
 
         public MethodBase Method
         {
-            get
-            {
-                if (m_method == null)
-                {
-                    m_method = m_resolver.AsMethod(Token);
-                }
-                return m_method;
-            }
+            get { return m_method ?? (m_method = m_resolver.AsMethod(Token)); }
         }
 
         public int Token { get; }
@@ -264,14 +250,7 @@ namespace ClrTest.Reflection
 
         public Type Type
         {
-            get
-            {
-                if (m_type == null)
-                {
-                    m_type = m_resolver.AsType(Token);
-                }
-                return m_type;
-            }
+            get { return m_type ?? (m_type = m_resolver.AsType(Token)); }
         }
 
         public int Token { get; }
@@ -296,14 +275,7 @@ namespace ClrTest.Reflection
 
         public byte[] Signature
         {
-            get
-            {
-                if (m_signature == null)
-                {
-                    m_signature = m_resolver.AsSignature(Token);
-                }
-                return m_signature;
-            }
+            get { return m_signature ?? (m_signature = m_resolver.AsSignature(Token)); }
         }
 
         public int Token { get; }
@@ -328,14 +300,7 @@ namespace ClrTest.Reflection
 
         public MemberInfo Member
         {
-            get
-            {
-                if (m_member == null)
-                {
-                    m_member = m_resolver.AsMember(Token);
-                }
-                return m_member;
-            }
+            get { return m_member ?? (m_member = m_resolver.AsMember(Token)); }
         }
 
         public int Token { get; }
@@ -360,12 +325,7 @@ namespace ClrTest.Reflection
 
         public string String
         {
-            get
-            {
-                if (m_string == null)
-                    m_string = m_resolver.AsString(Token);
-                return m_string;
-            }
+            get { return m_string ?? (m_string = m_resolver.AsString(Token)); }
         }
 
         public int Token { get; }
