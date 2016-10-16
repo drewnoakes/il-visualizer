@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ILReader", "ILReader\ILReader.csproj", "{3B40E8C3-C4E8-4085-9F82-F64308F3791C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ILMonitor", "ILMonitor\ILMonitor.csproj", "{77F852DD-35CD-4B2D-AA0E-0516F1E7597F}"
