@@ -26,34 +26,11 @@ namespace ClrTest.Reflection
             m_typeContext = method.DeclaringType == null ? null : method.DeclaringType.GetGenericArguments();
         }
 
-        public MethodBase AsMethod(int token)
-        {
-            return m_module.ResolveMethod(token, m_typeContext, m_methodContext);
-        }
-
-        public FieldInfo AsField(int token)
-        {
-            return m_module.ResolveField(token, m_typeContext, m_methodContext);
-        }
-
-        public Type AsType(int token)
-        {
-            return m_module.ResolveType(token, m_typeContext, m_methodContext);
-        }
-
-        public MemberInfo AsMember(int token)
-        {
-            return m_module.ResolveMember(token, m_typeContext, m_methodContext);
-        }
-
-        public string AsString(int token)
-        {
-            return m_module.ResolveString(token);
-        }
-
-        public byte[] AsSignature(int token)
-        {
-            return m_module.ResolveSignature(token);
-        }
+        public MethodBase AsMethod(int token) => m_module.ResolveMethod(token, m_typeContext, m_methodContext);
+        public FieldInfo AsField(int token) => m_module.ResolveField(token, m_typeContext, m_methodContext);
+        public Type AsType(int token) => m_module.ResolveType(token, m_typeContext, m_methodContext);
+        public MemberInfo AsMember(int token) => m_module.ResolveMember(token, m_typeContext, m_methodContext);
+        public string AsString(int token) => m_module.ResolveString(token);
+        public byte[] AsSignature(int token) => m_module.ResolveSignature(token);
     }
 }
