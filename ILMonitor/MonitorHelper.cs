@@ -130,14 +130,11 @@ namespace ClrTest.Reflection
             try
             {
                 var buffer = new byte[1024];
-                int received;
                 while (true)
                 {
-                    received = network.Read(buffer, 0, 1024);
+                    var received = network.Read(buffer, 0, 1024);
                     if (received == 0)
-                    {
                         break;
-                    }
                     memory.Write(buffer, 0, received);
                 }
                 var s = new XmlSerializer(typeof(T));
