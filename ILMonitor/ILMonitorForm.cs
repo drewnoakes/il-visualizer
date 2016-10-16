@@ -104,9 +104,11 @@ namespace ClrTest.Reflection
                 }
             }
 
-            var newChild = new MiniBrowser();
-            newChild.Text = mbi.MethodToString;
-            newChild.MdiParent = this;
+            var newChild = new MiniBrowser
+            {
+                Text = mbi.MethodToString,
+                MdiParent = this
+            };
             newChild.Show();
             return newChild;
         }

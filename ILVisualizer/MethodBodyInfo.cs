@@ -41,11 +41,12 @@ namespace ClrTest.Reflection
 
         public static MethodBodyInfo Create(MethodBase method)
         {
-            var mbi = new MethodBodyInfo();
-
-            mbi.Identity = method.GetHashCode();
-            mbi.TypeName = method.GetType().Name;
-            mbi.MethodToString = method.ToString();
+            var mbi = new MethodBodyInfo
+            {
+                Identity = method.GetHashCode(),
+                TypeName = method.GetType().Name,
+                MethodToString = method.ToString()
+            };
 
             var visitor = new ReadableILStringVisitor(
                 new MethodBodyInfoBuilder(mbi),

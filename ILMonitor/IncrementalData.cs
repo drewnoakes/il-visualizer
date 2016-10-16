@@ -28,19 +28,19 @@ namespace ClrTest.Reflection
 
         public static IncrementalMethodBodyInfo Create(MethodBodyInfo mbi, List<int> history)
         {
-            var imbi = new IncrementalMethodBodyInfo();
-
-            imbi.Identity = mbi.Identity;
-            imbi.TypeName = mbi.TypeName;
-            imbi.MethodToString = mbi.MethodToString;
+            var imbi = new IncrementalMethodBodyInfo
+            {
+                Identity = mbi.Identity,
+                TypeName = mbi.TypeName,
+                MethodToString = mbi.MethodToString
+            };
 
             var count = mbi.Instructions.Count;
             imbi.Instructions = new AgingInstruction[count];
 
             for (var i = 0; i < count; i++)
             {
-                imbi.Instructions[i] = new AgingInstruction();
-                imbi.Instructions[i].ILString = mbi.Instructions[i];
+                imbi.Instructions[i] = new AgingInstruction {ILString = mbi.Instructions[i]};
             }
 
             imbi.LengthHistory = new List<int>();
