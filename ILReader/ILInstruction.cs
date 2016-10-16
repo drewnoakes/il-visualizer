@@ -37,17 +37,15 @@ namespace ClrTest.Reflection
 
     public class InlineBrTargetInstruction : ILInstruction
     {
-        private readonly int m_delta;
-
         internal InlineBrTargetInstruction(int offset, OpCode opCode, int delta)
             : base(offset, opCode)
         {
-            m_delta = delta;
+            Delta = delta;
         }
 
-        public int Delta => m_delta;
+        public int Delta { get; }
 
-        public int TargetOffset => m_offset + m_delta + 1 + 4;
+        public int TargetOffset => m_offset + Delta + 1 + 4;
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -57,17 +55,15 @@ namespace ClrTest.Reflection
 
     public class ShortInlineBrTargetInstruction : ILInstruction
     {
-        private readonly sbyte m_delta;
-
         internal ShortInlineBrTargetInstruction(int offset, OpCode opCode, sbyte delta)
             : base(offset, opCode)
         {
-            m_delta = delta;
+            Delta = delta;
         }
 
-        public sbyte Delta => m_delta;
+        public sbyte Delta { get; }
 
-        public int TargetOffset => m_offset + m_delta + 1 + 1;
+        public int TargetOffset => m_offset + Delta + 1 + 1;
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -112,15 +108,13 @@ namespace ClrTest.Reflection
 
     public class InlineIInstruction : ILInstruction
     {
-        private readonly int m_int32;
-
         internal InlineIInstruction(int offset, OpCode opCode, int value)
             : base(offset, opCode)
         {
-            m_int32 = value;
+            Int32 = value;
         }
 
-        public int Int32 => m_int32;
+        public int Int32 { get; }
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -130,15 +124,13 @@ namespace ClrTest.Reflection
 
     public class InlineI8Instruction : ILInstruction
     {
-        private readonly long m_int64;
-
         internal InlineI8Instruction(int offset, OpCode opCode, long value)
             : base(offset, opCode)
         {
-            m_int64 = value;
+            Int64 = value;
         }
 
-        public long Int64 => m_int64;
+        public long Int64 { get; }
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -148,15 +140,13 @@ namespace ClrTest.Reflection
 
     public class ShortInlineIInstruction : ILInstruction
     {
-        private readonly byte m_int8;
-
         internal ShortInlineIInstruction(int offset, OpCode opCode, byte value)
             : base(offset, opCode)
         {
-            m_int8 = value;
+            Byte = value;
         }
 
-        public byte Byte => m_int8;
+        public byte Byte { get; }
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -166,15 +156,13 @@ namespace ClrTest.Reflection
 
     public class InlineRInstruction : ILInstruction
     {
-        private readonly double m_value;
-
         internal InlineRInstruction(int offset, OpCode opCode, double value)
             : base(offset, opCode)
         {
-            m_value = value;
+            Double = value;
         }
 
-        public double Double => m_value;
+        public double Double { get; }
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -184,15 +172,13 @@ namespace ClrTest.Reflection
 
     public class ShortInlineRInstruction : ILInstruction
     {
-        private readonly float m_value;
-
         internal ShortInlineRInstruction(int offset, OpCode opCode, float value)
             : base(offset, opCode)
         {
-            m_value = value;
+            Single = value;
         }
 
-        public float Single => m_value;
+        public float Single { get; }
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -203,14 +189,13 @@ namespace ClrTest.Reflection
     public class InlineFieldInstruction : ILInstruction
     {
         private readonly ITokenResolver m_resolver;
-        private readonly int m_token;
         private FieldInfo m_field;
 
         internal InlineFieldInstruction(ITokenResolver resolver, int offset, OpCode opCode, int token)
             : base(offset, opCode)
         {
             m_resolver = resolver;
-            m_token = token;
+            Token = token;
         }
 
         public FieldInfo Field
@@ -219,13 +204,13 @@ namespace ClrTest.Reflection
             {
                 if (m_field == null)
                 {
-                    m_field = m_resolver.AsField(m_token);
+                    m_field = m_resolver.AsField(Token);
                 }
                 return m_field;
             }
         }
 
-        public int Token => m_token;
+        public int Token { get; }
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -236,14 +221,13 @@ namespace ClrTest.Reflection
     public class InlineMethodInstruction : ILInstruction
     {
         private readonly ITokenResolver m_resolver;
-        private readonly int m_token;
         private MethodBase m_method;
 
         internal InlineMethodInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
             m_resolver = resolver;
-            m_token = token;
+            Token = token;
         }
 
         public MethodBase Method
@@ -252,13 +236,13 @@ namespace ClrTest.Reflection
             {
                 if (m_method == null)
                 {
-                    m_method = m_resolver.AsMethod(m_token);
+                    m_method = m_resolver.AsMethod(Token);
                 }
                 return m_method;
             }
         }
 
-        public int Token => m_token;
+        public int Token { get; }
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -269,14 +253,13 @@ namespace ClrTest.Reflection
     public class InlineTypeInstruction : ILInstruction
     {
         private readonly ITokenResolver m_resolver;
-        private readonly int m_token;
         private Type m_type;
 
         internal InlineTypeInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
             m_resolver = resolver;
-            m_token = token;
+            Token = token;
         }
 
         public Type Type
@@ -285,13 +268,13 @@ namespace ClrTest.Reflection
             {
                 if (m_type == null)
                 {
-                    m_type = m_resolver.AsType(m_token);
+                    m_type = m_resolver.AsType(Token);
                 }
                 return m_type;
             }
         }
 
-        public int Token => m_token;
+        public int Token { get; }
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -302,14 +285,13 @@ namespace ClrTest.Reflection
     public class InlineSigInstruction : ILInstruction
     {
         private readonly ITokenResolver m_resolver;
-        private readonly int m_token;
         private byte[] m_signature;
 
         internal InlineSigInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
             m_resolver = resolver;
-            m_token = token;
+            Token = token;
         }
 
         public byte[] Signature
@@ -318,13 +300,13 @@ namespace ClrTest.Reflection
             {
                 if (m_signature == null)
                 {
-                    m_signature = m_resolver.AsSignature(m_token);
+                    m_signature = m_resolver.AsSignature(Token);
                 }
                 return m_signature;
             }
         }
 
-        public int Token => m_token;
+        public int Token { get; }
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -335,14 +317,13 @@ namespace ClrTest.Reflection
     public class InlineTokInstruction : ILInstruction
     {
         private readonly ITokenResolver m_resolver;
-        private readonly int m_token;
         private MemberInfo m_member;
 
         internal InlineTokInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
             m_resolver = resolver;
-            m_token = token;
+            Token = token;
         }
 
         public MemberInfo Member
@@ -357,7 +338,7 @@ namespace ClrTest.Reflection
             }
         }
 
-        public int Token => m_token;
+        public int Token { get; }
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -368,14 +349,13 @@ namespace ClrTest.Reflection
     public class InlineStringInstruction : ILInstruction
     {
         private readonly ITokenResolver m_resolver;
-        private readonly int m_token;
         private string m_string;
 
         internal InlineStringInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
             : base(offset, opCode)
         {
             m_resolver = resolver;
-            m_token = token;
+            Token = token;
         }
 
         public string String
@@ -388,7 +368,7 @@ namespace ClrTest.Reflection
             }
         }
 
-        public int Token => m_token;
+        public int Token { get; }
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -398,15 +378,13 @@ namespace ClrTest.Reflection
 
     public class InlineVarInstruction : ILInstruction
     {
-        private readonly ushort m_ordinal;
-
         internal InlineVarInstruction(int offset, OpCode opCode, ushort ordinal)
             : base(offset, opCode)
         {
-            m_ordinal = ordinal;
+            Ordinal = ordinal;
         }
 
-        public ushort Ordinal => m_ordinal;
+        public ushort Ordinal { get; }
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -416,15 +394,13 @@ namespace ClrTest.Reflection
 
     public class ShortInlineVarInstruction : ILInstruction
     {
-        private readonly byte m_ordinal;
-
         internal ShortInlineVarInstruction(int offset, OpCode opCode, byte ordinal)
             : base(offset, opCode)
         {
-            m_ordinal = ordinal;
+            Ordinal = ordinal;
         }
 
-        public byte Ordinal => m_ordinal;
+        public byte Ordinal { get; }
 
         public override void Accept(ILInstructionVisitor visitor)
         {

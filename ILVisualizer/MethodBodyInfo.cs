@@ -12,8 +12,6 @@ namespace ClrTest.Reflection
         private string m_typeName;
         private string m_methodToString;
 
-        private readonly List<string> m_instructions = new List<string>();
-
         public int Identity
         {
             get { return m_methodId; }
@@ -32,11 +30,11 @@ namespace ClrTest.Reflection
             set { m_methodToString = value; }
         }
 
-        public List<string> Instructions => m_instructions;
+        public List<string> Instructions { get; } = new List<string>();
 
         private void AddInstruction(string inst)
         {
-            m_instructions.Add(inst);
+            Instructions.Add(inst);
         }
 
         public static MethodBodyInfo Create(MethodBase method)

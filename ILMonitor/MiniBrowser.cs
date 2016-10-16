@@ -14,13 +14,11 @@ namespace ClrTest.Reflection
             InitializeComponent();
         }
 
-        private IncrementalMethodBodyInfo m_imbi;
-
-        public IncrementalMethodBodyInfo CurrentData => m_imbi;
+        public IncrementalMethodBodyInfo CurrentData { get; private set; }
 
         public void UpdateWith(IncrementalMethodBodyInfo imbi)
         {
-            m_imbi = imbi;
+            CurrentData = imbi;
 
             var xslt = new XslCompiledTransform();
             using (var sr = new StringReader(Resources.XSLT))
@@ -35,7 +33,7 @@ namespace ClrTest.Reflection
             using (var beforeTransform = new MemoryStream())
             {
                 var afterTransform = new MemoryStream();
-                serializer.Serialize(beforeTransform, m_imbi);
+                serializer.Serialize(beforeTransform, CurrentData);
 
                 beforeTransform.Position = 0;
                 using (var reader = new XmlTextReader(beforeTransform))
