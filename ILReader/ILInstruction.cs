@@ -198,10 +198,7 @@ namespace ClrTest.Reflection
             Token = token;
         }
 
-        public FieldInfo Field
-        {
-            get { return m_field ?? (m_field = m_resolver.AsField(Token)); }
-        }
+        public FieldInfo Field => m_field ?? (m_field = m_resolver.AsField(Token));
 
         public int Token { get; }
 
@@ -223,10 +220,7 @@ namespace ClrTest.Reflection
             Token = token;
         }
 
-        public MethodBase Method
-        {
-            get { return m_method ?? (m_method = m_resolver.AsMethod(Token)); }
-        }
+        public MethodBase Method => m_method ?? (m_method = m_resolver.AsMethod(Token));
 
         public int Token { get; }
 
@@ -248,10 +242,7 @@ namespace ClrTest.Reflection
             Token = token;
         }
 
-        public Type Type
-        {
-            get { return m_type ?? (m_type = m_resolver.AsType(Token)); }
-        }
+        public Type Type => m_type ?? (m_type = m_resolver.AsType(Token));
 
         public int Token { get; }
 
@@ -273,10 +264,7 @@ namespace ClrTest.Reflection
             Token = token;
         }
 
-        public byte[] Signature
-        {
-            get { return m_signature ?? (m_signature = m_resolver.AsSignature(Token)); }
-        }
+        public byte[] Signature => m_signature ?? (m_signature = m_resolver.AsSignature(Token));
 
         public int Token { get; }
 
@@ -298,10 +286,7 @@ namespace ClrTest.Reflection
             Token = token;
         }
 
-        public MemberInfo Member
-        {
-            get { return m_member ?? (m_member = m_resolver.AsMember(Token)); }
-        }
+        public MemberInfo Member => m_member ?? (m_member = m_resolver.AsMember(Token));
 
         public int Token { get; }
 
@@ -323,10 +308,7 @@ namespace ClrTest.Reflection
             Token = token;
         }
 
-        public string String
-        {
-            get { return m_string ?? (m_string = m_resolver.AsString(Token)); }
-        }
+        public string String => m_string ?? (m_string = m_resolver.AsString(Token));
 
         public int Token { get; }
 
