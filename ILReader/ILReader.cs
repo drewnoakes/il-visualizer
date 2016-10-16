@@ -40,7 +40,6 @@ namespace ClrTest.Reflection
 
         private int m_position;
         private readonly ITokenResolver m_resolver;
-        private readonly IILProvider m_ilProvider;
         private readonly byte[] m_byteArray;
 
         public ILReader(MethodBase method)
@@ -56,9 +55,9 @@ namespace ClrTest.Reflection
                 throw new ArgumentException("method must be RuntimeMethodInfo or RuntimeConstructorInfo for this constructor.");
             }
 
-            m_ilProvider = new MethodBaseILProvider(method);
+            IILProvider mIlProvider = new MethodBaseILProvider(method);
             m_resolver = new ModuleScopeTokenResolver(method);
-            m_byteArray = m_ilProvider.GetByteArray();
+            m_byteArray = mIlProvider.GetByteArray();
             m_position = 0;
         }
 
@@ -70,8 +69,7 @@ namespace ClrTest.Reflection
             }
 
             m_resolver = tokenResolver;
-            m_ilProvider = ilProvider;
-            m_byteArray = m_ilProvider.GetByteArray();
+            m_byteArray = ilProvider.GetByteArray();
             m_position = 0;
         }
 
