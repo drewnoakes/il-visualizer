@@ -49,7 +49,7 @@ namespace ClrTest.Reflection
 
         private void ILMonitorForm_Load(object sender, EventArgs e)
         {
-            m_monitor = new TcpDataMonitor<MethodBodyInfo>(22017);
+            m_monitor = new TcpDataMonitor<MethodBodyInfo>(port: 22017);
 
             m_monitor.MonitorStatusChange += OnMonitorStatusChange;
             m_monitor.VisualizerDataReady += OnVisualizerDataReady;
