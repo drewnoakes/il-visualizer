@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ClrTest.Reflection
 {
@@ -32,23 +33,10 @@ namespace ClrTest.Reflection
             {
                 Identity = mbi.Identity,
                 TypeName = mbi.TypeName,
-                MethodToString = mbi.MethodToString
+                MethodToString = mbi.MethodToString,
+                Instructions = mbi.Instructions.Select(i => new AgingInstruction {ILString = i}).ToArray(),
+                LengthHistory = new List<int>((IEnumerable<int>)history ?? new int[0]) {mbi.Instructions.Count}
             };
-
-            var count = mbi.Instructions.Count;
-            imbi.Instructions = new AgingInstruction[count];
-
-            for (var i = 0; i < count; i++)
-            {
-                imbi.Instructions[i] = new AgingInstruction {ILString = mbi.Instructions[i]};
-            }
-
-            imbi.LengthHistory = new List<int>();
-            if (history != null)
-            {
-                imbi.LengthHistory.AddRange(history);
-            }
-            imbi.LengthHistory.Add(count);
 
             for (var i = 0; i < imbi.LengthHistory.Count - 1; i++)
             {
@@ -57,6 +45,7 @@ namespace ClrTest.Reflection
                     imbi.Instructions[a].Age = i + 1;
                 }
             }
+
             return imbi;
         }
     }
