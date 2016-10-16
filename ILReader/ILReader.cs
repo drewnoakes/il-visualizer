@@ -6,7 +6,7 @@ using System.Reflection.Emit;
 
 namespace ClrTest.Reflection
 {
-    public sealed class ILReader : IEnumerable<ILInstruction>, IEnumerable
+    public sealed class ILReader : IEnumerable<ILInstruction>
     {
         #region Static members
 
