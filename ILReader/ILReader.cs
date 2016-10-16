@@ -91,8 +91,8 @@ namespace ClrTest.Reflection
         private ILInstruction Next()
         {
             var offset = m_position;
-            var opCode = OpCodes.Nop;
-            var token = 0;
+            OpCode opCode;
+            int token;
 
             // read first 1 or 2 bytes as opCode
             var code = ReadByte();

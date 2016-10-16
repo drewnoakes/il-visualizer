@@ -130,7 +130,7 @@ namespace ClrTest.Reflection
             try
             {
                 var buffer = new byte[1024];
-                var received = 0;
+                int received;
                 while (true)
                 {
                     received = network.Read(buffer, 0, 1024);
