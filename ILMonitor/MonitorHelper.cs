@@ -124,12 +124,12 @@ namespace ClrTest.Reflection
 
         private void HandleConnection(TcpClient client)
         {
-            var network = client.GetStream();
-            var memory = new MemoryStream();
-
-            try
+            using (client)
+            using (var network = client.GetStream())
             {
+                var memory = new MemoryStream();
                 var buffer = new byte[1024];
+
                 while (true)
                 {
                     var received = network.Read(buffer, 0, 1024);
@@ -137,17 +137,12 @@ namespace ClrTest.Reflection
                         break;
                     memory.Write(buffer, 0, received);
                 }
-                var s = new XmlSerializer(typeof(T));
-                memory.Position = 0;
-                var ret = (T)s.Deserialize(memory);
 
-                FireDataReadyEvent(ret);
-            }
-            finally
-            {
-                memory.Close();
-                network.Close();
-                client.Close();
+                memory.Position = 0;
+
+                var data = (T)new XmlSerializer(typeof(T)).Deserialize(memory);
+
+                FireDataReadyEvent(data);
             }
         }
 
