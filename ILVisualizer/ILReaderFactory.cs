@@ -16,7 +16,7 @@ namespace ClrTest.Reflection
                 if (type == s_rtDynamicMethodType)
                 {
                     //
-                    // if the target is RTDynamicMethod, get the value of 
+                    // if the target is RTDynamicMethod, get the value of
                     // RTDynamicMethod.m_owner instead
                     //
                     dm = (DynamicMethod)s_fiOwner.GetValue(obj);
