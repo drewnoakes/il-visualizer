@@ -96,12 +96,8 @@ namespace ClrTest.Reflection
             foreach (var form in MdiChildren)
             {
                 var miniBrowser = form as MiniBrowser;
-                if (miniBrowser == null)
-                    continue;
-                if (miniBrowser.CurrentData == null)
-                    continue;
 
-                if (mbi.Identity == miniBrowser.CurrentData.Identity)
+                if (mbi.Identity == miniBrowser?.CurrentData?.Identity)
                 {
                     miniBrowser.Focus();
                     return miniBrowser;
