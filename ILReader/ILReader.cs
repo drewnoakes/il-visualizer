@@ -47,7 +47,7 @@ namespace ClrTest.Reflection
         {
             if (method == null)
             {
-                throw new ArgumentNullException("method");
+                throw new ArgumentNullException(nameof(method));
             }
 
             var rtType = method.GetType();
@@ -66,7 +66,7 @@ namespace ClrTest.Reflection
         {
             if (ilProvider == null)
             {
-                throw new ArgumentNullException("ilProvider");
+                throw new ArgumentNullException(nameof(ilProvider));
             }
 
             m_resolver = tokenResolver;
