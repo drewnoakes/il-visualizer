@@ -6,18 +6,14 @@ namespace ClrTest.Reflection
 {
     public abstract class ILInstruction
     {
-        protected int m_offset;
-        protected OpCode m_opCode;
-
         internal ILInstruction(int offset, OpCode opCode)
         {
-            m_offset = offset;
-            m_opCode = opCode;
+            Offset = offset;
+            OpCode = opCode;
         }
 
-        public int Offset => m_offset;
-
-        public OpCode OpCode => m_opCode;
+        public int Offset { get; }
+        public OpCode OpCode { get; }
 
         public abstract void Accept(ILInstructionVisitor visitor);
     }
@@ -45,7 +41,7 @@ namespace ClrTest.Reflection
 
         public int Delta { get; }
 
-        public int TargetOffset => m_offset + Delta + 1 + 4;
+        public int TargetOffset => Offset + Delta + 1 + 4;
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -63,7 +59,7 @@ namespace ClrTest.Reflection
 
         public sbyte Delta { get; }
 
-        public int TargetOffset => m_offset + Delta + 1 + 1;
+        public int TargetOffset => Offset + Delta + 1 + 1;
 
         public override void Accept(ILInstructionVisitor visitor)
         {
@@ -94,7 +90,7 @@ namespace ClrTest.Reflection
                     var itself = 1 + 4 + 4*cases;
                     m_targetOffsets = new int[cases];
                     for (var i = 0; i < cases; i++)
-                        m_targetOffsets[i] = m_offset + m_deltas[i] + itself;
+                        m_targetOffsets[i] = Offset + m_deltas[i] + itself;
                 }
                 return m_targetOffsets;
             }
