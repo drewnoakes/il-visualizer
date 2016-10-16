@@ -202,7 +202,7 @@ namespace ClrTest.Reflection
         public void Accept(ILInstructionVisitor visitor)
         {
             if (visitor == null)
-                throw new ArgumentNullException("argument 'visitor' can not be null");
+                throw new ArgumentNullException(nameof(visitor));
 
             foreach (var instruction in this)
             {
