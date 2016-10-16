@@ -7,45 +7,25 @@ namespace ClrTest.Reflection
 {
     public partial class ILMonitorForm : Form
     {
+        private AbstractXmlDataMonitor<MethodBodyInfo> m_monitor;
+
         public ILMonitorForm()
         {
             InitializeComponent();
         }
 
-        private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        private void ExitToolsStripMenuItem_Click(object sender, EventArgs e) => Application.Exit();
 
-        private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.Cascade);
-        }
-
-        private void TileVerticalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.TileVertical);
-        }
-
-        private void TileHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.TileHorizontal);
-        }
-
-        private void ArrangeIconsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.ArrangeIcons);
-        }
+        private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)        => LayoutMdi(MdiLayout.Cascade);
+        private void TileVerticalToolStripMenuItem_Click(object sender, EventArgs e)   => LayoutMdi(MdiLayout.TileVertical);
+        private void TileHorizontalToolStripMenuItem_Click(object sender, EventArgs e) => LayoutMdi(MdiLayout.TileHorizontal);
+        private void ArrangeIconsToolStripMenuItem_Click(object sender, EventArgs e)   => LayoutMdi(MdiLayout.ArrangeIcons);
 
         private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             foreach (var childForm in MdiChildren)
-            {
                 childForm.Close();
-            }
         }
-
-        private AbstractXmlDataMonitor<MethodBodyInfo> m_monitor;
 
         private void ILMonitorForm_Load(object sender, EventArgs e)
         {
@@ -113,15 +93,8 @@ namespace ClrTest.Reflection
             return newChild;
         }
 
-        private void stopToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            m_monitor.Stop();
-        }
-
-        private void startToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            m_monitor.Start();
-        }
+        private void stopToolStripMenuItem_Click(object sender, EventArgs e)  => m_monitor.Stop();
+        private void startToolStripMenuItem_Click(object sender, EventArgs e) => m_monitor.Start();
 
         private void ILMonitorForm_FormClosing(object sender, FormClosingEventArgs e)
         {

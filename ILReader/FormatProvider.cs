@@ -22,30 +22,11 @@ namespace ClrTest.Reflection
 
         public static DefaultFormatProvider Instance = new DefaultFormatProvider();
 
-        public virtual string Int32ToHex(int int32)
-        {
-            return int32.ToString("X8");
-        }
-
-        public virtual string Int16ToHex(int int16)
-        {
-            return int16.ToString("X4");
-        }
-
-        public virtual string Int8ToHex(int int8)
-        {
-            return int8.ToString("X2");
-        }
-
-        public virtual string Argument(int ordinal)
-        {
-            return $"V_{ordinal}";
-        }
-
-        public virtual string Label(int offset)
-        {
-            return $"IL_{offset:x4}";
-        }
+        public virtual string Int32ToHex(int int32) => int32.ToString("X8");
+        public virtual string Int16ToHex(int int16) => int16.ToString("X4");
+        public virtual string Int8ToHex(int int8) => int8.ToString("X2");
+        public virtual string Argument(int ordinal) => $"V_{ordinal}";
+        public virtual string Label(int offset) => $"IL_{offset:x4}";
 
         public virtual string MultipleLabels(int[] offsets)
         {
