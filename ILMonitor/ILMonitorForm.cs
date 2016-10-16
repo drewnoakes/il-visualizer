@@ -22,7 +22,7 @@ namespace ClrTest.Reflection
             LayoutMdi(MdiLayout.Cascade);
         }
 
-        private void TileVerticleToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TileVerticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.TileVertical);
         }

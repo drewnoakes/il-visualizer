@@ -19,7 +19,7 @@ namespace ClrTest.Reflection
 
         public OpCode OpCode => m_opCode;
 
-        public abstract void Accept(ILInstructionVisitor vistor);
+        public abstract void Accept(ILInstructionVisitor visitor);
     }
 
     public class InlineNoneInstruction : ILInstruction
@@ -29,9 +29,9 @@ namespace ClrTest.Reflection
         {
         }
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitInlineNoneInstruction(this);
+            visitor.VisitInlineNoneInstruction(this);
         }
     }
 
@@ -49,9 +49,9 @@ namespace ClrTest.Reflection
 
         public int TargetOffset => m_offset + m_delta + 1 + 4;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitInlineBrTargetInstruction(this);
+            visitor.VisitInlineBrTargetInstruction(this);
         }
     }
 
@@ -69,9 +69,9 @@ namespace ClrTest.Reflection
 
         public int TargetOffset => m_offset + m_delta + 1 + 1;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitShortInlineBrTargetInstruction(this);
+            visitor.VisitShortInlineBrTargetInstruction(this);
         }
     }
 
@@ -104,9 +104,9 @@ namespace ClrTest.Reflection
             }
         }
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitInlineSwitchInstruction(this);
+            visitor.VisitInlineSwitchInstruction(this);
         }
     }
 
@@ -122,9 +122,9 @@ namespace ClrTest.Reflection
 
         public int Int32 => m_int32;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitInlineIInstruction(this);
+            visitor.VisitInlineIInstruction(this);
         }
     }
 
@@ -140,9 +140,9 @@ namespace ClrTest.Reflection
 
         public long Int64 => m_int64;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitInlineI8Instruction(this);
+            visitor.VisitInlineI8Instruction(this);
         }
     }
 
@@ -158,9 +158,9 @@ namespace ClrTest.Reflection
 
         public byte Byte => m_int8;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitShortInlineIInstruction(this);
+            visitor.VisitShortInlineIInstruction(this);
         }
     }
 
@@ -176,9 +176,9 @@ namespace ClrTest.Reflection
 
         public double Double => m_value;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitInlineRInstruction(this);
+            visitor.VisitInlineRInstruction(this);
         }
     }
 
@@ -194,9 +194,9 @@ namespace ClrTest.Reflection
 
         public float Single => m_value;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitShortInlineRInstruction(this);
+            visitor.VisitShortInlineRInstruction(this);
         }
     }
 
@@ -227,9 +227,9 @@ namespace ClrTest.Reflection
 
         public int Token => m_token;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitInlineFieldInstruction(this);
+            visitor.VisitInlineFieldInstruction(this);
         }
     }
 
@@ -260,9 +260,9 @@ namespace ClrTest.Reflection
 
         public int Token => m_token;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitInlineMethodInstruction(this);
+            visitor.VisitInlineMethodInstruction(this);
         }
     }
 
@@ -293,9 +293,9 @@ namespace ClrTest.Reflection
 
         public int Token => m_token;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitInlineTypeInstruction(this);
+            visitor.VisitInlineTypeInstruction(this);
         }
     }
 
@@ -326,9 +326,9 @@ namespace ClrTest.Reflection
 
         public int Token => m_token;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitInlineSigInstruction(this);
+            visitor.VisitInlineSigInstruction(this);
         }
     }
 
@@ -359,9 +359,9 @@ namespace ClrTest.Reflection
 
         public int Token => m_token;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitInlineTokInstruction(this);
+            visitor.VisitInlineTokInstruction(this);
         }
     }
 
@@ -390,9 +390,9 @@ namespace ClrTest.Reflection
 
         public int Token => m_token;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitInlineStringInstruction(this);
+            visitor.VisitInlineStringInstruction(this);
         }
     }
 
@@ -408,9 +408,9 @@ namespace ClrTest.Reflection
 
         public ushort Ordinal => m_ordinal;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitInlineVarInstruction(this);
+            visitor.VisitInlineVarInstruction(this);
         }
     }
 
@@ -426,9 +426,9 @@ namespace ClrTest.Reflection
 
         public byte Ordinal => m_ordinal;
 
-        public override void Accept(ILInstructionVisitor vistor)
+        public override void Accept(ILInstructionVisitor visitor)
         {
-            vistor.VisitShortInlineVarInstruction(this);
+            visitor.VisitShortInlineVarInstruction(this);
         }
     }
 }
