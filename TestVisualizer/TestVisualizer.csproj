@@ -61,7 +61,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ILVisualizer\ILVisualizer.csproj">
       <Project>{6F6E9FC5-40A9-4ABD-89F3-EF7B6406F07B}</Project>
-      <Name>DynamicMethodVisualizer</Name>
+      <Name>ILVisualizer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
