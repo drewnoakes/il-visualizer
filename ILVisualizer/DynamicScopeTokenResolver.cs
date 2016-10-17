@@ -37,7 +37,7 @@ namespace ClrTest.Reflection
             s_genmethFi1 = s_genMethodInfoType.GetField("m_methodHandle", flags);
             s_genmethFi2 = s_genMethodInfoType.GetField("m_context", flags);
 
-            s_genFieldInfoType = Type.GetType("System.Reflection.Emit.GenericFieldInfo", false);
+            s_genFieldInfoType = Type.GetType("System.Reflection.Emit.GenericFieldInfo", throwOnError: false);
 
             s_genfieldFi1 = s_genFieldInfoType?.GetField("m_fieldHandle", flags);
             s_genfieldFi2 = s_genFieldInfoType?.GetField("m_context", flags);
