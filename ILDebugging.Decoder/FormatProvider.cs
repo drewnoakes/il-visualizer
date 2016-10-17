@@ -45,6 +45,8 @@ namespace ILDebugging.Decoder
         {
             var length = str.Length;
             var sb = new StringBuilder(length*2);
+
+            sb.Append('"');
             for (var i = 0; i < length; i++)
             {
                 var ch = str[i];
@@ -63,7 +65,9 @@ namespace ILDebugging.Decoder
                 else
                     sb.Append(ch);
             }
-            return "\"" + sb + "\"";
+            sb.Append('"');
+
+            return sb.ToString();
         }
 
         public virtual string SigByteArrayToString(byte[] sig)
