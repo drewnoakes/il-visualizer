@@ -47,11 +47,10 @@ internal class Program
         var l1 = il.DefineLabel();
         var returnLocal = il.DeclareLocal(typeof(object));
 
-
         // grab the method parameters of the method we wish to wrap
-        var methodParameters = typeof(Foo).GetMethod("MyMethod").GetParameters();
+        var method = typeof(Foo).GetMethod(nameof(Foo.MyMethod));
+        var methodParameters = method.GetParameters();
         var parameterLength = methodParameters.Length;
-        var method = typeof(Foo).GetMethod("MyMethod");
 
         // check to see if the call to MyMethodWrapper has the required amount of arguments in the object[] array.
         il.Emit(OpCodes.Ldarg_0);
