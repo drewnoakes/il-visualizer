@@ -23,12 +23,7 @@ namespace ClrTest.Reflection
 
             lblMethodGetType.Text = mbi.TypeName;
             lblMethodToString.Text = mbi.MethodToString;
-
-            var cnt = mbi.Instructions.Count;
-            var lines = new string[cnt];
-            for (var i = 0; i < cnt; i++)
-                lines[i] = mbi.Instructions[i];
-            richTextBox.Lines = lines;
+            richTextBox.Lines = mbi.Instructions.ToArray();
 
             ActiveControl = richTextBox;
         }
