@@ -58,10 +58,7 @@ namespace ILDebugging.Visualizer
             {
                 MethodBodyInfo mbi;
                 using (var output = objectProvider.GetData())
-                {
-                    var formatter = new BinaryFormatter();
-                    mbi = (MethodBodyInfo)formatter.Deserialize(output, null);
-                }
+                    mbi = (MethodBodyInfo)new BinaryFormatter().Deserialize(output, null);
 
                 IXmlDataProvider<MethodBodyInfo> provider = new TcpClientDataProvider(port: 22017);
                 provider.Dump(mbi);
