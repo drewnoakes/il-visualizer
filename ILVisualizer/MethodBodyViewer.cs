@@ -10,9 +10,6 @@ namespace ClrTest.Reflection
 {
     public partial class MethodBodyViewer : Form
     {
-        private IVisualizerObjectProvider m_objectProvider;
-        private MethodBodyInfo m_mbi;
-
         public MethodBodyViewer()
         {
             InitializeComponent();
@@ -20,29 +17,17 @@ namespace ClrTest.Reflection
 
         public void SetObjectProvider(IVisualizerObjectProvider objectProvider)
         {
-            m_objectProvider = objectProvider;
-            GetObjectData();
-            UpdateForm();
-        }
+            MethodBodyInfo mbi;
+            using (var output = objectProvider.GetData())
+                mbi = (MethodBodyInfo)new BinaryFormatter().Deserialize(output, null);
 
-        private void GetObjectData()
-        {
-            using (var output = m_objectProvider.GetData())
-            {
-                var formatter = new BinaryFormatter();
-                m_mbi = (MethodBodyInfo)formatter.Deserialize(output, null);
-            }
-        }
+            lblMethodGetType.Text = mbi.TypeName;
+            lblMethodToString.Text = mbi.MethodToString;
 
-        private void UpdateForm()
-        {
-            lblMethodGetType.Text = m_mbi.TypeName;
-            lblMethodToString.Text = m_mbi.MethodToString;
-
-            var cnt = m_mbi.Instructions.Count;
+            var cnt = mbi.Instructions.Count;
             var lines = new string[cnt];
             for (var i = 0; i < cnt; i++)
-                lines[i] = m_mbi.Instructions[i];
+                lines[i] = mbi.Instructions[i];
             richTextBox.Lines = lines;
 
             ActiveControl = richTextBox;
