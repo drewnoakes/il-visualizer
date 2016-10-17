@@ -10,9 +10,6 @@ namespace ClrTest.Reflection
     {
         #region Static members
 
-        private static readonly Type s_runtimeMethodInfoType = Type.GetType("System.Reflection.RuntimeMethodInfo");
-        private static readonly Type s_runtimeConstructorInfoType = Type.GetType("System.Reflection.RuntimeConstructorInfo");
-
         private static readonly OpCode[] s_OneByteOpCodes;
         private static readonly OpCode[] s_TwoByteOpCodes;
 
@@ -41,13 +38,6 @@ namespace ClrTest.Reflection
 
         public ILReader(MethodBase method)
         {
-            if (method == null)
-                throw new ArgumentNullException(nameof(method));
-
-            var rtType = method.GetType();
-            if (rtType != s_runtimeMethodInfoType && rtType != s_runtimeConstructorInfoType)
-                throw new ArgumentException("method must be RuntimeMethodInfo or RuntimeConstructorInfo for this constructor.");
-
             var mIlProvider = new MethodBaseILProvider(method);
             m_resolver = new ModuleScopeTokenResolver(method);
             m_byteArray = mIlProvider.GetByteArray();
