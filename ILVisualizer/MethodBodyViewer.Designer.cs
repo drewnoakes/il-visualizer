@@ -78,7 +78,8 @@ namespace ClrTest.Reflection {
             // 
             // richTextBox
             // 
-            this.richTextBox.BackColor = System.Drawing.SystemColors.Info;
+            this.richTextBox.BackColor = System.Drawing.SystemColors.Window;
+            this.richTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox.ContextMenuStrip = this.contextMenuStrip;
             this.richTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
