@@ -42,7 +42,7 @@ internal class Program
     {
         // DynamicMethod wrapper method
 
-        var dm = new DynamicMethod("MyMethodWrapper", typeof(object), new[] {typeof(object[])}, typeof(Program), true);
+        var dm = new DynamicMethod("MyMethodWrapper", typeof(object), new[] {typeof(object[])}, typeof(Program), skipVisibility: true);
         var il = dm.GetILGenerator();
         var l1 = il.DefineLabel();
         var returnLocal = il.DeclareLocal(typeof(object));
