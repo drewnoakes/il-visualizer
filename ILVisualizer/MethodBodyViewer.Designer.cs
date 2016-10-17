@@ -52,20 +52,22 @@ namespace ClrTest.Reflection {
             // 
             this.lblMethodToString.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMethodToString.AutoSize = true;
             this.lblMethodToString.BackColor = System.Drawing.SystemColors.Control;
-            this.lblMethodToString.Location = new System.Drawing.Point(110, 2);
+            this.lblMethodToString.Location = new System.Drawing.Point(110, 6);
             this.lblMethodToString.Name = "lblMethodToString";
-            this.lblMethodToString.Size = new System.Drawing.Size(382, 21);
+            this.lblMethodToString.Size = new System.Drawing.Size(93, 13);
             this.lblMethodToString.TabIndex = 1;
+            this.lblMethodToString.Text = "lblMethodToString";
             // 
             // lblMethodGetType
             // 
             this.lblMethodGetType.AutoSize = true;
             this.lblMethodGetType.Location = new System.Drawing.Point(3, 6);
             this.lblMethodGetType.Name = "lblMethodGetType";
-            this.lblMethodGetType.Size = new System.Drawing.Size(35, 13);
+            this.lblMethodGetType.Size = new System.Drawing.Size(94, 13);
             this.lblMethodGetType.TabIndex = 1;
-            this.lblMethodGetType.Text = "label1";
+            this.lblMethodGetType.Text = "lblMethodGetType";
             // 
             // panel2
             // 
