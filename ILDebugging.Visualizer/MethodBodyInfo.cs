@@ -8,29 +8,9 @@ namespace ILDebugging.Visualizer
     [Serializable]
     public class MethodBodyInfo
     {
-        private int m_methodId;
-
-        private string m_typeName;
-        private string m_methodToString;
-
-        public int Identity
-        {
-            get { return m_methodId; }
-            set { m_methodId = value; }
-        }
-
-        public string TypeName
-        {
-            get { return m_typeName; }
-            set { m_typeName = value; }
-        }
-
-        public string MethodToString
-        {
-            get { return m_methodToString; }
-            set { m_methodToString = value; }
-        }
-
+        public int Identity { get; set; }
+        public string TypeName { get; set; }
+        public string MethodToString { get; set; }
         public List<string> Instructions { get; } = new List<string>();
 
         private void AddInstruction(string inst)
