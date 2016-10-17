@@ -52,7 +52,7 @@ namespace ClrTest.Reflection {
             // 
             this.lblMethodToString.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMethodToString.BackColor = System.Drawing.Color.White;
+            this.lblMethodToString.BackColor = System.Drawing.SystemColors.Control;
             this.lblMethodToString.Location = new System.Drawing.Point(110, 2);
             this.lblMethodToString.Name = "lblMethodToString";
             this.lblMethodToString.Size = new System.Drawing.Size(382, 21);
