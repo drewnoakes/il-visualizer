@@ -1,9 +1,8 @@
 using System;
 using System.Reflection;
 using System.Reflection.Emit;
-using ILDebugging.Decoder;
 
-namespace ILDebugging.Visualizer
+namespace ILDebugging.Decoder
 {
     public class DynamicMethodILProvider : IILProvider
     {

@@ -2,9 +2,8 @@ using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Reflection.Emit;
-using ILDebugging.Decoder;
 
-namespace ILDebugging.Visualizer
+namespace ILDebugging.Decoder
 {
     internal class DynamicScopeTokenResolver : ITokenResolver
     {
@@ -48,7 +47,7 @@ namespace ILDebugging.Visualizer
 
         private readonly object m_scope;
 
-        internal object this[int token] => s_indexer.GetValue(m_scope, new object[] {token});
+        private object this[int token] => s_indexer.GetValue(m_scope, new object[] {token});
 
         public DynamicScopeTokenResolver(DynamicMethod dm)
         {

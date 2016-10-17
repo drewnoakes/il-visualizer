@@ -39,6 +39,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DynamicMethodILProvider.cs" />
+    <Compile Include="DynamicScopeTokenResolver.cs" />
+    <Compile Include="ILReaderFactory.cs" />
     <Compile Include="ReadableILStringVisitor.cs" />
     <Compile Include="ILInstruction.cs" />
     <Compile Include="ILProvider.cs" />
