@@ -37,15 +37,9 @@ namespace ClrTest.Reflection
             s_genmethFi2 = s_genMethodInfoType.GetField("m_context", s_bfInternal);
 
             s_genFieldInfoType = Type.GetType("System.Reflection.Emit.GenericFieldInfo", false);
-            if (s_genFieldInfoType != null)
-            {
-                s_genfieldFi1 = s_genFieldInfoType.GetField("m_fieldHandle", s_bfInternal);
-                s_genfieldFi2 = s_genFieldInfoType.GetField("m_context", s_bfInternal);
-            }
-            else
-            {
-                s_genfieldFi1 = s_genfieldFi2 = null;
-            }
+
+            s_genfieldFi1 = s_genFieldInfoType?.GetField("m_fieldHandle", s_bfInternal);
+            s_genfieldFi2 = s_genFieldInfoType?.GetField("m_context", s_bfInternal);
         }
 
         #endregion
