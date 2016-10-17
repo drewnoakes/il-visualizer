@@ -20,30 +20,6 @@ namespace ILDebugging.Sample
     {
         private static void Main()
         {
-            M1();
-            M2();
-        }
-
-        private static void M1()
-        {
-            var dm = new DynamicMethod("HelloWorld", typeof(void), new Type[] {}, typeof(Program), false);
-
-            var il = dm.GetILGenerator();
-
-            TestShowVisualizer(dm);
-            il.Emit(OpCodes.Ldstr, "hello, world");
-            TestShowVisualizer(dm);
-            il.Emit(OpCodes.Call, typeof(Console).GetMethod("WriteLine", new[] {typeof(string)}));
-            TestShowVisualizer(dm);
-            il.Emit(OpCodes.Ret);
-            TestShowVisualizer(dm);
-            dm.Invoke(null, null);
-        }
-
-        private static void M2()
-        {
-            // DynamicMethod wrapper method
-
             var dm = new DynamicMethod("MyMethodWrapper", typeof(object), new[] {typeof(object[])}, typeof(Program), skipVisibility: true);
             var il = dm.GetILGenerator();
             var l1 = il.DefineLabel();
@@ -95,13 +71,15 @@ namespace ILDebugging.Sample
             il.Emit(OpCodes.Stloc, returnLocal);
             il.Emit(OpCodes.Ldloc, returnLocal);
             il.Emit(OpCodes.Ret);
-            TestShowVisualizer(dm);
-        }
 
-        public static void TestShowVisualizer(object objectToVisualize)
-        {
-            var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(MethodBodyVisualizer), typeof(MethodBodyObjectSource));
-            visualizerHost.ShowVisualizer();
+            // Show the visualizer (via code)
+            var developmentHost = new VisualizerDevelopmentHost(
+                dm,
+                typeof(MethodBodyVisualizer),
+                typeof(MethodBodyObjectSource)
+            );
+
+            developmentHost.ShowVisualizer();
         }
     }
 }
