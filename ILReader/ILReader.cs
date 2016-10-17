@@ -10,14 +10,11 @@ namespace ClrTest.Reflection
     {
         #region Static members
 
-        private static readonly OpCode[] s_OneByteOpCodes;
-        private static readonly OpCode[] s_TwoByteOpCodes;
+        private static readonly OpCode[] s_OneByteOpCodes = new OpCode[0x100];
+        private static readonly OpCode[] s_TwoByteOpCodes = new OpCode[0x100];
 
         static ILReader()
         {
-            s_OneByteOpCodes = new OpCode[0x100];
-            s_TwoByteOpCodes = new OpCode[0x100];
-
             foreach (var fi in typeof(OpCodes).GetFields(BindingFlags.Public | BindingFlags.Static))
             {
                 var opCode = (OpCode)fi.GetValue(null);
