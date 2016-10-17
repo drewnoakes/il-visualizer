@@ -24,9 +24,9 @@ namespace ClrTest.Reflection {
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MethodBodyViewer));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MethodBodyViewer));
             this.panel3 = new System.Windows.Forms.Panel();
-            this.txtMethodToString = new System.Windows.Forms.TextBox();
+            this.lblMethodToString = new System.Windows.Forms.Label();
             this.lblMethodGetType = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.richTextBox = new System.Windows.Forms.RichTextBox();
@@ -40,7 +40,7 @@ namespace ClrTest.Reflection {
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.txtMethodToString);
+            this.panel3.Controls.Add(this.lblMethodToString);
             this.panel3.Controls.Add(this.lblMethodGetType);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
@@ -48,15 +48,15 @@ namespace ClrTest.Reflection {
             this.panel3.Size = new System.Drawing.Size(492, 25);
             this.panel3.TabIndex = 7;
             // 
-            // txtMethodToString
+            // lblMethodToString
             // 
-            this.txtMethodToString.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMethodToString.BackColor = System.Drawing.Color.White;
-            this.txtMethodToString.Location = new System.Drawing.Point(110, 2);
-            this.txtMethodToString.Name = "txtMethodToString";
-            this.txtMethodToString.Size = new System.Drawing.Size(382, 21);
-            this.txtMethodToString.TabIndex = 1;
+            this.lblMethodToString.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMethodToString.BackColor = System.Drawing.Color.White;
+            this.lblMethodToString.Location = new System.Drawing.Point(110, 2);
+            this.lblMethodToString.Name = "lblMethodToString";
+            this.lblMethodToString.Size = new System.Drawing.Size(382, 21);
+            this.lblMethodToString.TabIndex = 1;
             // 
             // lblMethodGetType
             // 
@@ -139,7 +139,7 @@ namespace ClrTest.Reflection {
         #endregion
 
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox txtMethodToString;
+        private System.Windows.Forms.Label lblMethodToString;
         private System.Windows.Forms.Label lblMethodGetType;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.RichTextBox richTextBox;

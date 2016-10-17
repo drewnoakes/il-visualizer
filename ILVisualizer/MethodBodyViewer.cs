@@ -37,7 +37,7 @@ namespace ClrTest.Reflection
         private void UpdateForm()
         {
             lblMethodGetType.Text = m_mbi.TypeName;
-            txtMethodToString.Text = m_mbi.MethodToString;
+            lblMethodToString.Text = m_mbi.MethodToString;
 
             var cnt = m_mbi.Instructions.Count;
             var lines = new string[cnt];
