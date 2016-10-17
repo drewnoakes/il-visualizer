@@ -7,7 +7,7 @@ namespace ClrTest.Reflection
 {
     internal class DynamicScopeTokenResolver : ITokenResolver
     {
-        #region Static stuffs
+        #region Static stuff
 
         private static readonly PropertyInfo s_indexer;
         private static readonly FieldInfo s_scopeFi;
