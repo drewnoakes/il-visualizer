@@ -126,8 +126,8 @@ namespace ClrTest.Reflection {
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IL Visualizer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MethodBodyViewer_FormClosing);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MethodForm_KeyUp);
             this.Load += new System.EventHandler(this.MethodBodyViewer_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MethodForm_KeyUp);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
