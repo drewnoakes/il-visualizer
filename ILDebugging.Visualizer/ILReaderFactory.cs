@@ -5,7 +5,7 @@ using ILDebugging.Decoder;
 
 namespace ILDebugging.Visualizer
 {
-    public class ILReaderFactory
+    public static class ILReaderFactory
     {
         public static ILReader Create(object obj)
         {
