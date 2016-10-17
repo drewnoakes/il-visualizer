@@ -37,11 +37,8 @@ namespace ClrTest.Reflection
         private readonly byte[] m_byteArray;
 
         public ILReader(MethodBase method)
+            : this(new MethodBaseILProvider(method), new ModuleScopeTokenResolver(method))
         {
-            var mIlProvider = new MethodBaseILProvider(method);
-            m_resolver = new ModuleScopeTokenResolver(method);
-            m_byteArray = mIlProvider.GetByteArray();
-            m_position = 0;
         }
 
         public ILReader(IILProvider ilProvider, ITokenResolver tokenResolver)
@@ -56,6 +53,8 @@ namespace ClrTest.Reflection
 
         public IEnumerator<ILInstruction> GetEnumerator()
         {
+            // TODO allow multiple concurrent enumerators (state should be in enumerator, not enumerable)
+
             while (m_position < m_byteArray.Length)
                 yield return Next();
 
