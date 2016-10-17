@@ -29,7 +29,6 @@ namespace ClrTest.Reflection
 
         #endregion
 
-        private int m_position;
         private readonly ITokenResolver m_resolver;
         private readonly byte[] m_byteArray;
 
@@ -45,129 +44,144 @@ namespace ClrTest.Reflection
 
             m_resolver = tokenResolver;
             m_byteArray = ilProvider.GetByteArray();
-            m_position = 0;
         }
 
         public IEnumerator<ILInstruction> GetEnumerator()
         {
-            // TODO allow multiple concurrent enumerators (state should be in enumerator, not enumerable)
+            var position = 0;
 
-            while (m_position < m_byteArray.Length)
-                yield return Next();
-
-            m_position = 0;
+            while (position < m_byteArray.Length)
+                yield return Next(ref position);
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        private ILInstruction Next()
+        private ILInstruction Next(ref int position)
         {
-            var offset = m_position;
+            var offset = position;
             OpCode opCode;
             int token;
 
             // read first 1 or 2 bytes as opCode
-            var code = ReadByte();
+            var code = ReadByte(ref position);
             if (code != 0xFE)
             {
                 opCode = s_OneByteOpCodes[code];
             }
             else
             {
-                code = ReadByte();
+                code = ReadByte(ref position);
                 opCode = s_TwoByteOpCodes[code];
             }
 
             switch (opCode.OperandType)
             {
                 case OperandType.InlineNone:
+                {
                     return new InlineNoneInstruction(offset, opCode);
-
-                //The operand is an 8-bit integer branch target.
+                }
                 case OperandType.ShortInlineBrTarget:
-                    var shortDelta = ReadSByte();
+                {
+                    // 8-bit integer branch target
+                    var shortDelta = ReadSByte(ref position);
                     return new ShortInlineBrTargetInstruction(offset, opCode, shortDelta);
-
-                //The operand is a 32-bit integer branch target.
+                }
                 case OperandType.InlineBrTarget:
-                    var delta = ReadInt32();
+                {
+                    // 32-bit integer branch target
+                    var delta = ReadInt32(ref position);
                     return new InlineBrTargetInstruction(offset, opCode, delta);
-
-                //The operand is an 8-bit integer: 001F  ldc.i4.s, FE12  unaligned.
+                }
                 case OperandType.ShortInlineI:
-                    var int8 = ReadByte();
+                {
+                    // 8-bit integer: 001F  ldc.i4.s, FE12  unaligned.
+                    var int8 = ReadByte(ref position);
                     return new ShortInlineIInstruction(offset, opCode, int8);
-
-                //The operand is a 32-bit integer.
+                }
                 case OperandType.InlineI:
-                    var int32 = ReadInt32();
+                {
+                    // 32-bit integer
+                    var int32 = ReadInt32(ref position);
                     return new InlineIInstruction(offset, opCode, int32);
-
-                //The operand is a 64-bit integer.
+                }
                 case OperandType.InlineI8:
-                    var int64 = ReadInt64();
+                {
+                    // 64-bit integer
+                    var int64 = ReadInt64(ref position);
                     return new InlineI8Instruction(offset, opCode, int64);
-
-                //The operand is a 32-bit IEEE floating point number.
+                }
                 case OperandType.ShortInlineR:
-                    var float32 = ReadSingle();
+                {
+                    // 32-bit IEEE floating point number
+                    var float32 = ReadSingle(ref position);
                     return new ShortInlineRInstruction(offset, opCode, float32);
-
-                //The operand is a 64-bit IEEE floating point number.
+                }
                 case OperandType.InlineR:
-                    var float64 = ReadDouble();
+                {
+                    // 64-bit IEEE floating point number
+                    var float64 = ReadDouble(ref position);
                     return new InlineRInstruction(offset, opCode, float64);
-
-                //The operand is an 8-bit integer containing the ordinal of a local variable or an argument
+                }
                 case OperandType.ShortInlineVar:
-                    var index8 = ReadByte();
+                {
+                    // 8-bit integer containing the ordinal of a local variable or an argument
+                    var index8 = ReadByte(ref position);
                     return new ShortInlineVarInstruction(offset, opCode, index8);
-
-                //The operand is 16-bit integer containing the ordinal of a local variable or an argument.
+                }
                 case OperandType.InlineVar:
-                    var index16 = ReadUInt16();
+                {
+                    // 16-bit integer containing the ordinal of a local variable or an argument
+                    var index16 = ReadUInt16(ref position);
                     return new InlineVarInstruction(offset, opCode, index16);
-
-                //The operand is a 32-bit metadata string token.
+                }
                 case OperandType.InlineString:
-                    token = ReadInt32();
+                {
+                    // 32-bit metadata string token
+                    token = ReadInt32(ref position);
                     return new InlineStringInstruction(offset, opCode, token, m_resolver);
-
-                //The operand is a 32-bit metadata signature token.
+                }
                 case OperandType.InlineSig:
-                    token = ReadInt32();
+                {
+                    // 32-bit metadata signature token
+                    token = ReadInt32(ref position);
                     return new InlineSigInstruction(offset, opCode, token, m_resolver);
-
-                //The operand is a 32-bit metadata token.
+                }
                 case OperandType.InlineMethod:
-                    token = ReadInt32();
+                {
+                    // 32-bit metadata token
+                    token = ReadInt32(ref position);
                     return new InlineMethodInstruction(offset, opCode, token, m_resolver);
-
-                //The operand is a 32-bit metadata token.
+                }
                 case OperandType.InlineField:
-                    token = ReadInt32();
+                {
+                    // 32-bit metadata token
+                    token = ReadInt32(ref position);
                     return new InlineFieldInstruction(m_resolver, offset, opCode, token);
-
-                //The operand is a 32-bit metadata token.
+                }
                 case OperandType.InlineType:
-                    token = ReadInt32();
+                {
+                    // 32-bit metadata token
+                    token = ReadInt32(ref position);
                     return new InlineTypeInstruction(offset, opCode, token, m_resolver);
-
-                //The operand is a FieldRef, MethodRef, or TypeRef token.
+                }
                 case OperandType.InlineTok:
-                    token = ReadInt32();
+                {
+                    // FieldRef, MethodRef, or TypeRef token
+                    token = ReadInt32(ref position);
                     return new InlineTokInstruction(offset, opCode, token, m_resolver);
-
-                //The operand is the 32-bit integer argument to a switch instruction.
+                }
                 case OperandType.InlineSwitch:
-                    var cases = ReadInt32();
+                {
+                    // 32-bit integer argument to a switch instruction
+                    var cases = ReadInt32(ref position);
                     var deltas = new int[cases];
                     for (var i = 0; i < cases; i++)
-                        deltas[i] = ReadInt32();
+                        deltas[i] = ReadInt32(ref position);
                     return new InlineSwitchInstruction(offset, opCode, deltas);
+                }
 
                 default:
-                    throw new BadImageFormatException("unexpected OperandType " + opCode.OperandType);
+                    throw new NotSupportedException($"Unsupported operand type: {opCode.OperandType}");
             }
         }
 
@@ -182,57 +196,57 @@ namespace ClrTest.Reflection
 
         #region read in operands
 
-        private byte ReadByte() => m_byteArray[m_position++];
+        private byte ReadByte(ref int position) => m_byteArray[position++];
 
-        private sbyte ReadSByte() => (sbyte)ReadByte();
+        private sbyte ReadSByte(ref int position) => (sbyte)ReadByte(ref position);
 
-        private ushort ReadUInt16()
+        private ushort ReadUInt16(ref int position)
         {
-            var pos = m_position;
-            m_position += 2;
-            return BitConverter.ToUInt16(m_byteArray, pos);
+            var value = BitConverter.ToUInt16(m_byteArray, position);
+            position += 2;
+            return value;
         }
 
-        private uint ReadUInt32()
+        private uint ReadUInt32(ref int position)
         {
-            var pos = m_position;
-            m_position += 4;
-            return BitConverter.ToUInt32(m_byteArray, pos);
+            var value = BitConverter.ToUInt32(m_byteArray, position);
+            position += 4;
+            return value;
         }
 
-        private ulong ReadUInt64()
+        private ulong ReadUInt64(ref int position)
         {
-            var pos = m_position;
-            m_position += 8;
-            return BitConverter.ToUInt64(m_byteArray, pos);
+            var value = BitConverter.ToUInt64(m_byteArray, position);
+            position += 8;
+            return value;
         }
 
-        private int ReadInt32()
+        private int ReadInt32(ref int position)
         {
-            var pos = m_position;
-            m_position += 4;
-            return BitConverter.ToInt32(m_byteArray, pos);
+            var value = BitConverter.ToInt32(m_byteArray, position);
+            position += 4;
+            return value;
         }
 
-        private long ReadInt64()
+        private long ReadInt64(ref int position)
         {
-            var pos = m_position;
-            m_position += 8;
-            return BitConverter.ToInt64(m_byteArray, pos);
+            var value = BitConverter.ToInt64(m_byteArray, position);
+            position += 8;
+            return value;
         }
 
-        private float ReadSingle()
+        private float ReadSingle(ref int position)
         {
-            var pos = m_position;
-            m_position += 4;
-            return BitConverter.ToSingle(m_byteArray, pos);
+            var value = BitConverter.ToSingle(m_byteArray, position);
+            position += 4;
+            return value;
         }
 
-        private double ReadDouble()
+        private double ReadDouble(ref int position)
         {
-            var pos = m_position;
-            m_position += 8;
-            return BitConverter.ToDouble(m_byteArray, pos);
+            var value = BitConverter.ToDouble(m_byteArray, position);
+            position += 8;
+            return value;
         }
 
         #endregion
