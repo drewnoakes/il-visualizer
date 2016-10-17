@@ -36,17 +36,19 @@ IL Monitor is a standalone MDI application that allows displaying mutliple IL vi
 
 (Notes apply to Visual Studio 2015, but are similar for earlier versions)
 
-Build and copy `ILDebugging.Decoder.dll` and `ILDebugging.Visualizer.dll` to either:
+1. [Download the latest release](https://github.com/drewnoakes/il-visualizer/releases/latest), or build from source
 
-> %USERPROFILE%\Documents\Visual Studio 2015\Visualizers
+2. Copy `ILDebugging.Decoder.dll` and `ILDebugging.Visualizer.dll` to either
 
-or
+    > %USERPROFILE%\Documents\Visual Studio 2015\Visualizers
+    
+    or
+    
+    > _VisualStudioInstallPath_\Common7\Packages\Debugger\Visualizers
 
-> _VisualStudioInstallPath_\Common7\Packages\Debugger\Visualizers
+3. Restart the debugging session (you don't have to restart Visual Studio)
 
-Then restart the debugging session.
-
-If you wish to use _IL Monitor_, you must compile and run that executable before attempting to use it.
+If you wish to use _Send to IL Monitor_, you run `ILDebugging.Monitor.exe` before attempting to use it from the debugger.
 
 ## Earlier Visual Studio Versions
 
