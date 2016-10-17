@@ -25,14 +25,11 @@ namespace ClrTest.Reflection
             {
                 var opCode = (OpCode)fi.GetValue(null);
                 var value = (ushort)opCode.Value;
+
                 if (value < 0x100)
-                {
                     s_OneByteOpCodes[value] = opCode;
-                }
                 else if ((value & 0xff00) == 0xfe00)
-                {
                     s_TwoByteOpCodes[value & 0xff] = opCode;
-                }
             }
         }
 
@@ -45,17 +42,13 @@ namespace ClrTest.Reflection
         public ILReader(MethodBase method)
         {
             if (method == null)
-            {
                 throw new ArgumentNullException(nameof(method));
-            }
 
             var rtType = method.GetType();
             if (rtType != s_runtimeMethodInfoType && rtType != s_runtimeConstructorInfoType)
-            {
                 throw new ArgumentException("method must be RuntimeMethodInfo or RuntimeConstructorInfo for this constructor.");
-            }
 
-            IILProvider mIlProvider = new MethodBaseILProvider(method);
+            var mIlProvider = new MethodBaseILProvider(method);
             m_resolver = new ModuleScopeTokenResolver(method);
             m_byteArray = mIlProvider.GetByteArray();
             m_position = 0;
@@ -64,9 +57,7 @@ namespace ClrTest.Reflection
         public ILReader(IILProvider ilProvider, ITokenResolver tokenResolver)
         {
             if (ilProvider == null)
-            {
                 throw new ArgumentNullException(nameof(ilProvider));
-            }
 
             m_resolver = tokenResolver;
             m_byteArray = ilProvider.GetByteArray();
@@ -81,10 +72,7 @@ namespace ClrTest.Reflection
             m_position = 0;
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         private ILInstruction Next()
         {
@@ -203,22 +191,14 @@ namespace ClrTest.Reflection
                 throw new ArgumentNullException(nameof(visitor));
 
             foreach (var instruction in this)
-            {
                 instruction.Accept(visitor);
-            }
         }
 
         #region read in operands
 
-        private byte ReadByte()
-        {
-            return m_byteArray[m_position++];
-        }
+        private byte ReadByte() => m_byteArray[m_position++];
 
-        private sbyte ReadSByte()
-        {
-            return (sbyte)ReadByte();
-        }
+        private sbyte ReadSByte() => (sbyte)ReadByte();
 
         private ushort ReadUInt16()
         {
