@@ -60,7 +60,6 @@ namespace ClrTest.Reflection
         {
             var offset = position;
             OpCode opCode;
-            int token;
 
             // read first 1 or 2 bytes as opCode
             var code = ReadByte(ref position);
@@ -137,37 +136,37 @@ namespace ClrTest.Reflection
                 case OperandType.InlineString:
                 {
                     // 32-bit metadata string token
-                    token = ReadInt32(ref position);
+                    var token = ReadInt32(ref position);
                     return new InlineStringInstruction(offset, opCode, token, m_resolver);
                 }
                 case OperandType.InlineSig:
                 {
                     // 32-bit metadata signature token
-                    token = ReadInt32(ref position);
+                    var token = ReadInt32(ref position);
                     return new InlineSigInstruction(offset, opCode, token, m_resolver);
                 }
                 case OperandType.InlineMethod:
                 {
                     // 32-bit metadata token
-                    token = ReadInt32(ref position);
+                    var token = ReadInt32(ref position);
                     return new InlineMethodInstruction(offset, opCode, token, m_resolver);
                 }
                 case OperandType.InlineField:
                 {
                     // 32-bit metadata token
-                    token = ReadInt32(ref position);
+                    var token = ReadInt32(ref position);
                     return new InlineFieldInstruction(m_resolver, offset, opCode, token);
                 }
                 case OperandType.InlineType:
                 {
                     // 32-bit metadata token
-                    token = ReadInt32(ref position);
+                    var token = ReadInt32(ref position);
                     return new InlineTypeInstruction(offset, opCode, token, m_resolver);
                 }
                 case OperandType.InlineTok:
                 {
                     // FieldRef, MethodRef, or TypeRef token
-                    token = ReadInt32(ref position);
+                    var token = ReadInt32(ref position);
                     return new InlineTokInstruction(offset, opCode, token, m_resolver);
                 }
                 case OperandType.InlineSwitch:
