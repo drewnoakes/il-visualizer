@@ -25,21 +25,22 @@ namespace ClrTest.Reflection
 
         static DynamicScopeTokenResolver()
         {
-            var s_bfInternal = BindingFlags.NonPublic | BindingFlags.Instance;
-            s_indexer = Type.GetType("System.Reflection.Emit.DynamicScope").GetProperty("Item", s_bfInternal);
-            s_scopeFi = Type.GetType("System.Reflection.Emit.DynamicILGenerator").GetField("m_scope", s_bfInternal);
+            const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
+
+            s_indexer = Type.GetType("System.Reflection.Emit.DynamicScope").GetProperty("Item", flags);
+            s_scopeFi = Type.GetType("System.Reflection.Emit.DynamicILGenerator").GetField("m_scope", flags);
 
             s_varArgMethodType = Type.GetType("System.Reflection.Emit.VarArgMethod");
-            s_varargFi1 = s_varArgMethodType.GetField("m_method", s_bfInternal);
+            s_varargFi1 = s_varArgMethodType.GetField("m_method", flags);
 
             s_genMethodInfoType = Type.GetType("System.Reflection.Emit.GenericMethodInfo");
-            s_genmethFi1 = s_genMethodInfoType.GetField("m_methodHandle", s_bfInternal);
-            s_genmethFi2 = s_genMethodInfoType.GetField("m_context", s_bfInternal);
+            s_genmethFi1 = s_genMethodInfoType.GetField("m_methodHandle", flags);
+            s_genmethFi2 = s_genMethodInfoType.GetField("m_context", flags);
 
             s_genFieldInfoType = Type.GetType("System.Reflection.Emit.GenericFieldInfo", false);
 
-            s_genfieldFi1 = s_genFieldInfoType?.GetField("m_fieldHandle", s_bfInternal);
-            s_genfieldFi2 = s_genFieldInfoType?.GetField("m_context", s_bfInternal);
+            s_genfieldFi1 = s_genFieldInfoType?.GetField("m_fieldHandle", flags);
+            s_genfieldFi2 = s_genFieldInfoType?.GetField("m_context", flags);
         }
 
         #endregion
