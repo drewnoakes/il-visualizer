@@ -20,7 +20,7 @@ namespace ILDebugging.Decoder
         {
         }
 
-        public static DefaultFormatProvider Instance = new DefaultFormatProvider();
+        public static DefaultFormatProvider Instance { get; } = new DefaultFormatProvider();
 
         public virtual string Int32ToHex(int int32) => int32.ToString("X8");
         public virtual string Int16ToHex(int int16) => int16.ToString("X4");
