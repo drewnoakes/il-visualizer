@@ -123,7 +123,7 @@ namespace ClrTest.Reflection {
             this.MinimumSize = new System.Drawing.Size(450, 300);
             this.Name = "MethodBodyViewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ILStream";
+            this.Text = "IL Visualizer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MethodBodyViewer_FormClosing);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MethodForm_KeyUp);
             this.Load += new System.EventHandler(this.MethodBodyViewer_Load);
