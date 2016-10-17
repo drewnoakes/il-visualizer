@@ -36,7 +36,7 @@ IL Monitor is a standalone MDI application that allows displaying mutliple IL vi
 
 (Notes apply to Visual Studio 2015, but are similar for earlier versions)
 
-Build and copy `ClrTest.Reflection.ILReader.dll` and `ClrTest.Reflection.ILVisualizer.dll` to either:
+Build and copy `ILDebugging.Decoder.dll` and `ILDebugging.Visualizer.dll` to either:
 
 > %USERPROFILE%\Documents\Visual Studio 2015\Visualizers
 
