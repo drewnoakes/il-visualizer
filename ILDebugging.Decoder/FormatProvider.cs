@@ -50,20 +50,30 @@ namespace ILDebugging.Decoder
             for (var i = 0; i < length; i++)
             {
                 var ch = str[i];
-                if (ch == '\t')
-                    sb.Append("\\t");
-                else if (ch == '\n')
-                    sb.Append("\\n");
-                else if (ch == '\r')
-                    sb.Append("\\r");
-                else if (ch == '\"')
-                    sb.Append("\\\"");
-                else if (ch == '\\')
-                    sb.Append("\\");
-                else if (ch < 0x20 || ch >= 0x7f)
-                    sb.AppendFormat("\\u{0:x4}", (int)ch);
-                else
-                    sb.Append(ch);
+                switch (ch)
+                {
+                    case '\t':
+                        sb.Append("\\t");
+                        break;
+                    case '\n':
+                        sb.Append("\\n");
+                        break;
+                    case '\r':
+                        sb.Append("\\r");
+                        break;
+                    case '\"':
+                        sb.Append("\\\"");
+                        break;
+                    case '\\':
+                        sb.Append("\\");
+                        break;
+                    default:
+                        if (ch < 0x20 || ch >= 0x7f)
+                            sb.AppendFormat("\\u{0:x4}", (int)ch);
+                        else
+                            sb.Append(ch);
+                        break;
+                }
             }
             sb.Append('"');
 
