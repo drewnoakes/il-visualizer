@@ -52,9 +52,8 @@ namespace ILDebugging.Monitor
             if (MonitorStatusChange != null)
             {
                 var args = new MonitorStatusChangeEventArgs(status);
-                var targetCtrl = MonitorStatusChange.Target as Control;
 
-                if (targetCtrl != null)
+                if (MonitorStatusChange.Target is Control targetCtrl)
                 {
                     targetCtrl.Invoke(MonitorStatusChange, this, args);
                 }
@@ -70,9 +69,8 @@ namespace ILDebugging.Monitor
             if (VisualizerDataReady != null)
             {
                 var args = new VisualizerDataEventArgs<T>(data);
-                var targetCtrl = VisualizerDataReady.Target as Control;
 
-                if (targetCtrl != null)
+                if (VisualizerDataReady.Target is Control targetCtrl)
                 {
                     targetCtrl.Invoke(VisualizerDataReady, this, args);
                 }

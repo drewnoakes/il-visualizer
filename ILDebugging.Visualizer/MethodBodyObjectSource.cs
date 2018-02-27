@@ -10,8 +10,7 @@ namespace ILDebugging.Visualizer
     {
         public override void GetData(object target, Stream outgoingData)
         {
-            var method = target as MethodBase;
-            if (method != null)
+            if (target is MethodBase method)
             {
                 try
                 {
