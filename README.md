@@ -36,7 +36,7 @@ IL Monitor is a standalone MDI application that allows displaying mutliple IL vi
 
 (Notes apply to VS 2015 and 2017, but are similar for earlier versions)
 
-1. [Download the latest release for your version of Visual Studio](https://github.com/drewnoakes/il-visualizer/releases/latest), or build from source
+1. [Download the latest release for your version of Visual Studio](https://github.com/drewnoakes/il-visualizer/releases), or build from source
 
 2. Copy `ILDebugging.Decoder.dll` and `ILDebugging.Visualizer.dll` to one of:
 
