@@ -14,7 +14,7 @@ namespace ILDebugging.Decoder
         string SigByteArrayToString(byte[] sig);
     }
 
-    public class DefaultFormatProvider : IFormatProvider
+    public sealed class DefaultFormatProvider : IFormatProvider
     {
         private DefaultFormatProvider()
         {
@@ -22,13 +22,13 @@ namespace ILDebugging.Decoder
 
         public static DefaultFormatProvider Instance { get; } = new DefaultFormatProvider();
 
-        public virtual string Int32ToHex(int int32) => int32.ToString("X8");
-        public virtual string Int16ToHex(int int16) => int16.ToString("X4");
-        public virtual string Int8ToHex(int int8) => int8.ToString("X2");
-        public virtual string Argument(int ordinal) => $"V_{ordinal}";
-        public virtual string Label(int offset) => $"IL_{offset:x4}";
+        public string Int32ToHex(int int32) => int32.ToString("X8");
+        public string Int16ToHex(int int16) => int16.ToString("X4");
+        public string Int8ToHex(int int8) => int8.ToString("X2");
+        public string Argument(int ordinal) => $"V_{ordinal}";
+        public string Label(int offset) => $"IL_{offset:x4}";
 
-        public virtual string MultipleLabels(int[] offsets)
+        public string MultipleLabels(int[] offsets)
         {
             var sb = new StringBuilder();
             var length = offsets.Length;
@@ -41,7 +41,7 @@ namespace ILDebugging.Decoder
             return sb.ToString();
         }
 
-        public virtual string EscapedString(string str)
+        public string EscapedString(string str)
         {
             var length = str.Length;
             var sb = new StringBuilder(length*2);
@@ -70,7 +70,7 @@ namespace ILDebugging.Decoder
             return sb.ToString();
         }
 
-        public virtual string SigByteArrayToString(byte[] sig)
+        public string SigByteArrayToString(byte[] sig)
         {
             var sb = new StringBuilder();
             var length = sig.Length;
