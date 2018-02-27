@@ -4,7 +4,9 @@ Originally developed by Haibo Luo in 2005 and posted in a series of blog posts
 ([part one](https://blogs.msdn.microsoft.com/haibo_luo/2005/10/25/debuggervisualizer-for-dynamicmethod-show-me-the-il/),
 [part two](https://blogs.msdn.microsoft.com/haibo_luo/2006/11/16/take-two-il-visualizer/)).
 
-Converted to a Git repository and upgraded to Visual Studio 2015 by Drew Noakes
+Fork of https://github.com/drewnoakes/il-visualizer (VS 2015)
+
+__This version is updated to VS 2017 (15.5+)__
 
 ## Usage
 
@@ -34,13 +36,13 @@ IL Monitor is a standalone MDI application that allows displaying mutliple IL vi
 
 ## Installation
 
-(Notes apply to Visual Studio 2015, but are similar for earlier versions)
+(Notes apply to VS 2017, check [original repo](https://github.com/drewnoakes/il-visualizer) for VS 2015)
 
-1. [Download the latest release](https://github.com/drewnoakes/il-visualizer/releases/latest), or build from source
+1. Build from source
 
 2. Copy `ILDebugging.Decoder.dll` and `ILDebugging.Visualizer.dll` to either
 
-    > %USERPROFILE%\Documents\Visual Studio 2015\Visualizers
+    > "%USERPROFILE%\Documents\Visual Studio 2017\Visualizers"
     
     or
     
