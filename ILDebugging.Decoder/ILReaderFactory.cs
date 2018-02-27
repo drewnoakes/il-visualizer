@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using System.Reflection.Emit;
-using ILDebugging.Decoder;
 
 namespace ILDebugging.Decoder
 {
