@@ -10,7 +10,7 @@ namespace ILDebugging.Decoder
 
     public class ReadableILStringToTextWriter : IILStringCollector
     {
-        protected TextWriter writer;
+        protected readonly TextWriter writer;
 
         public ReadableILStringToTextWriter(TextWriter writer)
         {
@@ -115,8 +115,8 @@ namespace ILDebugging.Decoder
 
     public class ReadableILStringVisitor : ILInstructionVisitor
     {
-        protected IFormatProvider formatProvider;
-        protected IILStringCollector collector;
+        protected readonly IFormatProvider formatProvider;
+        protected readonly IILStringCollector collector;
 
         public ReadableILStringVisitor(IILStringCollector collector)
             : this(collector, DefaultFormatProvider.Instance)
