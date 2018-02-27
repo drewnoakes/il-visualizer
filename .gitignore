@@ -14,3 +14,4 @@ node_modules/
 .vs/
 .bowerrc
 project.lock.json
+/.idea/
