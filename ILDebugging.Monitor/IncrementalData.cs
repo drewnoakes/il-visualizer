@@ -23,12 +23,7 @@ namespace ILDebugging.Monitor
         // hidden field
         public List<int> LengthHistory;
 
-        public static IncrementalMethodBodyInfo Create(MethodBodyInfo mbi)
-        {
-            return Create(mbi, null);
-        }
-
-        public static IncrementalMethodBodyInfo Create(MethodBodyInfo mbi, List<int> history)
+        public static IncrementalMethodBodyInfo Create(MethodBodyInfo mbi, List<int> history = null)
         {
             var imbi = new IncrementalMethodBodyInfo
             {
