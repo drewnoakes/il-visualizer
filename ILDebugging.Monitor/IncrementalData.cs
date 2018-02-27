@@ -31,7 +31,7 @@ namespace ILDebugging.Monitor
                 TypeName = mbi.TypeName,
                 MethodToString = mbi.MethodToString,
                 Instructions = mbi.Instructions.Select(i => new AgingInstruction {ILString = i}).ToArray(),
-                LengthHistory = new List<int>(history ?? new int[0]) {mbi.Instructions.Count}
+                LengthHistory = new List<int>(history ?? Enumerable.Empty<int>()) {mbi.Instructions.Count}
             };
 
             for (var i = 0; i < imbi.LengthHistory.Count - 1; i++)
