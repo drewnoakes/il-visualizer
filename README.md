@@ -46,6 +46,8 @@ IL Monitor is a standalone MDI application that allows displaying mutliple IL vi
 
 3. Restart the debugging session (you don't have to restart Visual Studio)
 
+**Note**: If you get error _"Operation not supported"_ when invoking the visualizer, restart Visual Studio and try again.
+
 If you wish to use _Send to IL Monitor_, you run `ILDebugging.Monitor.exe` before attempting to use it from the debugger.
 
 ## Earlier Visual Studio Versions
