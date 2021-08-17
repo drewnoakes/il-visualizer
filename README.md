@@ -40,9 +40,9 @@ IL Monitor is a standalone MDI application that allows displaying mutliple IL vi
 
 2. Copy `ILDebugging.Decoder.dll` and `ILDebugging.Visualizer.dll` to one of:
 
-  - `%USERPROFILE%\Documents\Visual Studio 2015\Visualizers`
-  - `%USERPROFILE%\Documents\Visual Studio 2017\Visualizers`
-  - `VisualStudioInstallPath_\Common7\Packages\Debugger\Visualizers`
+   - `%USERPROFILE%\Documents\Visual Studio 2015\Visualizers`
+   - `%USERPROFILE%\Documents\Visual Studio 2017\Visualizers`
+   - `VisualStudioInstallPath_\Common7\Packages\Debugger\Visualizers`
 
 3. Restart the debugging session (you don't have to restart Visual Studio)
 
